@@ -1,0 +1,241 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MACMSInterAgentMessage",
+  "description": "JSON Schema draft-07 specification for MACMS inter-agent communication protocol messages.",
+  "type": "object",
+  "required": [
+    "message_id",
+    "protocol_version",
+    "timestamp",
+    "sender_agent_id",
+    "recipient_agent_id",
+    "message_type",
+    "priority",
+    "trace_id",
+    "payload_schema",
+    "payload",
+    "ttl_seconds",
+    "retry_count",
+    "audit_classification",
+    "sender_signature",
+    "nonce"
+  ],
+  "properties": {
+    "message_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique UUID v4 message identifier."
+    },
+    "protocol_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Protocol semantic version string (e.g. 1.0.0)."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 UTC timestamp."
+    },
+    "sender_agent_id": {
+      "type": "string",
+      "enum": [
+        "agent-tm-001",
+        "agent-cs-001",
+        "agent-ru-001",
+        "agent-rg-001"
+      ],
+      "description": "Identifier of the sending agent."
+    },
+    "recipient_agent_id": {
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": [
+            "agent-tm-001",
+            "agent-cs-001",
+            "agent-ru-001",
+            "agent-rg-001"
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "agent-tm-001",
+              "agent-cs-001",
+              "agent-ru-001",
+              "agent-rg-001"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      ],
+      "description": "Single recipient agent ID or list of recipient IDs for multicast."
+    },
+    "message_type": {
+      "type": "string",
+      "enum": [
+        "ALERT",
+        "QUERY",
+        "RESPONSE",
+        "UPDATE",
+        "HEARTBEAT",
+        "ESCALATION"
+      ],
+      "description": "Functional category of the message."
+    },
+    "priority": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "Priority level from 1 (P1-CRITICAL) to 5 (P5-INFORMATIONAL)."
+    },
+    "correlation_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "UUID referencing original query or alert message."
+    },
+    "trace_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Distributed tracing UUID v4."
+    },
+    "payload_schema": {
+      "type": "string",
+      "pattern": "^[a-z0-9.-]+$",
+      "description": "Identifier pattern of payload schema definition."
+    },
+    "payload": {
+      "type": "object",
+      "description": "Message payload contents matching payload_schema."
+    },
+    "confidence_score": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Analytical confidence score required for ALERT and ESCALATION messages."
+    },
+    "ttl_seconds": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 86400,
+      "description": "Time-to-live in seconds."
+    },
+    "retry_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of routing retry attempts."
+    },
+    "audit_classification": {
+      "type": "string",
+      "enum": [
+        "REGULATORY",
+        "OPERATIONAL",
+        "DIAGNOSTIC"
+      ],
+      "description": "Audit logging classification."
+    },
+    "sender_signature": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Base64 encoded cryptographic HMAC-SHA256 signature."
+    },
+    "nonce": {
+      "type": "string",
+      "minLength": 16,
+      "description": "Cryptographic nonce string for replay prevention."
+    }
+  },
+  "definitions": {
+    "AlertPayload": {
+      "type": "object",
+      "required": [
+        "violation_type",
+        "severity",
+        "detected_at",
+        "evidence_refs",
+        "affected_entities"
+      ],
+      "properties": {
+        "violation_type": { "type": "string" },
+        "severity": { "type": "string", "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"] },
+        "detected_at": { "type": "string", "format": "date-time" },
+        "evidence_refs": { "type": "array", "items": { "type": "string" } },
+        "affected_entities": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "QueryPayload": {
+      "type": "object",
+      "required": [
+        "query_type",
+        "parameters",
+        "response_schema_required"
+      ],
+      "properties": {
+        "query_type": { "type": "string" },
+        "parameters": { "type": "object" },
+        "response_schema_required": { "type": "string" }
+      }
+    },
+    "ResponsePayload": {
+      "type": "object",
+      "required": [
+        "query_id",
+        "status",
+        "result_data",
+        "errors"
+      ],
+      "properties": {
+        "query_id": { "type": "string", "format": "uuid" },
+        "status": { "type": "string", "enum": ["SUCCESS", "PARTIAL", "FAILED"] },
+        "result_data": { "type": "object" },
+        "errors": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "UpdatePayload": {
+      "type": "object",
+      "required": [
+        "update_type",
+        "entity_id",
+        "changed_fields",
+        "previous_values"
+      ],
+      "properties": {
+        "update_type": { "type": "string" },
+        "entity_id": { "type": "string" },
+        "changed_fields": { "type": "object" },
+        "previous_values": { "type": "object" }
+      }
+    },
+    "HeartbeatPayload": {
+      "type": "object",
+      "required": [
+        "agent_status",
+        "queue_depth",
+        "last_processed_timestamp"
+      ],
+      "properties": {
+        "agent_status": { "type": "string", "enum": ["HEALTHY", "DEGRADED", "UNHEALTHY"] },
+        "queue_depth": { "type": "integer", "minimum": 0 },
+        "last_processed_timestamp": { "type": "string", "format": "date-time" }
+      }
+    },
+    "EscalationPayload": {
+      "type": "object",
+      "required": [
+        "escalation_reason",
+        "recommended_tier",
+        "decision_support_package_ref",
+        "human_assignee_role"
+      ],
+      "properties": {
+        "escalation_reason": { "type": "string" },
+        "recommended_tier": { "type": "string", "enum": ["TIER_1", "TIER_2", "TIER_3"] },
+        "decision_support_package_ref": { "type": "string" },
+        "human_assignee_role": { "type": "string" }
+      }
+    }
+  }
+}

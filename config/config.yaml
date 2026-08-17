@@ -1,0 +1,62 @@
+# MACMS Configuration - Meridian Global Bank
+# Environment variable overrides: MCMS_<SECTION>_<KEY> (e.g., MCMS_KAFKA_BOOTSTRAP_SERVERS)
+
+agents:
+  agent-tm-001:
+    name: "Transaction Monitor"
+    secret_key: "tm-secret-key-2026"
+    resource_limits:
+      vcpu: 32
+      memory_gb: 128
+  agent-cs-001:
+    name: "Communication Scanner"
+    secret_key: "cs-secret-key-2026"
+    resource_limits:
+      vcpu: 24
+      memory_gb: 96
+  agent-ru-001:
+    name: "Regulatory Update Tracker"
+    secret_key: "ru-secret-key-2026"
+    resource_limits:
+      vcpu: 8
+      memory_gb: 32
+  agent-rg-001:
+    name: "Report Generator"
+    secret_key: "rg-secret-key-2026"
+    resource_limits:
+      vcpu: 16
+      memory_gb: 64
+
+kafka:
+  bootstrap_servers:
+    - "localhost:9092"
+  producer:
+    batch_size: 16384
+    linger_ms: 5
+    compression_type: "gzip"
+    acks: "all"
+    retries: 3
+    max_in_flight_requests_per_connection: 5
+  consumer:
+    group_id: "mcms-consumer-group"
+    auto_offset_reset: "earliest"
+    enable_auto_commit: false
+
+audit:
+  storage_path: "./data/audit"
+  initial_seed: "MERIDIAN_GENESIS_BLOCK"
+  retention_days: 2555
+
+orchestrator:
+  max_queue_depth: 1000
+  max_retries: 3
+  heartbeat_interval_seconds: 30
+  shutdown_timeout_seconds: 30
+
+escalation:
+  human_queue_topic: "mcms.escalation.human"
+  default_tier: "TIER_1"
+  sla_seconds:
+    TIER_1: 3600
+    TIER_2: 14400
+    TIER_3: 86400

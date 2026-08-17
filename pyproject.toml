@@ -1,0 +1,66 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mcms"
+version = "0.1.0"
+description = "Multi-Agent Compliance Monitoring System (MACMS) for Meridian Global Bank"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    { name = "Meridian Global Bank Engineering", email = "compliance-tech@meridianbank.com" }
+]
+dependencies = [
+    "kafka-python>=2.0.2",
+    "pydantic>=2.5.0",
+    "cryptography>=41.0.0",
+    "structlog>=23.1.0",
+    "fastapi>=0.100.0",
+    "uvicorn>=0.22.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "mypy>=1.5.0",
+    "ruff>=0.1.0",
+]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+
+[[tool.mypy.overrides]]
+module = "kafka.*"
+ignore_missing_imports = true
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "UP", "B", "C4", "SIM", "ARG"]
+ignore = ["E501", "N818", "SIM102"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-v --tb=short"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+
+[tool.pytest-asyncio]
+mode = "auto"
