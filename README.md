@@ -2,84 +2,57 @@
 
 ## Multi-Agent Compliance Monitoring System
 
-MACMS is a Python reference implementation for coordinating compliance checks across trading activity, employee communications, regulatory updates, and reporting workflows.
+MACMS is a Python reference implementation for coordinating compliance reviews across trading activity, employee communications, regulatory updates, and reporting.
 
-The project addresses a practical problem: a compliance case often depends on evidence from more than one source. A suspicious trade may need to be compared with a chat message, a regulatory rule, and a prior decision. If each review is handled separately, important context can be missed and the final decision can be difficult to reconstruct. MACMS provides a common message contract, routes work to specialist agents, combines their assessments, escalates uncertain cases to a human reviewer, and records the decision history in a tamper-evident audit chain.
+## The problem
 
-This repository is a **synthetic, in-process reference implementation**. It demonstrates the coordination and control logic; it is not connected to a bank, customer data, live market feeds, production Kafka infrastructure, or external regulatory feeds.
+Compliance cases rarely come from one source. A suspicious trade may need to be reviewed alongside a chat message, a regulatory rule, and earlier case evidence. When these checks are performed in separate systems, context can be lost and the final decision is harder to explain or audit.
 
-## What the repository implements
+MACMS provides one workflow for this process. It sends work to specialist agents, combines their findings, routes uncertain cases to human reviewers, and records the case history in a tamper-evident audit chain.
 
-| Area | Implemented capability |
+## What is implemented
+
+| Component | Current implementation |
 | --- | --- |
-| Agent roles | Transaction Monitor (`TM`), Communication Scanner (`CS`), Regulatory Update Tracker (`RU`), and Report Generator (`RG`) |
-| Message contracts | Pydantic models for alerts, queries, responses, updates, heartbeats, and escalations, with schema validation |
-| Routing | Priority-based routing with retry limits, queue depth controls, TTL handling, and dead-letter routing |
-| Evidence review | Deterministic synthetic assessments from multiple agents and evidence items |
-| Decision handling | Bayesian and Dempster–Shafer consensus, conflict classification, and special handling for unresolved conflicts |
-| Human review | Tiered escalation, assignment, decision recording, override handling, and feedback capture |
-| Auditability | Append-only SHA-256 hash-chain records with trace IDs and action metadata |
-| Observability | Structured audit events, metrics, dashboard data, and a FastAPI observability API |
-| Scenario coverage | 20 synthetic compliance scenarios, CS-01 through CS-20, with five tests per scenario |
+| Specialist agents | Transaction Monitor, Communication Scanner, Regulatory Update Tracker, and Report Generator |
+| Message protocol | Pydantic message models and a generated JSON Schema for alerts, queries, responses, updates, heartbeats, and escalations |
+| Routing | Priority queues, retry limits, TTL handling, queue-depth controls, and dead-letter routing |
+| Decision handling | Bayesian and Dempster–Shafer consensus, conflict classification, and unresolved-conflict handling |
+| Human review | Tiered escalation, reviewer assignment, decisions, overrides, and feedback records |
+| Audit | Append-only SHA-256 hash chains with trace IDs and action metadata |
+| Observability | Structured audit events, metrics, and a FastAPI dashboard API |
+| Scenarios | 20 deterministic synthetic scenarios, CS-01 through CS-20 |
 
-## Typical workflow
-
-A scenario moves through the system as follows:
+## Processing flow
 
 ```mermaid
 flowchart LR
-    A[Input event] --> B[Specialist agent assessment]
-    B --> C[Evidence collection]
+    A[Event] --> B[Agent assessment]
+    B --> C[Evidence]
     C --> D[Consensus or conflict handling]
-    D --> E{Human review needed?}
+    D --> E{Human review?}
     E -- No --> F[Report or update]
-    E -- Yes --> G[Tiered escalation]
+    E -- Yes --> G[Escalation]
     G --> H[Human decision]
     H --> F
-    F --> I[Audit chain and metrics]
+    F --> I[Audit and metrics]
 ```
 
-The flow is designed to make a case traceable. A reviewer should be able to identify the originating event, participating agents, evidence references, decision path, escalation level, and final report or suppression outcome.
+Each scenario records the event, participating agents, evidence references, decision path, escalation level, and final outcome.
+
+## Current scope
+
+The repository uses fixed synthetic inputs and deterministic rules. The tests verify message validation, routing, agent coordination, consensus, escalation, reporting, and audit behavior. They do not measure the accuracy of a machine-learning model.
+
+The current tests run in process. Kafka client and configuration code are included, but a running Kafka broker is not required for the test suite.
 
 ## Scenarios
 
-The scenario suite uses fixed synthetic data and rule-based expected outcomes. It is intended to verify message flow and decision handling, not to measure the accuracy of a machine-learning model.
+The 20 scenarios cover trading and market conduct, communications, regulatory conflicts, customer risk, financial crime, and false-positive suppression.
 
-| Scenario group | Examples |
-| --- | --- |
-| Trading and market conduct | Spoofing, wash trading, insider trading, late trading, concentration risk, and routing bias |
-| Communications | Off-channel communications, privileged communications, and research-independence conflicts |
-| Regulatory and jurisdictional issues | Cross-border transfers and conflicting EU/Singapore requirements |
-| Customer and financial crime risk | Elder exploitation and trade-finance money laundering |
-| Decision quality | Legitimate block-trade false-positive suppression with no alert or escalation |
+CS-18 verifies that a legitimate $450M block trade is suppressed after review, with reduced confidence and no alert or escalation. CS-19 verifies special handling for conflicting EU and Singapore requirements. CS-20 verifies coordination among all four specialist agents for a trade-finance money-laundering case.
 
-The full status table is available in [`tests/scenarios/scenario-summary.md`](tests/scenarios/scenario-summary.md). Each scenario directory contains the specification, trace-through, message artifact, audit artifact, and tests.
-
-## Repository structure
-
-```text
-.
-├── config/
-│   └── config.yaml                 # Local development configuration
-├── docs/
-│   ├── architecture/               # System topology, data flow, security, and failure modes
-│   ├── agents/                     # Agent responsibilities and decision trees
-│   ├── conflict-resolution/        # Consensus and conflict handling
-│   ├── escalation/                 # Human-review workflow
-│   ├── observability/              # Logging, metrics, and dashboard documentation
-│   └── protocols/                  # Message schema and routing rules
-├── src/mcms/
-│   ├── agents/                     # Agent implementations
-│   ├── api/                        # FastAPI observability dashboard
-│   ├── core/                       # Messages, routing, orchestration, audit, consensus, and escalation
-│   ├── scenario_specs.py           # Synthetic scenario catalogue
-│   └── scenario_support.py         # Shared scenario runner and assertions
-├── tests/
-│   ├── scenarios/                  # CS-01 through CS-20 scenario tests and artifacts
-│   └── test_*.py                   # Unit and component tests
-├── pyproject.toml
-└── requirements.txt
-```
+See the complete scenario table in [`tests/scenarios/scenario-summary.md`](tests/scenarios/scenario-summary.md). Each scenario directory contains its specification, trace-through, message artifact, audit artifact, and tests.
 
 ## Quick start
 
@@ -87,8 +60,6 @@ The full status table is available in [`tests/scenarios/scenario-summary.md`](te
 
 - Python 3.11 or newer
 - Git
-
-The test suite does not require a running Kafka broker. Kafka client configuration and integration-facing components are included, but the current scenario and unit tests run in process with synthetic inputs.
 
 ### Install
 
@@ -104,15 +75,15 @@ python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
 
-### Run the tests
+### Run tests
 
 ```bash
 pytest -q
 ```
 
-The current repository contains 287 passing tests, including 100 scenario tests across CS-01 through CS-20.
+The current repository has 287 passing tests, including 100 scenario tests across CS-01 through CS-20.
 
-### Run quality checks
+### Run checks
 
 ```bash
 ruff check src/ tests/
@@ -121,50 +92,70 @@ mypy --strict src/
 git diff --check
 ```
 
-### Run the observability API locally
+### Start the dashboard API
 
-The dashboard is an optional FastAPI application. Start it with:
+The dashboard is optional. Set a local development API key and start FastAPI with:
 
 ```bash
+export MCMS_DASHBOARD_API_KEY=dev-only-key
 uvicorn src.mcms.api.dashboard:app --reload
 ```
 
-All dashboard routes require the `X-API-Key` header. For local development, the default key is `macms-phase5-api-key`; set `MCMS_DASHBOARD_API_KEY` before starting the application to use a different value.
+Send the same value in the `X-API-Key` header when calling dashboard endpoints.
 
-## Important limitations
+## Repository layout
 
-This repository should not be described as a production compliance platform. It currently does not provide:
+```text
+.
+├── config/config.yaml             # Local configuration
+├── docs/
+│   ├── architecture/              # Topology, data flow, security, and failure modes
+│   ├── agents/                    # Agent responsibilities and decision trees
+│   ├── conflict-resolution/       # Consensus and conflict handling
+│   ├── escalation/                # Human-review workflow
+│   ├── observability/             # Logging, metrics, and dashboard documentation
+│   └── protocols/                 # Message schema and routing rules
+├── src/mcms/
+│   ├── agents/                    # Agent implementations
+│   ├── api/                       # FastAPI dashboard API
+│   ├── core/                      # Core message, routing, audit, and review services
+│   ├── scenario_specs.py          # Synthetic scenario definitions
+│   └── scenario_support.py        # Shared scenario runner and assertions
+├── tests/
+│   ├── scenarios/                 # CS-01 through CS-20
+│   └── test_*.py                  # Unit and component tests
+├── pyproject.toml
+└── requirements.txt
+```
 
-- Live trading, communications, customer, or regulatory data ingestion.
-- A trained machine-learning or natural-language-processing detection model.
-- Persistent production storage for audit, metrics, or case records.
-- Production mTLS certificate validation, HSM integration, Vault integration, or full enterprise RBAC.
-- Completed India-specific regulatory implementation from the Phase 8 prompt.
-- The optional CS-21 through CS-25 bonus scenarios from the Phase 8 prompt.
-- A production deployment, availability guarantee, or regulatory filing service.
+## Documentation
 
-The synthetic scenarios are deliberately deterministic so that the message contracts, routing, consensus, escalation, reporting, and audit behavior can be tested repeatably.
-
-## Documentation guide
-
-| Topic | Document |
+| Topic | Link |
 | --- | --- |
-| System structure and data flow | [`docs/architecture/`](docs/architecture/) |
+| Architecture and data flow | [`docs/architecture/`](docs/architecture/) |
 | Agent responsibilities | [`docs/agents/`](docs/agents/) |
-| Message format | [`docs/protocols/message-schema.json`](docs/protocols/message-schema.json) |
-| Routing and priority rules | [`docs/protocols/routing-logic.md`](docs/protocols/routing-logic.md) |
+| Message schema | [`docs/protocols/message-schema.json`](docs/protocols/message-schema.json) |
+| Routing rules | [`docs/protocols/routing-logic.md`](docs/protocols/routing-logic.md) |
 | Consensus and conflict handling | [`docs/conflict-resolution/`](docs/conflict-resolution/) |
 | Human escalation | [`docs/escalation/`](docs/escalation/) |
 | Audit and observability | [`docs/observability/`](docs/observability/) |
-| Scenario implementation status | [`tests/scenarios/scenario-summary.md`](tests/scenarios/scenario-summary.md) |
-| Phase 1–6 assessment | [`SELF-ASSESSMENT.md`](SELF-ASSESSMENT.md) |
+| Scenario status | [`tests/scenarios/scenario-summary.md`](tests/scenarios/scenario-summary.md) |
+| Existing self-assessment | [`SELF-ASSESSMENT.md`](SELF-ASSESSMENT.md) |
 
-## Project status
+## Limitations
 
-**Phase 7 is implemented and published.** The repository includes all 20 mandatory synthetic scenarios and the supporting unit and integration-style tests described above.
+This is not a production compliance platform. It does not currently include live data feeds, customer data, trained ML/NLP detection, production persistence, production mTLS certificate validation, HSM or Vault integration, a complete enterprise RBAC implementation, external regulatory-feed parsing, or regulatory filing submission.
 
-**Phase 8 has been reviewed but not implemented.** Its remaining scope includes production security controls, India-specific compliance documentation and tests, optional additional scenarios, performance validation, and final documentation review.
+The India-specific work, performance validation, and optional CS-21 through CS-25 scenarios described in the Phase 8 prompt are not implemented.
+
+Do not use the sample configuration secrets or synthetic artifacts in a production environment.
+
+## Status
+
+**Phase 7 is complete.** All 20 mandatory synthetic scenarios and their supporting tests are implemented.
+
+**Phase 8 has been reviewed but is not implemented.** It is the remaining work for production security, India-specific compliance, additional scenarios, performance validation, and final documentation review.
 
 ## License
 
-No open-source license has been declared for this repository. Treat the contents as project-specific reference code unless the repository owner provides separate licensing terms.
+No open-source license has been declared for this repository. Treat the code and documentation as project-specific reference material unless the repository owner provides separate licensing terms.
