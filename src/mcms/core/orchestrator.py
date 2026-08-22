@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
+import asyncio
 import logging
 from datetime import UTC, datetime
 from typing import TYPE_CHECKING, Any, cast
+from uuid import UUID
 
 from src.mcms.core.audit import AuditChain
 from src.mcms.core.config import Config
@@ -37,13 +39,43 @@ class Orchestrator:
         self._resolved_messages: list[Message] = []
         self._shutdown = False
         from src.mcms.core.conflict_resolver import ConflictResolver
+        from src.mcms.core.escalation import EscalationService
 
         self._conflict_resolver: ConflictResolver = ConflictResolver(ConsensusEngine(config), self)
+        escalation_config = config.get_escalation_config()
+        escalation_config["human_assignment"] = config.get("human_assignment", {})
+        escalation_config["feedback"] = config.get("feedback", {})
+        self._escalation_service: EscalationService = EscalationService(escalation_config, self)
+        self._sla_monitor_task: asyncio.Task[None] | None = None
+
+    def _ensure_sla_monitor(self) -> None:
+        if self._sla_monitor_task is None or self._sla_monitor_task.done():
+            self._sla_monitor_task = asyncio.create_task(self._sla_monitor())
+
+    async def _sla_monitor(self) -> None:
+        while not self._shutdown:
+            try:
+                await asyncio.sleep(
+                    float(self._config.get("escalation.sla_monitor_interval_seconds", 60))
+                )
+                for record in await self._escalation_service.check_sla():
+                    if datetime.now(UTC) >= record.sla_deadline or record.status == "open":
+                        await self._escalation_service.auto_escalate(record.escalation_id)
+            except asyncio.CancelledError:
+                return
+            except Exception as error:
+                logger.exception("SLA monitor iteration failed: %s", error)
 
     async def dispatch(self, message: Message) -> None:
         """Route messages, buffering correlated ALERTs for conflict resolution."""
         if self._shutdown:
             raise OrchestratorError("Orchestrator is shut down; cannot dispatch messages")
+
+        self._ensure_sla_monitor()
+
+        if message.message_type == "ESCALATION":
+            await self.handle_escalation(message, reason="Inter-agent escalation message")
+            return
 
         if message.message_type == "ALERT":
             key = message.correlation_id or message.trace_id
@@ -91,12 +123,16 @@ class Orchestrator:
             raise OrchestratorError("Cannot route an empty message group to the resolver")
         resolved = await self._conflict_resolver.resolve_conflict(messages)
         self._resolved_messages.append(resolved)
+        if resolved.message_type == "ESCALATION":
+            await self.handle_escalation(resolved, reason="Consensus escalation")
+            return
         report_agent = self._registry.get_agent("agent-rg-001")
         if report_agent is not None:
             await report_agent.process_message(resolved)
 
     async def register_agent(self, agent: BaseAgent) -> None:
         """Registers agent for message delivery."""
+        self._ensure_sla_monitor()
         self._registry.register(agent)
         self._audit_chain.append(
             {
@@ -132,14 +168,33 @@ class Orchestrator:
         }
         self._registry.update_health(sender_id, health_data)
 
+    async def handle_escalation(self, message: Message, reason: str) -> UUID:
+        """Route an ESCALATION message through EscalationService."""
+        recommended = _payload(message).get("tier", _payload(message).get("recommended_tier", 1))
+        if isinstance(recommended, str) and recommended.startswith("TIER_"):
+            recommended = recommended.removeprefix("TIER_")
+        try:
+            recommended_tier = int(recommended)
+        except (TypeError, ValueError):
+            recommended_tier = 1
+        record = await self._escalation_service.escalate(message, reason, recommended_tier)
+        return record.escalation_id
+
     async def escalate(self, message: Message, reason: str) -> None:
-        """Creates escalation entry and routes to human escalation queue."""
+        """Create an escalation through the Phase 4 service."""
+        conflict_type = _payload(message).get("conflict_type")
+        recommended_tier = self._escalation_service.determine_tier(
+            message, str(conflict_type) if conflict_type else None
+        )
+        await self.handle_escalation(message, reason=reason)
+        # Preserve the Phase 1–3 queue/audit compatibility contract.
         escalation_entry: dict[str, Any] = {
             "original_message_id": message.message_id,
             "reason": reason,
             "timestamp": datetime.now(UTC).isoformat(),
             "sender_agent_id": message.sender_agent_id,
             "priority": message.priority,
+            "recommended_tier": recommended_tier,
         }
         self._escalation_queue.append(escalation_entry)
         self._audit_chain.append(
@@ -168,11 +223,17 @@ class Orchestrator:
             "audit_chain_length": len(self._audit_chain.entries),
             "conflict_buffer_depth": sum(len(items) for items in self._conflict_buffer.values()),
             "resolved_message_depth": len(self._resolved_messages),
+            "escalation_record_count": len(self._escalation_service.records),
+            "sla_monitor_running": self._sla_monitor_task is not None
+            and not self._sla_monitor_task.done(),
         }
 
     async def shutdown(self) -> None:
         """Graceful shutdown with in-flight message completion."""
         self._shutdown = True
+        if self._sla_monitor_task is not None:
+            self._sla_monitor_task.cancel()
+            self._sla_monitor_task = None
         self._audit_chain.append(
             {
                 "action": "SHUTDOWN",

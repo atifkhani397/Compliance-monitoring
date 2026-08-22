@@ -100,3 +100,23 @@ class ConvergenceError(ConsensusError):
 
 class InvalidAssessmentError(ConsensusError):
     """Raised when an agent assessment violates the consensus input contract."""
+
+
+class EscalationError(MCMSException):
+    """Base exception for human-in-the-loop escalation failures."""
+
+
+class AssignmentError(EscalationError):
+    """Raised when no suitable available human can be assigned."""
+
+
+class SlaViolationError(EscalationError):
+    """Raised when an escalation exceeds its service-level agreement."""
+
+
+class OverrideDeniedError(EscalationError):
+    """Raised when an override lacks authority, justification, or approval."""
+
+
+class FeedbackError(EscalationError):
+    """Raised when feedback data is malformed or cannot be recorded."""

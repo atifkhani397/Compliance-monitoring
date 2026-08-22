@@ -53,18 +53,37 @@ orchestrator:
   heartbeat_interval_seconds: 30
   shutdown_timeout_seconds: 30
 
-escalation:
-  human_queue_topic: "mcms.escalation.human"
-  default_tier: "TIER_1"
-  sla_seconds:
-    TIER_1: 3600
-    TIER_2: 14400
-    TIER_3: 86400
-
 consensus:
   prior: 0.5
   escalation_threshold: 0.7
   convergence_threshold: 0.2
+  agent_weights:
+    agent-tm-001: 0.35
+    agent-cs-001: 0.30
+    agent-ru-001: 0.20
+    agent-rg-001: 0.15
+
+# Phase 4 human-in-the-loop escalation configuration
+escalation:
+  human_queue_topic: "mcms.escalation.human"
+  default_tier: "TIER_1"
+  sla_seconds:
+    TIER_1: 14400
+    TIER_2: 7200
+    TIER_3: 3600
+    TIER_4: 1800
+  after_hours: false
+  review_warning_fraction: 0.5
+
+human_assignment:
+  business_hours_start: 6
+  business_hours_end: 18
+  on_call: []
+  cco_id: "cco-001"
+
+feedback:
+  review_period_seconds: 86400
+  thresholds: {}
   agent_weights:
     agent-tm-001: 0.35
     agent-cs-001: 0.30

@@ -11,6 +11,23 @@
           "title": "Affected Entities",
           "type": "array"
         },
+        "agent_status": {
+          "anyOf": [
+            {
+              "enum": [
+                "HEALTHY",
+                "DEGRADED",
+                "STOPPED"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Agent Status"
+        },
         "attributed_entity": {
           "anyOf": [
             {
@@ -22,6 +39,23 @@
           ],
           "default": null,
           "title": "Attributed Entity"
+        },
+        "board_level": {
+          "default": false,
+          "title": "Board Level",
+          "type": "boolean"
+        },
+        "conflict_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Conflict Type"
         },
         "consensus_result": {
           "anyOf": [
@@ -35,6 +69,11 @@
           ],
           "default": null,
           "title": "Consensus Result"
+        },
+        "cross_jurisdictional": {
+          "default": false,
+          "title": "Cross Jurisdictional",
+          "type": "boolean"
         },
         "detected_at": {
           "title": "Detected At",
@@ -64,6 +103,11 @@
           "default": null,
           "title": "Jurisdiction"
         },
+        "mria": {
+          "default": false,
+          "title": "Mria",
+          "type": "boolean"
+        },
         "regulatory_requirement": {
           "anyOf": [
             {
@@ -76,6 +120,29 @@
           "default": null,
           "title": "Regulatory Requirement"
         },
+        "repeated_violation_count": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Repeated Violation Count",
+          "type": "integer"
+        },
+        "required_skills": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Skills",
+          "type": "array"
+        },
+        "sanctions_related": {
+          "default": false,
+          "title": "Sanctions Related",
+          "type": "boolean"
+        },
+        "senior_management": {
+          "default": false,
+          "title": "Senior Management",
+          "type": "boolean"
+        },
         "severity": {
           "enum": [
             "LOW",
@@ -85,6 +152,11 @@
           ],
           "title": "Severity",
           "type": "string"
+        },
+        "system_generated_anomaly": {
+          "default": false,
+          "title": "System Generated Anomaly",
+          "type": "boolean"
         },
         "violation_type": {
           "title": "Violation Type",
@@ -195,6 +267,18 @@
       "additionalProperties": false,
       "description": "Payload for ESCALATION messages.",
       "properties": {
+        "assigned_to": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Assigned To"
+        },
         "conflict_type": {
           "anyOf": [
             {
@@ -223,10 +307,56 @@
           "enum": [
             "TIER_1",
             "TIER_2",
-            "TIER_3"
+            "TIER_3",
+            "TIER_4"
           ],
           "title": "Recommended Tier",
           "type": "string"
+        },
+        "sla_deadline": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sla Deadline"
+        },
+        "status": {
+          "anyOf": [
+            {
+              "enum": [
+                "open",
+                "in_review",
+                "resolved",
+                "auto_escalated",
+                "overridden"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Status"
+        },
+        "tier": {
+          "anyOf": [
+            {
+              "maximum": 4,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tier"
         }
       },
       "required": [
@@ -236,6 +366,78 @@
         "human_assignee_role"
       ],
       "title": "EscalationPayload",
+      "type": "object"
+    },
+    "FeedbackPayload": {
+      "additionalProperties": false,
+      "description": "Labeled feedback carried by an UPDATE message.",
+      "properties": {
+        "agent_id": {
+          "title": "Agent Id",
+          "type": "string"
+        },
+        "alert_id": {
+          "title": "Alert Id",
+          "type": "string"
+        },
+        "confidence_after": {
+          "anyOf": [
+            {
+              "maximum": 1.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Confidence After"
+        },
+        "confidence_before": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence Before",
+          "type": "number"
+        },
+        "decision_id": {
+          "title": "Decision Id",
+          "type": "string"
+        },
+        "human_decision": {
+          "enum": [
+            "approve",
+            "reject",
+            "override",
+            "request_more_info"
+          ],
+          "title": "Human Decision",
+          "type": "string"
+        },
+        "justification": {
+          "title": "Justification",
+          "type": "string"
+        },
+        "timestamp": {
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "violation_type": {
+          "title": "Violation Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "decision_id",
+        "alert_id",
+        "agent_id",
+        "violation_type",
+        "human_decision",
+        "confidence_before",
+        "justification",
+        "timestamp"
+      ],
+      "title": "FeedbackPayload",
       "type": "object"
     },
     "HeartbeatPayload": {
@@ -267,6 +469,49 @@
         "last_processed_timestamp"
       ],
       "title": "HeartbeatPayload",
+      "type": "object"
+    },
+    "HumanDecisionPayload": {
+      "additionalProperties": false,
+      "description": "Human disposition carried by an UPDATE message.",
+      "properties": {
+        "confidence_after": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence After",
+          "type": "number"
+        },
+        "decided_at": {
+          "title": "Decided At",
+          "type": "string"
+        },
+        "decided_by": {
+          "title": "Decided By",
+          "type": "string"
+        },
+        "decision": {
+          "enum": [
+            "approve",
+            "reject",
+            "override",
+            "request_more_info"
+          ],
+          "title": "Decision",
+          "type": "string"
+        },
+        "justification": {
+          "title": "Justification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "decision",
+        "justification",
+        "decided_by",
+        "decided_at",
+        "confidence_after"
+      ],
+      "title": "HumanDecisionPayload",
       "type": "object"
     },
     "QueryPayload": {
@@ -376,6 +621,28 @@
           "title": "Entity Id",
           "type": "string"
         },
+        "feedback": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FeedbackPayload"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "human_decision": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/HumanDecisionPayload"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "previous_values": {
           "additionalProperties": true,
           "title": "Previous Values",
@@ -479,6 +746,12 @@
         },
         {
           "$ref": "#/$defs/ConsensusPayload"
+        },
+        {
+          "$ref": "#/$defs/HumanDecisionPayload"
+        },
+        {
+          "$ref": "#/$defs/FeedbackPayload"
         },
         {
           "additionalProperties": true,

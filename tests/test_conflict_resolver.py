@@ -224,9 +224,10 @@ async def test_orchestrator_routes_correlated_alerts_to_resolver() -> None:
     await orchestrator.dispatch(alert("agent-tm-001", correlation_id, 0.9))
     await orchestrator.dispatch(alert("agent-cs-001", correlation_id, 0.2))
     assert len(orchestrator._resolved_messages) == 1
-    # The first alert is handled directly; the second correlated alert triggers
-    # the resolver and adds one resolved output.
-    assert len(report_agent.outbound_queue) == 2
+    # The first alert is handled directly. A low-confidence consensus becomes
+    # an ESCALATION and is routed through the Phase 4 service.
+    assert len(report_agent.outbound_queue) == 1
+    assert len(orchestrator._escalation_service.records) == 1
     assert any(
         entry.data.get("action") == "CONFLICT_RESOLUTION"
         for entry in orchestrator._audit_chain.entries

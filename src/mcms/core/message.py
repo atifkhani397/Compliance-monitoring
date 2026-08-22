@@ -35,6 +35,16 @@ class AlertPayload(BaseModel):
     jurisdiction: str | None = None
     regulatory_requirement: str | None = None
     attributed_entity: str | None = None
+    cross_jurisdictional: bool = False
+    mria: bool = False
+    board_level: bool = False
+    senior_management: bool = False
+    repeated_violation_count: int = Field(default=0, ge=0)
+    system_generated_anomaly: bool = False
+    sanctions_related: bool = False
+    agent_status: Literal["HEALTHY", "DEGRADED", "STOPPED"] | None = None
+    conflict_type: str | None = None
+    required_skills: list[str] = Field(default_factory=list)
     consensus_result: dict[str, Any] | None = None
 
     @field_validator("detected_at")
@@ -96,6 +106,34 @@ class ResponsePayload(BaseModel):
         return v
 
 
+class HumanDecisionPayload(BaseModel):
+    """Human disposition carried by an UPDATE message."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    decision: Literal["approve", "reject", "override", "request_more_info"]
+    justification: str
+    decided_by: str
+    decided_at: str
+    confidence_after: float = Field(ge=0.0, le=1.0)
+
+
+class FeedbackPayload(BaseModel):
+    """Labeled feedback carried by an UPDATE message."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    decision_id: str
+    alert_id: str
+    agent_id: str
+    violation_type: str
+    human_decision: Literal["approve", "reject", "override", "request_more_info"]
+    confidence_before: float = Field(ge=0.0, le=1.0)
+    confidence_after: float | None = Field(default=None, ge=0.0, le=1.0)
+    justification: str
+    timestamp: str
+
+
 class UpdatePayload(BaseModel):
     """Payload for UPDATE messages."""
 
@@ -106,6 +144,8 @@ class UpdatePayload(BaseModel):
     changed_fields: dict[str, Any]
     previous_values: dict[str, Any]
     consensus_result: ConsensusPayload | None = None
+    human_decision: HumanDecisionPayload | None = None
+    feedback: FeedbackPayload | None = None
 
 
 class HeartbeatPayload(BaseModel):
@@ -133,10 +173,14 @@ class EscalationPayload(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     escalation_reason: str
-    recommended_tier: Literal["TIER_1", "TIER_2", "TIER_3"]
+    recommended_tier: Literal["TIER_1", "TIER_2", "TIER_3", "TIER_4"]
     decision_support_package_ref: str
     human_assignee_role: str
     conflict_type: str | None = None
+    assigned_to: str | None = None
+    tier: int | None = Field(default=None, ge=1, le=4)
+    sla_deadline: str | None = None
+    status: Literal["open", "in_review", "resolved", "auto_escalated", "overridden"] | None = None
 
 
 PayloadType = (
@@ -147,6 +191,8 @@ PayloadType = (
     | HeartbeatPayload
     | EscalationPayload
     | ConsensusPayload
+    | HumanDecisionPayload
+    | FeedbackPayload
     | dict[str, Any]
 )
 
