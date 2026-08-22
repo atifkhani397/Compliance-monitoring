@@ -1,0 +1,190 @@
+[
+  {
+    "index": 0,
+    "timestamp": "2026-08-22T18:38:52.727428+00:00",
+    "previous_hash": "e3eba8b0b470c0e19ed44237f1302e2fe392b8138b5ef82a6031636dc371ad46",
+    "current_hash": "1fc3ebbda21f8457a8c844f2b4a892c0a967537c70ebdb6036ca093d0efe764d",
+    "data": {
+      "action": "DETECTION",
+      "scenario_id": "CS-18",
+      "trace_id": "f1ed883c-9626-4705-8c9e-87f8c7deeeab",
+      "agent_id": "agent-tm-001",
+      "confidence": 0.65,
+      "severity": "MEDIUM"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "f1ed883c-9626-4705-8c9e-87f8c7deeeab",
+    "action_type": "DETECTION",
+    "action_data": {
+      "scenario_id": "CS-18",
+      "trace_id": "f1ed883c-9626-4705-8c9e-87f8c7deeeab",
+      "agent_id": "agent-tm-001",
+      "confidence": 0.65,
+      "severity": "MEDIUM"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 1,
+    "timestamp": "2026-08-22T18:38:52.727586+00:00",
+    "previous_hash": "1fc3ebbda21f8457a8c844f2b4a892c0a967537c70ebdb6036ca093d0efe764d",
+    "current_hash": "5132c4bf8d797453987d9d1a00a502663f4143e5b02ae674d1bdf91a0d2cc64d",
+    "data": {
+      "action": "SUPPRESSION",
+      "scenario_id": "CS-18",
+      "trace_id": "f1ed883c-9626-4705-8c9e-87f8c7deeeab",
+      "message_id": "f3f212e1-b420-471f-9496-f6038c5169c6",
+      "confidence": 0.15
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "f1ed883c-9626-4705-8c9e-87f8c7deeeab",
+    "action_type": "SUPPRESSION",
+    "action_data": {
+      "scenario_id": "CS-18",
+      "trace_id": "f1ed883c-9626-4705-8c9e-87f8c7deeeab",
+      "message_id": "f3f212e1-b420-471f-9496-f6038c5169c6",
+      "confidence": 0.15
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 2,
+    "timestamp": "2026-08-22T18:38:52.727685+00:00",
+    "previous_hash": "5132c4bf8d797453987d9d1a00a502663f4143e5b02ae674d1bdf91a0d2cc64d",
+    "current_hash": "74835feb54fa4086ca1dc888d8b330d3b15b44ea2cb8a797e286d3f7f66fb582",
+    "data": {
+      "action": "REPORT_GENERATION",
+      "scenario_id": "CS-18",
+      "trace_id": "f1ed883c-9626-4705-8c9e-87f8c7deeeab",
+      "report_types": [
+        "No report generated \u2014 false-positive suppression record"
+      ],
+      "status": "DRAFT_REQUIRES_HUMAN_AUTHORIZATION"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "f1ed883c-9626-4705-8c9e-87f8c7deeeab",
+    "action_type": "REPORT_GENERATION",
+    "action_data": {
+      "scenario_id": "CS-18",
+      "trace_id": "f1ed883c-9626-4705-8c9e-87f8c7deeeab",
+      "report_types": [
+        "No report generated \u2014 false-positive suppression record"
+      ],
+      "status": "DRAFT_REQUIRES_HUMAN_AUTHORIZATION"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 3,
+    "timestamp": "2026-08-22T18:38:52.727715+00:00",
+    "previous_hash": "74835feb54fa4086ca1dc888d8b330d3b15b44ea2cb8a797e286d3f7f66fb582",
+    "current_hash": "89cea42c8805a90f48af5ceca0b3deb00d1f7eb865527409c1958f3d67703b92",
+    "data": {
+      "action": "REPORT_AUTHORIZATION_REQUIRED",
+      "scenario_id": "CS-18",
+      "trace_id": "f1ed883c-9626-4705-8c9e-87f8c7deeeab",
+      "report_id": "668b9fef-c47c-43d8-b8b3-466aa370ebe7"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "f1ed883c-9626-4705-8c9e-87f8c7deeeab",
+    "action_type": "REPORT_AUTHORIZATION_REQUIRED",
+    "action_data": {
+      "scenario_id": "CS-18",
+      "trace_id": "f1ed883c-9626-4705-8c9e-87f8c7deeeab",
+      "report_id": "668b9fef-c47c-43d8-b8b3-466aa370ebe7"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 4,
+    "timestamp": "2026-08-22T18:38:52.727736+00:00",
+    "previous_hash": "89cea42c8805a90f48af5ceca0b3deb00d1f7eb865527409c1958f3d67703b92",
+    "current_hash": "168d825d41464bdf2b70b5e1779129d197125cd1751c3ec264476080bf155475",
+    "data": {
+      "action": "TRACE_CHECKPOINT",
+      "scenario_id": "CS-18",
+      "trace_id": "f1ed883c-9626-4705-8c9e-87f8c7deeeab",
+      "sequence": 4
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "f1ed883c-9626-4705-8c9e-87f8c7deeeab",
+    "action_type": "TRACE_CHECKPOINT",
+    "action_data": {
+      "scenario_id": "CS-18",
+      "trace_id": "f1ed883c-9626-4705-8c9e-87f8c7deeeab",
+      "sequence": 4
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 5,
+    "timestamp": "2026-08-22T18:38:52.727754+00:00",
+    "previous_hash": "168d825d41464bdf2b70b5e1779129d197125cd1751c3ec264476080bf155475",
+    "current_hash": "515770955834964ecc75734bbda4ff13de7a16f48eaad26ab0a318c3a7c44fc2",
+    "data": {
+      "action": "TRACE_CHECKPOINT",
+      "scenario_id": "CS-18",
+      "trace_id": "f1ed883c-9626-4705-8c9e-87f8c7deeeab",
+      "sequence": 5
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "f1ed883c-9626-4705-8c9e-87f8c7deeeab",
+    "action_type": "TRACE_CHECKPOINT",
+    "action_data": {
+      "scenario_id": "CS-18",
+      "trace_id": "f1ed883c-9626-4705-8c9e-87f8c7deeeab",
+      "sequence": 5
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 6,
+    "timestamp": "2026-08-22T18:38:52.727769+00:00",
+    "previous_hash": "515770955834964ecc75734bbda4ff13de7a16f48eaad26ab0a318c3a7c44fc2",
+    "current_hash": "bd6d0204768db0ddf37c3e4fb00037a4925d5a67c8e9cc9e83dcf7b2087615ca",
+    "data": {
+      "action": "TRACE_CHECKPOINT",
+      "scenario_id": "CS-18",
+      "trace_id": "f1ed883c-9626-4705-8c9e-87f8c7deeeab",
+      "sequence": 6
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "f1ed883c-9626-4705-8c9e-87f8c7deeeab",
+    "action_type": "TRACE_CHECKPOINT",
+    "action_data": {
+      "scenario_id": "CS-18",
+      "trace_id": "f1ed883c-9626-4705-8c9e-87f8c7deeeab",
+      "sequence": 6
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 7,
+    "timestamp": "2026-08-22T18:38:52.727783+00:00",
+    "previous_hash": "bd6d0204768db0ddf37c3e4fb00037a4925d5a67c8e9cc9e83dcf7b2087615ca",
+    "current_hash": "e3e12e737028ed4e09f1eed04cc94501f5891048d211b2a295d5630c1b0e3b5e",
+    "data": {
+      "action": "TRACE_CHECKPOINT",
+      "scenario_id": "CS-18",
+      "trace_id": "f1ed883c-9626-4705-8c9e-87f8c7deeeab",
+      "sequence": 7
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "f1ed883c-9626-4705-8c9e-87f8c7deeeab",
+    "action_type": "TRACE_CHECKPOINT",
+    "action_data": {
+      "scenario_id": "CS-18",
+      "trace_id": "f1ed883c-9626-4705-8c9e-87f8c7deeeab",
+      "sequence": 7
+    },
+    "signature": null,
+    "nonce": null
+  }
+]

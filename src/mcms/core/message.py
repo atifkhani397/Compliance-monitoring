@@ -46,6 +46,8 @@ class AlertPayload(BaseModel):
     conflict_type: str | None = None
     required_skills: list[str] = Field(default_factory=list)
     scenario_context: dict[str, Any] = Field(default_factory=dict)
+    affected_jurisdictions: list[str] = Field(default_factory=list)
+    conflicting_regulations: list[str] = Field(default_factory=list)
     consensus_result: dict[str, Any] | None = None
 
     @field_validator("detected_at")

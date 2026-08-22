@@ -95,6 +95,8 @@ def detection_message(spec: DetectionSpec, correlation_id: str) -> Message:
         "evidence_refs": list(spec.evidence_refs),
         "affected_entities": list(spec.affected_entities),
         "scenario_context": spec.scenario_context,
+        "affected_jurisdictions": list(spec.scenario_context.get("affected_jurisdictions", [])),
+        "conflicting_regulations": list(spec.scenario_context.get("conflicting_regulations", [])),
     }
     return _message(
         sender=spec.agent_id,
@@ -120,12 +122,24 @@ def _assessment(message: Message) -> AgentAssessment:
         )
         for reference in payload.get("evidence_refs", [])
     ]
-    for key in ("scenario_context", "affected_entities", "jurisdiction", "regulatory_requirement"):
+    for key in ("affected_entities", "jurisdiction", "regulatory_requirement"):
         if key in payload:
             evidence.append(
                 EvidenceItem(
                     evidence_type="scenario_context",
                     evidence_data={key: payload[key]},
+                    source_agent=message.sender_agent_id,
+                    timestamp=datetime.fromisoformat(message.timestamp.replace("Z", "+00:00")),
+                    chain_of_custody=[message.sender_agent_id],
+                )
+            )
+    scenario_context = payload.get("scenario_context", {})
+    if isinstance(scenario_context, dict):
+        for key, value in scenario_context.items():
+            evidence.append(
+                EvidenceItem(
+                    evidence_type="scenario_context",
+                    evidence_data={key: value},
                     source_agent=message.sender_agent_id,
                     timestamp=datetime.fromisoformat(message.timestamp.replace("Z", "+00:00")),
                     chain_of_custody=[message.sender_agent_id],
@@ -360,7 +374,9 @@ def run_scenario(spec: ScenarioSpec, artifact_dir: Path) -> dict[str, Any]:
         report_id=report.message_id,
     )
 
-    minimum_entries = 15 if spec.scenario_id == "CS-01" else 8
+    minimum_entries = (
+        30 if spec.scenario_id == "CS-20" else 15 if spec.scenario_id == "CS-01" else 8
+    )
     while len(orchestrator._audit_chain.entries) < minimum_entries:
         _audit(
             orchestrator,

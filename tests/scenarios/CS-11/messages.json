@@ -1,0 +1,145 @@
+[
+  {
+    "message_id": "dbedda37-ea87-4d70-afd3-f64666940928",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:38:52.587059+00:00",
+    "sender_agent_id": "agent-cs-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "ALERT",
+    "priority": 2,
+    "correlation_id": "0a7b099f-8595-4282-899a-c5e9bff297ac",
+    "trace_id": "0a7b099f-8595-4282-899a-c5e9bff297ac",
+    "payload_schema": "alert-v1",
+    "payload": {
+      "violation_type": "data_privacy_violation",
+      "severity": "HIGH",
+      "detected_at": "2026-08-22T18:38:52.587044+00:00",
+      "evidence_refs": [
+        "transfer_14000_eu_001",
+        "missing_scc_001"
+      ],
+      "affected_entities": [
+        "EU_Residents_14000"
+      ],
+      "exculpatory": false,
+      "jurisdiction": null,
+      "regulatory_requirement": null,
+      "attributed_entity": null,
+      "cross_jurisdictional": false,
+      "mria": false,
+      "board_level": false,
+      "senior_management": false,
+      "repeated_violation_count": 0,
+      "system_generated_anomaly": false,
+      "sanctions_related": false,
+      "agent_status": null,
+      "conflict_type": null,
+      "required_skills": [],
+      "scenario_context": {
+        "transfer_to_non_adequate_jurisdiction": true,
+        "scc_documented": false,
+        "consent": false
+      },
+      "affected_jurisdictions": [],
+      "conflicting_regulations": [],
+      "consensus_result": null
+    },
+    "confidence_score": 0.87,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "988c089016b00a5a"
+  },
+  {
+    "message_id": "520b88b3-5ca9-4549-816f-60540f65cd28",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:38:52.587751+00:00",
+    "sender_agent_id": "agent-ru-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "ALERT",
+    "priority": 2,
+    "correlation_id": "0a7b099f-8595-4282-899a-c5e9bff297ac",
+    "trace_id": "0a7b099f-8595-4282-899a-c5e9bff297ac",
+    "payload_schema": "alert-v1",
+    "payload": {
+      "violation_type": "data_privacy_violation",
+      "severity": "HIGH",
+      "detected_at": "2026-08-22T18:38:52.587737+00:00",
+      "evidence_refs": [
+        "schrems_ii_confirmation_001",
+        "gdpr_article_44_001"
+      ],
+      "affected_entities": [
+        "EU_Residents_14000"
+      ],
+      "exculpatory": false,
+      "jurisdiction": null,
+      "regulatory_requirement": null,
+      "attributed_entity": null,
+      "cross_jurisdictional": false,
+      "mria": false,
+      "board_level": false,
+      "senior_management": false,
+      "repeated_violation_count": 0,
+      "system_generated_anomaly": false,
+      "sanctions_related": false,
+      "agent_status": null,
+      "conflict_type": null,
+      "required_skills": [],
+      "scenario_context": {
+        "regulatory_confirmation": "GDPR Article 44 requires SCCs",
+        "privacy_shield_invalidated": true
+      },
+      "affected_jurisdictions": [],
+      "conflicting_regulations": [],
+      "consensus_result": null
+    },
+    "confidence_score": 0.95,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "42071982d386cc5b"
+  },
+  {
+    "message_id": "67b3cead-0895-4106-8160-9e47ab332389",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:38:52.589165+00:00",
+    "sender_agent_id": "agent-rg-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "UPDATE",
+    "priority": 2,
+    "correlation_id": "0a7b099f-8595-4282-899a-c5e9bff297ac",
+    "trace_id": "0a7b099f-8595-4282-899a-c5e9bff297ac",
+    "payload_schema": "update-v1",
+    "payload": {
+      "update_type": "report_generation",
+      "entity_id": "CS-11",
+      "changed_fields": {
+        "report_types": [
+          "Data breach notification draft (GDPR Article 33)",
+          "DPO assessment",
+          "Remediation plan"
+        ],
+        "status": "DRAFT_REQUIRES_HUMAN_AUTHORIZATION",
+        "regulations": [
+          "GDPR Articles 44-49",
+          "Schrems II"
+        ]
+      },
+      "previous_values": {},
+      "consensus_result": null,
+      "human_decision": null,
+      "feedback": null,
+      "reason": null,
+      "evidence_refs": []
+    },
+    "confidence_score": null,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "d054e2fa7b620e55"
+  }
+]

@@ -1,0 +1,231 @@
+[
+  {
+    "index": 0,
+    "timestamp": "2026-08-22T18:38:52.742808+00:00",
+    "previous_hash": "e3eba8b0b470c0e19ed44237f1302e2fe392b8138b5ef82a6031636dc371ad46",
+    "current_hash": "1096bb32118dc7811a79b47ebc59ac759c38ae1a6031163c0edbb4842ff4b3e5",
+    "data": {
+      "action": "DETECTION",
+      "scenario_id": "CS-19",
+      "trace_id": "db41f690-4451-4746-b758-7c26a1d07032",
+      "agent_id": "agent-ru-001",
+      "confidence": 0.5,
+      "severity": "HIGH"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "db41f690-4451-4746-b758-7c26a1d07032",
+    "action_type": "DETECTION",
+    "action_data": {
+      "scenario_id": "CS-19",
+      "trace_id": "db41f690-4451-4746-b758-7c26a1d07032",
+      "agent_id": "agent-ru-001",
+      "confidence": 0.5,
+      "severity": "HIGH"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 1,
+    "timestamp": "2026-08-22T18:38:52.742846+00:00",
+    "previous_hash": "1096bb32118dc7811a79b47ebc59ac759c38ae1a6031163c0edbb4842ff4b3e5",
+    "current_hash": "bd4b0890e2517c15f9b6820b8773a49198a028648a474a7cbaa0420b7f5709f0",
+    "data": {
+      "action": "MESSAGE_SENT",
+      "scenario_id": "CS-19",
+      "trace_id": "db41f690-4451-4746-b758-7c26a1d07032",
+      "agent_id": "agent-ru-001",
+      "message_id": "8bc002f9-a3f3-417a-8f1e-ec3844ccd850"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "db41f690-4451-4746-b758-7c26a1d07032",
+    "action_type": "MESSAGE_SENT",
+    "action_data": {
+      "scenario_id": "CS-19",
+      "trace_id": "db41f690-4451-4746-b758-7c26a1d07032",
+      "agent_id": "agent-ru-001",
+      "message_id": "8bc002f9-a3f3-417a-8f1e-ec3844ccd850"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 2,
+    "timestamp": "2026-08-22T18:38:52.742867+00:00",
+    "previous_hash": "bd4b0890e2517c15f9b6820b8773a49198a028648a474a7cbaa0420b7f5709f0",
+    "current_hash": "5ef3e0c72f3752c377e3870d6df7a342f7abeb7df3b60ca522aaa97cc329de09",
+    "data": {
+      "action": "MESSAGE_RECEIVED",
+      "scenario_id": "CS-19",
+      "trace_id": "db41f690-4451-4746-b758-7c26a1d07032",
+      "agent_id": "orchestrator",
+      "message_id": "8bc002f9-a3f3-417a-8f1e-ec3844ccd850"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "db41f690-4451-4746-b758-7c26a1d07032",
+    "action_type": "MESSAGE_RECEIVED",
+    "action_data": {
+      "scenario_id": "CS-19",
+      "trace_id": "db41f690-4451-4746-b758-7c26a1d07032",
+      "agent_id": "orchestrator",
+      "message_id": "8bc002f9-a3f3-417a-8f1e-ec3844ccd850"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 3,
+    "timestamp": "2026-08-22T18:38:52.742885+00:00",
+    "previous_hash": "5ef3e0c72f3752c377e3870d6df7a342f7abeb7df3b60ca522aaa97cc329de09",
+    "current_hash": "aed7ac3e35e665e688236f4ca7029d6070746204c95fee8dea722dda3a2bb489",
+    "data": {
+      "action": "REGULATORY_CONFLICT",
+      "scenario_id": "CS-19",
+      "trace_id": "db41f690-4451-4746-b758-7c26a1d07032",
+      "conflict_type": "E",
+      "regulations": [
+        "EMIR Reporting Obligation",
+        "MAS Securities and Futures Act"
+      ]
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "db41f690-4451-4746-b758-7c26a1d07032",
+    "action_type": "REGULATORY_CONFLICT",
+    "action_data": {
+      "scenario_id": "CS-19",
+      "trace_id": "db41f690-4451-4746-b758-7c26a1d07032",
+      "conflict_type": "E",
+      "regulations": [
+        "EMIR Reporting Obligation",
+        "MAS Securities and Futures Act"
+      ]
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 4,
+    "timestamp": "2026-08-22T18:38:52.743082+00:00",
+    "previous_hash": "aed7ac3e35e665e688236f4ca7029d6070746204c95fee8dea722dda3a2bb489",
+    "current_hash": "0210a2bb48319e593d85310705904b55e6fbe49524b83ff25a4e4fbc73ecffbc",
+    "data": {
+      "action": "ESCALATION_CREATED",
+      "escalation_id": "39a91b43-5c55-4124-bbdc-ec4d8a8eee41",
+      "alert_id": "8bc002f9-a3f3-417a-8f1e-ec3844ccd850",
+      "tier": 4,
+      "assigned_to": "unassigned",
+      "status": "open",
+      "reason": "Phase 6 CS-19: Multi-Jurisdiction Regulatory Conflict requires human review"
+    },
+    "agent_id": "escalation-service",
+    "trace_id": null,
+    "action_type": null,
+    "action_data": null,
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 5,
+    "timestamp": "2026-08-22T18:38:52.743524+00:00",
+    "previous_hash": "0210a2bb48319e593d85310705904b55e6fbe49524b83ff25a4e4fbc73ecffbc",
+    "current_hash": "2f5c3d8a9f6285b0a54b43e7cb88a32fc6a461c5bcd3a8f5a7793601443e366c",
+    "data": {
+      "action": "ESCALATION",
+      "scenario_id": "CS-19",
+      "trace_id": "db41f690-4451-4746-b758-7c26a1d07032",
+      "escalation_id": "39a91b43-5c55-4124-bbdc-ec4d8a8eee41",
+      "tier": 4,
+      "sla_deadline": "2026-08-22T19:08:52.743022+00:00"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "db41f690-4451-4746-b758-7c26a1d07032",
+    "action_type": "ESCALATION",
+    "action_data": {
+      "scenario_id": "CS-19",
+      "trace_id": "db41f690-4451-4746-b758-7c26a1d07032",
+      "escalation_id": "39a91b43-5c55-4124-bbdc-ec4d8a8eee41",
+      "tier": 4,
+      "sla_deadline": "2026-08-22T19:08:52.743022+00:00"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 6,
+    "timestamp": "2026-08-22T18:38:52.743571+00:00",
+    "previous_hash": "2f5c3d8a9f6285b0a54b43e7cb88a32fc6a461c5bcd3a8f5a7793601443e366c",
+    "current_hash": "b813c8ddf560174d2dd21c8daf416cf2e016af5b023f96df223c617f62d83e3b",
+    "data": {
+      "action": "DECISION_SUPPORT_PACKAGE",
+      "scenario_id": "CS-19",
+      "trace_id": "db41f690-4451-4746-b758-7c26a1d07032",
+      "escalation_id": "39a91b43-5c55-4124-bbdc-ec4d8a8eee41",
+      "evidence_count": 2
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "db41f690-4451-4746-b758-7c26a1d07032",
+    "action_type": "DECISION_SUPPORT_PACKAGE",
+    "action_data": {
+      "scenario_id": "CS-19",
+      "trace_id": "db41f690-4451-4746-b758-7c26a1d07032",
+      "escalation_id": "39a91b43-5c55-4124-bbdc-ec4d8a8eee41",
+      "evidence_count": 2
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 7,
+    "timestamp": "2026-08-22T18:38:52.743738+00:00",
+    "previous_hash": "b813c8ddf560174d2dd21c8daf416cf2e016af5b023f96df223c617f62d83e3b",
+    "current_hash": "10f552abf865b90fe8069ac6ac31186d1938ed30dd2261e6642f86a7dab62ce1",
+    "data": {
+      "action": "REPORT_GENERATION",
+      "scenario_id": "CS-19",
+      "trace_id": "db41f690-4451-4746-b758-7c26a1d07032",
+      "report_types": [
+        "Regulatory conflict analysis",
+        "Legal opinion request",
+        "Jurisdictional compliance strategy"
+      ],
+      "status": "DRAFT_REQUIRES_HUMAN_AUTHORIZATION"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "db41f690-4451-4746-b758-7c26a1d07032",
+    "action_type": "REPORT_GENERATION",
+    "action_data": {
+      "scenario_id": "CS-19",
+      "trace_id": "db41f690-4451-4746-b758-7c26a1d07032",
+      "report_types": [
+        "Regulatory conflict analysis",
+        "Legal opinion request",
+        "Jurisdictional compliance strategy"
+      ],
+      "status": "DRAFT_REQUIRES_HUMAN_AUTHORIZATION"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 8,
+    "timestamp": "2026-08-22T18:38:52.743778+00:00",
+    "previous_hash": "10f552abf865b90fe8069ac6ac31186d1938ed30dd2261e6642f86a7dab62ce1",
+    "current_hash": "21594e834df014ab7cbb87e221de1afce32394dbe21c4b61db7a597c73dd599a",
+    "data": {
+      "action": "REPORT_AUTHORIZATION_REQUIRED",
+      "scenario_id": "CS-19",
+      "trace_id": "db41f690-4451-4746-b758-7c26a1d07032",
+      "report_id": "d7097357-99f4-4342-a5db-e711dd84d4c0"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "db41f690-4451-4746-b758-7c26a1d07032",
+    "action_type": "REPORT_AUTHORIZATION_REQUIRED",
+    "action_data": {
+      "scenario_id": "CS-19",
+      "trace_id": "db41f690-4451-4746-b758-7c26a1d07032",
+      "report_id": "d7097357-99f4-4342-a5db-e711dd84d4c0"
+    },
+    "signature": null,
+    "nonce": null
+  }
+]

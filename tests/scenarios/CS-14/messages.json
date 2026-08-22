@@ -1,0 +1,95 @@
+[
+  {
+    "message_id": "380c7617-ce39-46a0-815c-8e9c279f2039",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:38:52.643224+00:00",
+    "sender_agent_id": "agent-tm-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "ALERT",
+    "priority": 1,
+    "correlation_id": "29783f8a-90e4-4851-9b2d-08b902caabc6",
+    "trace_id": "29783f8a-90e4-4851-9b2d-08b902caabc6",
+    "payload_schema": "alert-v1",
+    "payload": {
+      "violation_type": "late_trading",
+      "severity": "CRITICAL",
+      "detected_at": "2026-08-22T18:38:52.643204+00:00",
+      "evidence_refs": [
+        "nav_timestamp_014",
+        "late_entry_pattern_001"
+      ],
+      "affected_entities": [
+        "Mutual_Fund_14"
+      ],
+      "exculpatory": false,
+      "jurisdiction": null,
+      "regulatory_requirement": null,
+      "attributed_entity": null,
+      "cross_jurisdictional": false,
+      "mria": false,
+      "board_level": false,
+      "senior_management": false,
+      "repeated_violation_count": 0,
+      "system_generated_anomaly": false,
+      "sanctions_related": false,
+      "agent_status": null,
+      "conflict_type": null,
+      "required_skills": [],
+      "scenario_context": {
+        "orders": 14,
+        "official_cutoff": "16:00:00 ET",
+        "system_entry_window": "16:12-16:23 ET",
+        "same_day_pricing": true
+      },
+      "affected_jurisdictions": [],
+      "conflicting_regulations": [],
+      "consensus_result": null
+    },
+    "confidence_score": 0.9,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "bbf6247553be7a94"
+  },
+  {
+    "message_id": "00ac9a10-4061-464c-ac40-97449650184a",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:38:52.645072+00:00",
+    "sender_agent_id": "agent-rg-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "UPDATE",
+    "priority": 1,
+    "correlation_id": "29783f8a-90e4-4851-9b2d-08b902caabc6",
+    "trace_id": "29783f8a-90e4-4851-9b2d-08b902caabc6",
+    "payload_schema": "update-v1",
+    "payload": {
+      "update_type": "report_generation",
+      "entity_id": "CS-14",
+      "changed_fields": {
+        "report_types": [
+          "SEC referral",
+          "Fund board notification",
+          "Client restitution calculation"
+        ],
+        "status": "DRAFT_REQUIRES_HUMAN_AUTHORIZATION",
+        "regulations": [
+          "SEC Rule 22c-1",
+          "Investment Company Act Section 22(c)"
+        ]
+      },
+      "previous_values": {},
+      "consensus_result": null,
+      "human_decision": null,
+      "feedback": null,
+      "reason": null,
+      "evidence_refs": []
+    },
+    "confidence_score": null,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "f9d3e942e1a4a3a3"
+  }
+]

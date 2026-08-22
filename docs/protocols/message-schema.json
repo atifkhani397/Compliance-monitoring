@@ -154,6 +154,20 @@
           "title": "Scenario Context",
           "type": "object"
         },
+        "affected_jurisdictions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Affected Jurisdictions",
+          "type": "array"
+        },
+        "conflicting_regulations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Conflicting Regulations",
+          "type": "array"
+        },
         "consensus_result": {
           "anyOf": [
             {

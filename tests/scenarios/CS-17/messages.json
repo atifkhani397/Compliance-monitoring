@@ -1,0 +1,150 @@
+[
+  {
+    "message_id": "77ebd5df-a7f2-4f00-852f-60763651aa2f",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:38:52.712762+00:00",
+    "sender_agent_id": "agent-tm-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "ALERT",
+    "priority": 1,
+    "correlation_id": "d21b44a5-646d-4ccc-ace0-06e6cb379838",
+    "trace_id": "d21b44a5-646d-4ccc-ace0-06e6cb379838",
+    "payload_schema": "alert-v1",
+    "payload": {
+      "violation_type": "elder_financial_exploitation",
+      "severity": "CRITICAL",
+      "detected_at": "2026-08-22T18:38:52.712746+00:00",
+      "evidence_refs": [
+        "elder_trade_spike_047",
+        "poa_trade_instruction_001"
+      ],
+      "affected_entities": [
+        "Client_84",
+        "POA_Holder"
+      ],
+      "exculpatory": false,
+      "jurisdiction": null,
+      "regulatory_requirement": null,
+      "attributed_entity": null,
+      "cross_jurisdictional": false,
+      "mria": false,
+      "board_level": false,
+      "senior_management": false,
+      "repeated_violation_count": 0,
+      "system_generated_anomaly": false,
+      "sanctions_related": false,
+      "agent_status": null,
+      "conflict_type": null,
+      "required_skills": [],
+      "scenario_context": {
+        "client_age": 84,
+        "trades_in_month": 47,
+        "historical_monthly_average": 2,
+        "account_decline_pct": 22,
+        "poa_filed_weeks_ago": 6
+      },
+      "affected_jurisdictions": [],
+      "conflicting_regulations": [],
+      "consensus_result": null
+    },
+    "confidence_score": 0.87,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "580e5dc07e7fdf7b"
+  },
+  {
+    "message_id": "daeaa3d9-6a56-4747-8bd6-09725de5bca7",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:38:52.713279+00:00",
+    "sender_agent_id": "agent-cs-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "ALERT",
+    "priority": 1,
+    "correlation_id": "d21b44a5-646d-4ccc-ace0-06e6cb379838",
+    "trace_id": "d21b44a5-646d-4ccc-ace0-06e6cb379838",
+    "payload_schema": "alert-v1",
+    "payload": {
+      "violation_type": "elder_financial_exploitation",
+      "severity": "CRITICAL",
+      "detected_at": "2026-08-22T18:38:52.713266+00:00",
+      "evidence_refs": [
+        "coercive_language_001",
+        "urgent_dont_tell_002"
+      ],
+      "affected_entities": [
+        "Client_84",
+        "POA_Holder"
+      ],
+      "exculpatory": false,
+      "jurisdiction": null,
+      "regulatory_requirement": null,
+      "attributed_entity": null,
+      "cross_jurisdictional": false,
+      "mria": false,
+      "board_level": false,
+      "senior_management": false,
+      "repeated_violation_count": 0,
+      "system_generated_anomaly": false,
+      "sanctions_related": false,
+      "agent_status": null,
+      "conflict_type": null,
+      "required_skills": [],
+      "scenario_context": {
+        "coercive_language": true,
+        "urgency_tactics": true,
+        "isolation_tactics": true
+      },
+      "affected_jurisdictions": [],
+      "conflicting_regulations": [],
+      "consensus_result": null
+    },
+    "confidence_score": 0.85,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "c2f4d588c2fdcd78"
+  },
+  {
+    "message_id": "001c9c42-ecca-47e4-b6b1-ea0e717f1aac",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:38:52.714691+00:00",
+    "sender_agent_id": "agent-rg-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "UPDATE",
+    "priority": 1,
+    "correlation_id": "d21b44a5-646d-4ccc-ace0-06e6cb379838",
+    "trace_id": "d21b44a5-646d-4ccc-ace0-06e6cb379838",
+    "payload_schema": "update-v1",
+    "payload": {
+      "update_type": "report_generation",
+      "entity_id": "CS-17",
+      "changed_fields": {
+        "report_types": [
+          "Elder exploitation SAR",
+          "Adult protective services notification",
+          "POA revocation recommendation"
+        ],
+        "status": "DRAFT_REQUIRES_HUMAN_AUTHORIZATION",
+        "regulations": [
+          "FINRA Rules 2165 and 4512",
+          "SEC Senior Safe Act"
+        ]
+      },
+      "previous_values": {},
+      "consensus_result": null,
+      "human_decision": null,
+      "feedback": null,
+      "reason": null,
+      "evidence_refs": []
+    },
+    "confidence_score": null,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "5db0d63ee2da6b4a"
+  }
+]
