@@ -45,6 +45,7 @@ class AlertPayload(BaseModel):
     agent_status: Literal["HEALTHY", "DEGRADED", "STOPPED"] | None = None
     conflict_type: str | None = None
     required_skills: list[str] = Field(default_factory=list)
+    scenario_context: dict[str, Any] = Field(default_factory=dict)
     consensus_result: dict[str, Any] | None = None
 
     @field_validator("detected_at")
@@ -146,6 +147,8 @@ class UpdatePayload(BaseModel):
     consensus_result: ConsensusPayload | None = None
     human_decision: HumanDecisionPayload | None = None
     feedback: FeedbackPayload | None = None
+    reason: str | None = None
+    evidence_refs: list[str] = Field(default_factory=list)
 
 
 class HeartbeatPayload(BaseModel):

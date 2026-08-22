@@ -132,3 +132,11 @@ class MetricsError(ObservabilityError):
 
 class DashboardError(ObservabilityError):
     """Raised when dashboard data cannot be retrieved."""
+
+
+class ScenarioTestError(MCMSException):
+    """Raised when a synthetic scenario produces an unexpected result."""
+
+
+class TraceValidationError(MCMSException):
+    """Raised when a scenario trace violates message or audit requirements."""

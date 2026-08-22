@@ -4,76 +4,19 @@
       "additionalProperties": false,
       "description": "Payload for ALERT messages.",
       "properties": {
-        "affected_entities": {
-          "items": {
-            "type": "string"
-          },
-          "title": "Affected Entities",
-          "type": "array"
+        "violation_type": {
+          "title": "Violation Type",
+          "type": "string"
         },
-        "agent_status": {
-          "anyOf": [
-            {
-              "enum": [
-                "HEALTHY",
-                "DEGRADED",
-                "STOPPED"
-              ],
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
+        "severity": {
+          "enum": [
+            "LOW",
+            "MEDIUM",
+            "HIGH",
+            "CRITICAL"
           ],
-          "default": null,
-          "title": "Agent Status"
-        },
-        "attributed_entity": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Attributed Entity"
-        },
-        "board_level": {
-          "default": false,
-          "title": "Board Level",
-          "type": "boolean"
-        },
-        "conflict_type": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Conflict Type"
-        },
-        "consensus_result": {
-          "anyOf": [
-            {
-              "additionalProperties": true,
-              "type": "object"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Consensus Result"
-        },
-        "cross_jurisdictional": {
-          "default": false,
-          "title": "Cross Jurisdictional",
-          "type": "boolean"
+          "title": "Severity",
+          "type": "string"
         },
         "detected_at": {
           "title": "Detected At",
@@ -84,6 +27,13 @@
             "type": "string"
           },
           "title": "Evidence Refs",
+          "type": "array"
+        },
+        "affected_entities": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Affected Entities",
           "type": "array"
         },
         "exculpatory": {
@@ -103,11 +53,6 @@
           "default": null,
           "title": "Jurisdiction"
         },
-        "mria": {
-          "default": false,
-          "title": "Mria",
-          "type": "boolean"
-        },
         "regulatory_requirement": {
           "anyOf": [
             {
@@ -120,11 +65,82 @@
           "default": null,
           "title": "Regulatory Requirement"
         },
+        "attributed_entity": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Attributed Entity"
+        },
+        "cross_jurisdictional": {
+          "default": false,
+          "title": "Cross Jurisdictional",
+          "type": "boolean"
+        },
+        "mria": {
+          "default": false,
+          "title": "Mria",
+          "type": "boolean"
+        },
+        "board_level": {
+          "default": false,
+          "title": "Board Level",
+          "type": "boolean"
+        },
+        "senior_management": {
+          "default": false,
+          "title": "Senior Management",
+          "type": "boolean"
+        },
         "repeated_violation_count": {
           "default": 0,
           "minimum": 0,
           "title": "Repeated Violation Count",
           "type": "integer"
+        },
+        "system_generated_anomaly": {
+          "default": false,
+          "title": "System Generated Anomaly",
+          "type": "boolean"
+        },
+        "sanctions_related": {
+          "default": false,
+          "title": "Sanctions Related",
+          "type": "boolean"
+        },
+        "agent_status": {
+          "anyOf": [
+            {
+              "enum": [
+                "HEALTHY",
+                "DEGRADED",
+                "STOPPED"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Agent Status"
+        },
+        "conflict_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Conflict Type"
         },
         "required_skills": {
           "items": {
@@ -133,34 +149,23 @@
           "title": "Required Skills",
           "type": "array"
         },
-        "sanctions_related": {
-          "default": false,
-          "title": "Sanctions Related",
-          "type": "boolean"
+        "scenario_context": {
+          "additionalProperties": true,
+          "title": "Scenario Context",
+          "type": "object"
         },
-        "senior_management": {
-          "default": false,
-          "title": "Senior Management",
-          "type": "boolean"
-        },
-        "severity": {
-          "enum": [
-            "LOW",
-            "MEDIUM",
-            "HIGH",
-            "CRITICAL"
+        "consensus_result": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
           ],
-          "title": "Severity",
-          "type": "string"
-        },
-        "system_generated_anomaly": {
-          "default": false,
-          "title": "System Generated Anomaly",
-          "type": "boolean"
-        },
-        "violation_type": {
-          "title": "Violation Type",
-          "type": "string"
+          "default": null,
+          "title": "Consensus Result"
         }
       },
       "required": [
@@ -177,22 +182,6 @@
       "additionalProperties": false,
       "description": "Consensus result embedded in an UPDATE message.",
       "properties": {
-        "audit_trail_ref": {
-          "title": "Audit Trail Ref",
-          "type": "string"
-        },
-        "conflict_type": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Conflict Type"
-        },
         "consensus_confidence": {
           "maximum": 1.0,
           "minimum": 0.0,
@@ -210,6 +199,18 @@
           "title": "Consensus Severity",
           "type": "string"
         },
+        "conflict_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Conflict Type"
+        },
         "contributing_agents": {
           "items": {
             "type": "string"
@@ -224,6 +225,20 @@
           "title": "Dissenting Agents",
           "type": "array"
         },
+        "resolution_method": {
+          "enum": [
+            "bayesian",
+            "dempster_shafer",
+            "hybrid",
+            "escalation"
+          ],
+          "title": "Resolution Method",
+          "type": "string"
+        },
+        "escalation_required": {
+          "title": "Escalation Required",
+          "type": "boolean"
+        },
         "escalation_reason": {
           "anyOf": [
             {
@@ -236,18 +251,8 @@
           "default": null,
           "title": "Escalation Reason"
         },
-        "escalation_required": {
-          "title": "Escalation Required",
-          "type": "boolean"
-        },
-        "resolution_method": {
-          "enum": [
-            "bayesian",
-            "dempster_shafer",
-            "hybrid",
-            "escalation"
-          ],
-          "title": "Resolution Method",
+        "audit_trail_ref": {
+          "title": "Audit Trail Ref",
           "type": "string"
         }
       },
@@ -267,17 +272,27 @@
       "additionalProperties": false,
       "description": "Payload for ESCALATION messages.",
       "properties": {
-        "assigned_to": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
+        "escalation_reason": {
+          "title": "Escalation Reason",
+          "type": "string"
+        },
+        "recommended_tier": {
+          "enum": [
+            "TIER_1",
+            "TIER_2",
+            "TIER_3",
+            "TIER_4"
           ],
-          "default": null,
-          "title": "Assigned To"
+          "title": "Recommended Tier",
+          "type": "string"
+        },
+        "decision_support_package_ref": {
+          "title": "Decision Support Package Ref",
+          "type": "string"
+        },
+        "human_assignee_role": {
+          "title": "Human Assignee Role",
+          "type": "string"
         },
         "conflict_type": {
           "anyOf": [
@@ -291,27 +306,31 @@
           "default": null,
           "title": "Conflict Type"
         },
-        "decision_support_package_ref": {
-          "title": "Decision Support Package Ref",
-          "type": "string"
-        },
-        "escalation_reason": {
-          "title": "Escalation Reason",
-          "type": "string"
-        },
-        "human_assignee_role": {
-          "title": "Human Assignee Role",
-          "type": "string"
-        },
-        "recommended_tier": {
-          "enum": [
-            "TIER_1",
-            "TIER_2",
-            "TIER_3",
-            "TIER_4"
+        "assigned_to": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
           ],
-          "title": "Recommended Tier",
-          "type": "string"
+          "default": null,
+          "title": "Assigned To"
+        },
+        "tier": {
+          "anyOf": [
+            {
+              "maximum": 4,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tier"
         },
         "sla_deadline": {
           "anyOf": [
@@ -343,20 +362,6 @@
           ],
           "default": null,
           "title": "Status"
-        },
-        "tier": {
-          "anyOf": [
-            {
-              "maximum": 4,
-              "minimum": 1,
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Tier"
         }
       },
       "required": [
@@ -372,13 +377,37 @@
       "additionalProperties": false,
       "description": "Labeled feedback carried by an UPDATE message.",
       "properties": {
-        "agent_id": {
-          "title": "Agent Id",
+        "decision_id": {
+          "title": "Decision Id",
           "type": "string"
         },
         "alert_id": {
           "title": "Alert Id",
           "type": "string"
+        },
+        "agent_id": {
+          "title": "Agent Id",
+          "type": "string"
+        },
+        "violation_type": {
+          "title": "Violation Type",
+          "type": "string"
+        },
+        "human_decision": {
+          "enum": [
+            "approve",
+            "reject",
+            "override",
+            "request_more_info"
+          ],
+          "title": "Human Decision",
+          "type": "string"
+        },
+        "confidence_before": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence Before",
+          "type": "number"
         },
         "confidence_after": {
           "anyOf": [
@@ -394,36 +423,12 @@
           "default": null,
           "title": "Confidence After"
         },
-        "confidence_before": {
-          "maximum": 1.0,
-          "minimum": 0.0,
-          "title": "Confidence Before",
-          "type": "number"
-        },
-        "decision_id": {
-          "title": "Decision Id",
-          "type": "string"
-        },
-        "human_decision": {
-          "enum": [
-            "approve",
-            "reject",
-            "override",
-            "request_more_info"
-          ],
-          "title": "Human Decision",
-          "type": "string"
-        },
         "justification": {
           "title": "Justification",
           "type": "string"
         },
         "timestamp": {
           "title": "Timestamp",
-          "type": "string"
-        },
-        "violation_type": {
-          "title": "Violation Type",
           "type": "string"
         }
       },
@@ -453,14 +458,14 @@
           "title": "Agent Status",
           "type": "string"
         },
-        "last_processed_timestamp": {
-          "title": "Last Processed Timestamp",
-          "type": "string"
-        },
         "queue_depth": {
           "minimum": 0,
           "title": "Queue Depth",
           "type": "integer"
+        },
+        "last_processed_timestamp": {
+          "title": "Last Processed Timestamp",
+          "type": "string"
         }
       },
       "required": [
@@ -475,20 +480,6 @@
       "additionalProperties": false,
       "description": "Human disposition carried by an UPDATE message.",
       "properties": {
-        "confidence_after": {
-          "maximum": 1.0,
-          "minimum": 0.0,
-          "title": "Confidence After",
-          "type": "number"
-        },
-        "decided_at": {
-          "title": "Decided At",
-          "type": "string"
-        },
-        "decided_by": {
-          "title": "Decided By",
-          "type": "string"
-        },
         "decision": {
           "enum": [
             "approve",
@@ -502,6 +493,20 @@
         "justification": {
           "title": "Justification",
           "type": "string"
+        },
+        "decided_by": {
+          "title": "Decided By",
+          "type": "string"
+        },
+        "decided_at": {
+          "title": "Decided At",
+          "type": "string"
+        },
+        "confidence_after": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence After",
+          "type": "number"
         }
       },
       "required": [
@@ -518,14 +523,14 @@
       "additionalProperties": false,
       "description": "Payload for QUERY messages.",
       "properties": {
+        "query_type": {
+          "title": "Query Type",
+          "type": "string"
+        },
         "parameters": {
           "additionalProperties": true,
           "title": "Parameters",
           "type": "object"
-        },
-        "query_type": {
-          "title": "Query Type",
-          "type": "string"
         },
         "response_schema_required": {
           "title": "Response Schema Required",
@@ -544,16 +549,30 @@
       "additionalProperties": false,
       "description": "Payload for RESPONSE messages.",
       "properties": {
+        "query_id": {
+          "title": "Query Id",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "SUCCESS",
+            "PARTIAL",
+            "FAILED"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "result_data": {
+          "additionalProperties": true,
+          "title": "Result Data",
+          "type": "object"
+        },
         "errors": {
           "items": {
             "type": "string"
           },
           "title": "Errors",
           "type": "array"
-        },
-        "query_id": {
-          "title": "Query Id",
-          "type": "string"
         },
         "resolution_method": {
           "anyOf": [
@@ -572,20 +591,6 @@
           ],
           "default": null,
           "title": "Resolution Method"
-        },
-        "result_data": {
-          "additionalProperties": true,
-          "title": "Result Data",
-          "type": "object"
-        },
-        "status": {
-          "enum": [
-            "SUCCESS",
-            "PARTIAL",
-            "FAILED"
-          ],
-          "title": "Status",
-          "type": "string"
         }
       },
       "required": [
@@ -601,30 +606,28 @@
       "additionalProperties": false,
       "description": "Payload for UPDATE messages.",
       "properties": {
+        "update_type": {
+          "title": "Update Type",
+          "type": "string"
+        },
+        "entity_id": {
+          "title": "Entity Id",
+          "type": "string"
+        },
         "changed_fields": {
           "additionalProperties": true,
           "title": "Changed Fields",
+          "type": "object"
+        },
+        "previous_values": {
+          "additionalProperties": true,
+          "title": "Previous Values",
           "type": "object"
         },
         "consensus_result": {
           "anyOf": [
             {
               "$ref": "#/$defs/ConsensusPayload"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null
-        },
-        "entity_id": {
-          "title": "Entity Id",
-          "type": "string"
-        },
-        "feedback": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/FeedbackPayload"
             },
             {
               "type": "null"
@@ -643,14 +646,35 @@
           ],
           "default": null
         },
-        "previous_values": {
-          "additionalProperties": true,
-          "title": "Previous Values",
-          "type": "object"
+        "feedback": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FeedbackPayload"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         },
-        "update_type": {
-          "title": "Update Type",
-          "type": "string"
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
         }
       },
       "required": [
@@ -666,28 +690,59 @@
   "additionalProperties": false,
   "description": "Base inter-agent message container model.",
   "properties": {
-    "audit_classification": {
-      "enum": [
-        "REGULATORY",
-        "OPERATIONAL",
-        "DIAGNOSTIC"
-      ],
-      "title": "Audit Classification",
+    "message_id": {
+      "description": "UUID v4 message identifier.",
+      "title": "Message Id",
       "type": "string"
     },
-    "confidence_score": {
+    "protocol_version": {
+      "description": "Semver version string.",
+      "title": "Protocol Version",
+      "type": "string"
+    },
+    "timestamp": {
+      "description": "ISO 8601 UTC timestamp.",
+      "title": "Timestamp",
+      "type": "string"
+    },
+    "sender_agent_id": {
+      "description": "Sender agent ID.",
+      "title": "Sender Agent Id",
+      "type": "string"
+    },
+    "recipient_agent_id": {
       "anyOf": [
         {
-          "maximum": 1.0,
-          "minimum": 0.0,
-          "type": "number"
+          "type": "string"
         },
         {
-          "type": "null"
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       ],
-      "default": null,
-      "title": "Confidence Score"
+      "description": "Single agent ID or list of IDs.",
+      "title": "Recipient Agent Id"
+    },
+    "message_type": {
+      "enum": [
+        "ALERT",
+        "QUERY",
+        "RESPONSE",
+        "UPDATE",
+        "HEARTBEAT",
+        "ESCALATION"
+      ],
+      "title": "Message Type",
+      "type": "string"
+    },
+    "priority": {
+      "description": "Priority level 1 to 5.",
+      "maximum": 5,
+      "minimum": 1,
+      "title": "Priority",
+      "type": "integer"
     },
     "correlation_id": {
       "anyOf": [
@@ -702,26 +757,14 @@
       "description": "UUID v4 correlation ID.",
       "title": "Correlation Id"
     },
-    "message_id": {
-      "description": "UUID v4 message identifier.",
-      "title": "Message Id",
+    "trace_id": {
+      "description": "UUID v4 distributed trace ID.",
+      "title": "Trace Id",
       "type": "string"
     },
-    "message_type": {
-      "enum": [
-        "ALERT",
-        "QUERY",
-        "RESPONSE",
-        "UPDATE",
-        "HEARTBEAT",
-        "ESCALATION"
-      ],
-      "title": "Message Type",
-      "type": "string"
-    },
-    "nonce": {
-      "minLength": 16,
-      "title": "Nonce",
+    "payload_schema": {
+      "description": "Pattern matching payload schema.",
+      "title": "Payload Schema",
       "type": "string"
     },
     "payload": {
@@ -761,37 +804,25 @@
       "description": "Structured message payload dictionary.",
       "title": "Payload"
     },
-    "payload_schema": {
-      "description": "Pattern matching payload schema.",
-      "title": "Payload Schema",
-      "type": "string"
-    },
-    "priority": {
-      "description": "Priority level 1 to 5.",
-      "maximum": 5,
-      "minimum": 1,
-      "title": "Priority",
-      "type": "integer"
-    },
-    "protocol_version": {
-      "description": "Semver version string.",
-      "title": "Protocol Version",
-      "type": "string"
-    },
-    "recipient_agent_id": {
+    "confidence_score": {
       "anyOf": [
         {
-          "type": "string"
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "type": "number"
         },
         {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
+          "type": "null"
         }
       ],
-      "description": "Single agent ID or list of IDs.",
-      "title": "Recipient Agent Id"
+      "default": null,
+      "title": "Confidence Score"
+    },
+    "ttl_seconds": {
+      "maximum": 86400,
+      "minimum": 1,
+      "title": "Ttl Seconds",
+      "type": "integer"
     },
     "retry_count": {
       "default": 0,
@@ -799,9 +830,13 @@
       "title": "Retry Count",
       "type": "integer"
     },
-    "sender_agent_id": {
-      "description": "Sender agent ID.",
-      "title": "Sender Agent Id",
+    "audit_classification": {
+      "enum": [
+        "REGULATORY",
+        "OPERATIONAL",
+        "DIAGNOSTIC"
+      ],
+      "title": "Audit Classification",
       "type": "string"
     },
     "sender_signature": {
@@ -809,21 +844,10 @@
       "title": "Sender Signature",
       "type": "string"
     },
-    "timestamp": {
-      "description": "ISO 8601 UTC timestamp.",
-      "title": "Timestamp",
+    "nonce": {
+      "minLength": 16,
+      "title": "Nonce",
       "type": "string"
-    },
-    "trace_id": {
-      "description": "UUID v4 distributed trace ID.",
-      "title": "Trace Id",
-      "type": "string"
-    },
-    "ttl_seconds": {
-      "maximum": 86400,
-      "minimum": 1,
-      "title": "Ttl Seconds",
-      "type": "integer"
     }
   },
   "required": [

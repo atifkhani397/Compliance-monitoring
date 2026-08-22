@@ -1,0 +1,93 @@
+[
+  {
+    "message_id": "628bd8be-54af-4e20-a478-c79e8e5b5770",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:27:01.353055+00:00",
+    "sender_agent_id": "agent-tm-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "ALERT",
+    "priority": 1,
+    "correlation_id": "bbf35e8c-b0ba-428d-b7b1-cef3d282cdf7",
+    "trace_id": "bbf35e8c-b0ba-428d-b7b1-cef3d282cdf7",
+    "payload_schema": "alert-v1",
+    "payload": {
+      "violation_type": "aml_structuring",
+      "severity": "CRITICAL",
+      "detected_at": "2026-08-22T18:27:01.353040+00:00",
+      "evidence_refs": [
+        "structuring_pattern_023",
+        "branch_spread_007"
+      ],
+      "affected_entities": [
+        "Depositor_004"
+      ],
+      "exculpatory": false,
+      "jurisdiction": null,
+      "regulatory_requirement": null,
+      "attributed_entity": null,
+      "cross_jurisdictional": false,
+      "mria": false,
+      "board_level": false,
+      "senior_management": false,
+      "repeated_violation_count": 0,
+      "system_generated_anomaly": false,
+      "sanctions_related": false,
+      "agent_status": null,
+      "conflict_type": null,
+      "required_skills": [],
+      "scenario_context": {
+        "deposit_count": 23,
+        "branch_count": 7,
+        "total_usd": 214000,
+        "amount_range_usd": "8500-9900"
+      },
+      "consensus_result": null
+    },
+    "confidence_score": 0.95,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "f8cb6e052f9263cc"
+  },
+  {
+    "message_id": "086566b8-95b3-47e9-bd22-6d958ca5482e",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:27:01.354544+00:00",
+    "sender_agent_id": "agent-rg-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "UPDATE",
+    "priority": 1,
+    "correlation_id": "bbf35e8c-b0ba-428d-b7b1-cef3d282cdf7",
+    "trace_id": "bbf35e8c-b0ba-428d-b7b1-cef3d282cdf7",
+    "payload_schema": "update-v1",
+    "payload": {
+      "update_type": "report_generation",
+      "entity_id": "CS-04",
+      "changed_fields": {
+        "report_types": [
+          "SAR draft (FinCEN Form 111)",
+          "Branch alert notification"
+        ],
+        "status": "DRAFT_REQUIRES_HUMAN_AUTHORIZATION",
+        "regulations": [
+          "Bank Secrecy Act",
+          "31 CFR 1020.320",
+          "FinCEN SAR"
+        ]
+      },
+      "previous_values": {},
+      "consensus_result": null,
+      "human_decision": null,
+      "feedback": null,
+      "reason": null,
+      "evidence_refs": []
+    },
+    "confidence_score": null,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "db24513cfc614a72"
+  }
+]

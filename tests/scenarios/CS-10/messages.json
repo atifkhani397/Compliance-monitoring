@@ -1,0 +1,93 @@
+[
+  {
+    "message_id": "294c1721-4b38-42bb-b681-08cd19593b3c",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:27:01.470011+00:00",
+    "sender_agent_id": "agent-tm-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "ALERT",
+    "priority": 1,
+    "correlation_id": "f922b36b-12a3-426d-bd79-6acf6062ee7a",
+    "trace_id": "f922b36b-12a3-426d-bd79-6acf6062ee7a",
+    "payload_schema": "alert-v1",
+    "payload": {
+      "violation_type": "front_running",
+      "severity": "CRITICAL",
+      "detected_at": "2026-08-22T18:27:01.469996+00:00",
+      "evidence_refs": [
+        "personal_trade_lead_089",
+        "client_order_timing_010"
+      ],
+      "affected_entities": [
+        "Trader_07"
+      ],
+      "exculpatory": false,
+      "jurisdiction": null,
+      "regulatory_requirement": null,
+      "attributed_entity": null,
+      "cross_jurisdictional": false,
+      "mria": false,
+      "board_level": false,
+      "senior_management": false,
+      "repeated_violation_count": 0,
+      "system_generated_anomaly": false,
+      "sanctions_related": false,
+      "agent_status": null,
+      "conflict_type": null,
+      "required_skills": [],
+      "scenario_context": {
+        "profitable_trade_pct": 89,
+        "average_return_pct": 2.3,
+        "lead_time_minutes": "10-30"
+      },
+      "consensus_result": null
+    },
+    "confidence_score": 0.9,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "51996e883ed2ea80"
+  },
+  {
+    "message_id": "95608b8f-a671-43fc-a261-2e7a7b8a64e2",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:27:01.471878+00:00",
+    "sender_agent_id": "agent-rg-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "UPDATE",
+    "priority": 1,
+    "correlation_id": "f922b36b-12a3-426d-bd79-6acf6062ee7a",
+    "trace_id": "f922b36b-12a3-426d-bd79-6acf6062ee7a",
+    "payload_schema": "update-v1",
+    "payload": {
+      "update_type": "report_generation",
+      "entity_id": "CS-10",
+      "changed_fields": {
+        "report_types": [
+          "Internal disciplinary report",
+          "Client notification",
+          "Regulatory referral"
+        ],
+        "status": "DRAFT_REQUIRES_HUMAN_AUTHORIZATION",
+        "regulations": [
+          "SEC Section 17(j)",
+          "Investment Company Act Section 17(j)",
+          "FINRA Rule 5270"
+        ]
+      },
+      "previous_values": {},
+      "consensus_result": null,
+      "human_decision": null,
+      "feedback": null,
+      "reason": null,
+      "evidence_refs": []
+    },
+    "confidence_score": null,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "f871a893254ad6d7"
+  }
+]

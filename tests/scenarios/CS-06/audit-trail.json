@@ -1,0 +1,227 @@
+[
+  {
+    "index": 0,
+    "timestamp": "2026-08-22T18:27:01.389617+00:00",
+    "previous_hash": "e3eba8b0b470c0e19ed44237f1302e2fe392b8138b5ef82a6031636dc371ad46",
+    "current_hash": "ee8331300c1bc01926ab4d4917345e4638a0c488b97c0ea469957140da1f9919",
+    "data": {
+      "action": "DETECTION",
+      "scenario_id": "CS-06",
+      "trace_id": "240dafad-1014-42dc-ae11-a2acebfe65b4",
+      "agent_id": "agent-tm-001",
+      "confidence": 0.87,
+      "severity": "HIGH"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "240dafad-1014-42dc-ae11-a2acebfe65b4",
+    "action_type": "DETECTION",
+    "action_data": {
+      "scenario_id": "CS-06",
+      "trace_id": "240dafad-1014-42dc-ae11-a2acebfe65b4",
+      "agent_id": "agent-tm-001",
+      "confidence": 0.87,
+      "severity": "HIGH"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 1,
+    "timestamp": "2026-08-22T18:27:01.389654+00:00",
+    "previous_hash": "ee8331300c1bc01926ab4d4917345e4638a0c488b97c0ea469957140da1f9919",
+    "current_hash": "3a80976e49a874ffc234b93b2ca3adcc2fa63d9cb40f48624de5875e3e69faa6",
+    "data": {
+      "action": "MESSAGE_SENT",
+      "scenario_id": "CS-06",
+      "trace_id": "240dafad-1014-42dc-ae11-a2acebfe65b4",
+      "agent_id": "agent-tm-001",
+      "message_id": "0020f7ea-329a-412b-8004-1dee1c5e7b7d"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "240dafad-1014-42dc-ae11-a2acebfe65b4",
+    "action_type": "MESSAGE_SENT",
+    "action_data": {
+      "scenario_id": "CS-06",
+      "trace_id": "240dafad-1014-42dc-ae11-a2acebfe65b4",
+      "agent_id": "agent-tm-001",
+      "message_id": "0020f7ea-329a-412b-8004-1dee1c5e7b7d"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 2,
+    "timestamp": "2026-08-22T18:27:01.389676+00:00",
+    "previous_hash": "3a80976e49a874ffc234b93b2ca3adcc2fa63d9cb40f48624de5875e3e69faa6",
+    "current_hash": "810b76b3e69db45d0ad6ed2b1cd1d6db384e400545773caea80b2c7c1bd32b59",
+    "data": {
+      "action": "MESSAGE_RECEIVED",
+      "scenario_id": "CS-06",
+      "trace_id": "240dafad-1014-42dc-ae11-a2acebfe65b4",
+      "agent_id": "orchestrator",
+      "message_id": "0020f7ea-329a-412b-8004-1dee1c5e7b7d"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "240dafad-1014-42dc-ae11-a2acebfe65b4",
+    "action_type": "MESSAGE_RECEIVED",
+    "action_data": {
+      "scenario_id": "CS-06",
+      "trace_id": "240dafad-1014-42dc-ae11-a2acebfe65b4",
+      "agent_id": "orchestrator",
+      "message_id": "0020f7ea-329a-412b-8004-1dee1c5e7b7d"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 3,
+    "timestamp": "2026-08-22T18:27:01.389998+00:00",
+    "previous_hash": "810b76b3e69db45d0ad6ed2b1cd1d6db384e400545773caea80b2c7c1bd32b59",
+    "current_hash": "56155d11e0cc14e4a27c19aec1ade1e6410901d28757acc2b1a537a96dac7cac",
+    "data": {
+      "action": "CONSENSUS_RESOLUTION",
+      "scenario_id": "CS-06",
+      "trace_id": "240dafad-1014-42dc-ae11-a2acebfe65b4",
+      "confidence": "0.80475",
+      "severity": "HIGH",
+      "conflict_type": null,
+      "method": "hybrid"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "240dafad-1014-42dc-ae11-a2acebfe65b4",
+    "action_type": "CONSENSUS_RESOLUTION",
+    "action_data": {
+      "scenario_id": "CS-06",
+      "trace_id": "240dafad-1014-42dc-ae11-a2acebfe65b4",
+      "confidence": "0.80475",
+      "severity": "HIGH",
+      "conflict_type": null,
+      "method": "hybrid"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 4,
+    "timestamp": "2026-08-22T18:27:01.390180+00:00",
+    "previous_hash": "56155d11e0cc14e4a27c19aec1ade1e6410901d28757acc2b1a537a96dac7cac",
+    "current_hash": "35f49163725cf118e8c759598741e3b4d9efd8caa82d88a86ec0b376799fe68b",
+    "data": {
+      "action": "ESCALATION_CREATED",
+      "escalation_id": "1048ac06-d1e4-4cfc-b126-db8b58879e90",
+      "alert_id": "0020f7ea-329a-412b-8004-1dee1c5e7b7d",
+      "tier": 2,
+      "assigned_to": "unassigned",
+      "status": "open",
+      "reason": "Phase 6 CS-06: Wash Trading \u2014 Cross-Account Coordination requires human review"
+    },
+    "agent_id": "escalation-service",
+    "trace_id": null,
+    "action_type": null,
+    "action_data": null,
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 5,
+    "timestamp": "2026-08-22T18:27:01.390501+00:00",
+    "previous_hash": "35f49163725cf118e8c759598741e3b4d9efd8caa82d88a86ec0b376799fe68b",
+    "current_hash": "902bf4d75ba07849dffb35c9779d7809539f953a164945c1894ac80b22b4c046",
+    "data": {
+      "action": "ESCALATION",
+      "scenario_id": "CS-06",
+      "trace_id": "240dafad-1014-42dc-ae11-a2acebfe65b4",
+      "escalation_id": "1048ac06-d1e4-4cfc-b126-db8b58879e90",
+      "tier": 2,
+      "sla_deadline": "2026-08-22T20:27:01.390135+00:00"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "240dafad-1014-42dc-ae11-a2acebfe65b4",
+    "action_type": "ESCALATION",
+    "action_data": {
+      "scenario_id": "CS-06",
+      "trace_id": "240dafad-1014-42dc-ae11-a2acebfe65b4",
+      "escalation_id": "1048ac06-d1e4-4cfc-b126-db8b58879e90",
+      "tier": 2,
+      "sla_deadline": "2026-08-22T20:27:01.390135+00:00"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 6,
+    "timestamp": "2026-08-22T18:27:01.390536+00:00",
+    "previous_hash": "902bf4d75ba07849dffb35c9779d7809539f953a164945c1894ac80b22b4c046",
+    "current_hash": "f933e18a370205cdd4bdf7d8eeacb441cebb60b6d213764717f7cdc32358b4f3",
+    "data": {
+      "action": "DECISION_SUPPORT_PACKAGE",
+      "scenario_id": "CS-06",
+      "trace_id": "240dafad-1014-42dc-ae11-a2acebfe65b4",
+      "escalation_id": "1048ac06-d1e4-4cfc-b126-db8b58879e90",
+      "evidence_count": 2
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "240dafad-1014-42dc-ae11-a2acebfe65b4",
+    "action_type": "DECISION_SUPPORT_PACKAGE",
+    "action_data": {
+      "scenario_id": "CS-06",
+      "trace_id": "240dafad-1014-42dc-ae11-a2acebfe65b4",
+      "escalation_id": "1048ac06-d1e4-4cfc-b126-db8b58879e90",
+      "evidence_count": 2
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 7,
+    "timestamp": "2026-08-22T18:27:01.390646+00:00",
+    "previous_hash": "f933e18a370205cdd4bdf7d8eeacb441cebb60b6d213764717f7cdc32358b4f3",
+    "current_hash": "6e88f6e7a3f32febf228f4b202b95a73e77bb6b8a5aeab0a43e50d55f8491b55",
+    "data": {
+      "action": "REPORT_GENERATION",
+      "scenario_id": "CS-06",
+      "trace_id": "240dafad-1014-42dc-ae11-a2acebfe65b4",
+      "report_types": [
+        "Exchange referral",
+        "Internal trading desk review"
+      ],
+      "status": "DRAFT_REQUIRES_HUMAN_AUTHORIZATION"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "240dafad-1014-42dc-ae11-a2acebfe65b4",
+    "action_type": "REPORT_GENERATION",
+    "action_data": {
+      "scenario_id": "CS-06",
+      "trace_id": "240dafad-1014-42dc-ae11-a2acebfe65b4",
+      "report_types": [
+        "Exchange referral",
+        "Internal trading desk review"
+      ],
+      "status": "DRAFT_REQUIRES_HUMAN_AUTHORIZATION"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 8,
+    "timestamp": "2026-08-22T18:27:01.390672+00:00",
+    "previous_hash": "6e88f6e7a3f32febf228f4b202b95a73e77bb6b8a5aeab0a43e50d55f8491b55",
+    "current_hash": "a90f2bb1a9a06ddb4d53d2e0aa4a13a1d3374f03ed8849f57c867e7a0df55457",
+    "data": {
+      "action": "REPORT_AUTHORIZATION_REQUIRED",
+      "scenario_id": "CS-06",
+      "trace_id": "240dafad-1014-42dc-ae11-a2acebfe65b4",
+      "report_id": "b7dc5f01-5ae1-4535-b094-ac82ff4e00c8"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "240dafad-1014-42dc-ae11-a2acebfe65b4",
+    "action_type": "REPORT_AUTHORIZATION_REQUIRED",
+    "action_data": {
+      "scenario_id": "CS-06",
+      "trace_id": "240dafad-1014-42dc-ae11-a2acebfe65b4",
+      "report_id": "b7dc5f01-5ae1-4535-b094-ac82ff4e00c8"
+    },
+    "signature": null,
+    "nonce": null
+  }
+]

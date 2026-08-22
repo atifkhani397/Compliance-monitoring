@@ -1,0 +1,82 @@
+[
+  {
+    "message_id": "f7a908a1-57a1-4b90-a935-cfe61251d6c0",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:27:01.407022+00:00",
+    "sender_agent_id": "agent-ru-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "UPDATE",
+    "priority": 2,
+    "correlation_id": "416a2b7b-5ed6-42b1-b9ab-5c655eca28e7",
+    "trace_id": "416a2b7b-5ed6-42b1-b9ab-5c655eca28e7",
+    "payload_schema": "update-v1",
+    "payload": {
+      "update_type": "regulatory_change",
+      "entity_id": "CS-07",
+      "changed_fields": {
+        "regulations": [
+          "SEC Swap Margin Rule",
+          "Basel III CRE54",
+          "EMIR Margin Rules"
+        ],
+        "impact": "system_update_required"
+      },
+      "previous_values": {},
+      "consensus_result": null,
+      "human_decision": null,
+      "feedback": null,
+      "reason": "regulatory_change_requires_tracking",
+      "evidence_refs": [
+        "sec_final_rule_2026",
+        "margin_methodology_impact"
+      ]
+    },
+    "confidence_score": null,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "e5e6e42b58e4764c"
+  },
+  {
+    "message_id": "d9426dc8-a87e-4ce7-83f5-b87fb3041e10",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:27:01.407724+00:00",
+    "sender_agent_id": "agent-rg-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "UPDATE",
+    "priority": 2,
+    "correlation_id": "416a2b7b-5ed6-42b1-b9ab-5c655eca28e7",
+    "trace_id": "416a2b7b-5ed6-42b1-b9ab-5c655eca28e7",
+    "payload_schema": "update-v1",
+    "payload": {
+      "update_type": "report_generation",
+      "entity_id": "CS-07",
+      "changed_fields": {
+        "report_types": [
+          "Impact assessment report",
+          "Implementation timeline",
+          "Stakeholder notification"
+        ],
+        "status": "DRAFT_REQUIRES_HUMAN_AUTHORIZATION",
+        "regulations": [
+          "SEC Swap Margin Rule",
+          "Basel III CRE54",
+          "EMIR Margin Rules"
+        ]
+      },
+      "previous_values": {},
+      "consensus_result": null,
+      "human_decision": null,
+      "feedback": null,
+      "reason": null,
+      "evidence_refs": []
+    },
+    "confidence_score": null,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "7b30e3b32eb5ec38"
+  }
+]

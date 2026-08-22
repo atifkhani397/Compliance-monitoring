@@ -26,8 +26,10 @@ from src.mcms.core.exceptions import (
     OrchestratorError,
     OverrideDeniedError,
     RoutingError,
+    ScenarioTestError,
     SecurityError,
     SlaViolationError,
+    TraceValidationError,
 )
 from src.mcms.core.feedback import FeedbackLoop, FeedbackRecord
 from src.mcms.core.human_assignment import HumanAssignmentEngine, HumanProfile
@@ -81,5 +83,7 @@ __all__ = [
     "RoutingError",
     "SecurityError",
     "SlaViolationError",
+    "ScenarioTestError",
+    "TraceValidationError",
     "build_topic_name",
 ]

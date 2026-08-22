@@ -1,0 +1,142 @@
+[
+  {
+    "message_id": "9c158aba-d6c7-4d3b-9206-d016f9c36c68",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:27:01.446226+00:00",
+    "sender_agent_id": "agent-tm-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "ALERT",
+    "priority": 1,
+    "correlation_id": "cb43372a-dcb9-4690-9561-611c2f4a5e07",
+    "trace_id": "cb43372a-dcb9-4690-9561-611c2f4a5e07",
+    "payload_schema": "alert-v1",
+    "payload": {
+      "violation_type": "sanctions_violation",
+      "severity": "CRITICAL",
+      "detected_at": "2026-08-22T18:27:01.446211+00:00",
+      "evidence_refs": [
+        "wire_intermediary_chain_003",
+        "sdn_match_001"
+      ],
+      "affected_entities": [
+        "Corporate_Client_7",
+        "SDN_Subsidiary"
+      ],
+      "exculpatory": false,
+      "jurisdiction": null,
+      "regulatory_requirement": null,
+      "attributed_entity": null,
+      "cross_jurisdictional": false,
+      "mria": false,
+      "board_level": false,
+      "senior_management": false,
+      "repeated_violation_count": 0,
+      "system_generated_anomaly": false,
+      "sanctions_related": false,
+      "agent_status": null,
+      "conflict_type": null,
+      "required_skills": [],
+      "scenario_context": {
+        "intermediary_bank_count": 3,
+        "sdn_added_hours_ago": 48
+      },
+      "consensus_result": null
+    },
+    "confidence_score": 0.94,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "51776118f6120101"
+  },
+  {
+    "message_id": "5d60ebb1-1086-4acf-b94a-809630262b59",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:27:01.446694+00:00",
+    "sender_agent_id": "agent-ru-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "ALERT",
+    "priority": 1,
+    "correlation_id": "cb43372a-dcb9-4690-9561-611c2f4a5e07",
+    "trace_id": "cb43372a-dcb9-4690-9561-611c2f4a5e07",
+    "payload_schema": "alert-v1",
+    "payload": {
+      "violation_type": "sanctions_violation",
+      "severity": "CRITICAL",
+      "detected_at": "2026-08-22T18:27:01.446682+00:00",
+      "evidence_refs": [
+        "ofac_update_048",
+        "enhanced_screening_001"
+      ],
+      "affected_entities": [
+        "SDN_Subsidiary"
+      ],
+      "exculpatory": false,
+      "jurisdiction": null,
+      "regulatory_requirement": null,
+      "attributed_entity": null,
+      "cross_jurisdictional": false,
+      "mria": false,
+      "board_level": false,
+      "senior_management": false,
+      "repeated_violation_count": 0,
+      "system_generated_anomaly": false,
+      "sanctions_related": false,
+      "agent_status": null,
+      "conflict_type": null,
+      "required_skills": [],
+      "scenario_context": {
+        "regulatory_update_confirmed": true,
+        "sdn_added_hours_ago": 48
+      },
+      "consensus_result": null
+    },
+    "confidence_score": 0.98,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "23ff5fbe35ffa426"
+  },
+  {
+    "message_id": "772540f7-878c-4965-aaca-cbcd66589fb0",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:27:01.448579+00:00",
+    "sender_agent_id": "agent-rg-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "UPDATE",
+    "priority": 1,
+    "correlation_id": "cb43372a-dcb9-4690-9561-611c2f4a5e07",
+    "trace_id": "cb43372a-dcb9-4690-9561-611c2f4a5e07",
+    "payload_schema": "update-v1",
+    "payload": {
+      "update_type": "report_generation",
+      "entity_id": "CS-09",
+      "changed_fields": {
+        "report_types": [
+          "OFAC compliance report",
+          "Transaction hold documentation",
+          "Voluntary disclosure draft"
+        ],
+        "status": "DRAFT_REQUIRES_HUMAN_AUTHORIZATION",
+        "regulations": [
+          "OFAC Regulations",
+          "31 CFR Part 501",
+          "EU Sanctions Regulation"
+        ]
+      },
+      "previous_values": {},
+      "consensus_result": null,
+      "human_decision": null,
+      "feedback": null,
+      "reason": null,
+      "evidence_refs": []
+    },
+    "confidence_score": null,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "e70be9a42d872c52"
+  }
+]

@@ -1,33 +1,39 @@
 ---
-title: MACMS Test Scenario Summary Index
-date: 2026-08-17
-version: 1.0.0
-status: Placeholder Baseline
+title: MACMS Compliance Scenario Summary Index
+date: 2026-08-22
+version: 2.0.0
+status: Phase 6 Implemented
 ---
 
-# MACMS Test Scenario Summary Index
+# MACMS Compliance Scenario Summary Index
 
-This document tracks all 20 compliance test scenarios (`CS-01` through `CS-20`) to be fully implemented in future project phases.
+Phase 6 implements the first ten synthetic, deterministic trace-throughs. Each implemented scenario contains `scenario.md`, `trace-through.md`, `messages.json`, `audit-trail.json`, and `test_scenario.py`. Every scenario has five executable tests covering detection, schema-valid messaging, consensus or special handling, escalation/reporting, and audit verification.
 
-| Scenario ID | Scenario Name | Primary Domain | Status |
-| :---: | :--- | :--- | :---: |
-| `CS-01` | Front-Running Detection | Market Abuse | Pending (Phase 2) |
-| `CS-02` | Wash Sale & Volume Manipulation | Market Abuse | Pending (Phase 2) |
-| `CS-03` | Spoofing & Layering Orders | Market Abuse | Pending (Phase 2) |
-| `CS-04` | Off-Channel Communication | Surveillance | Pending (Phase 2) |
-| `CS-05` | Insider Dealing & Information Barrier | Surveillance | Pending (Phase 2) |
-| `CS-06` | RBI Circular Compliance Mapping | Regulatory | Pending (Phase 2) |
-| `CS-07` | SEBI Trade Disclosure Verification | Regulatory | Pending (Phase 2) |
-| `CS-08` | Automated SAR Filing Generation | Reporting | Pending (Phase 2) |
-| `CS-09` | Collusion Detection across Trading Desks | Surveillance | Pending (Phase 2) |
-| `CS-10` | Cross-Asset Anomaly Detection | Market Abuse | Pending (Phase 2) |
-| `CS-11` | GDPR PII Redaction in Comm Logs | Privacy | Pending (Phase 2) |
-| `CS-12` | MiFID II Best Execution Validation | Execution | Pending (Phase 2) |
-| `CS-13` | High-Frequency Order Cancel Ratio | Market Abuse | Pending (Phase 2) |
-| `CS-14` | Multilingual Audio Transcript Abuse | Surveillance | Pending (Phase 2) |
-| `CS-15` | Conflict of Interest Disclosure | Surveillance | Pending (Phase 2) |
-| `CS-16` | Regulatory Sandbox Policy Shift | Regulatory | Pending (Phase 2) |
-| `CS-17` | Multi-Agent Discrepancy Escalation | Consensus | Pending (Phase 2) |
-| `CS-18` | Audit Chain Tampering Recovery | Audit | Pending (Phase 2) |
-| `CS-19` | High Throughput Queue Backpressure | System | Pending (Phase 2) |
-| `CS-20` | Full System Failover & Disaster Recovery | System | Pending (Phase 2) |
+| Scenario | Agents | Complexity | Expected Alert | Status | Test Count |
+| --- | --- | --- | --- | --- | ---: |
+| CS-01 | TM + CS | High | CRITICAL | Implemented | 5 |
+| CS-02 | TM | Medium | HIGH | Implemented | 5 |
+| CS-03 | CS + TM | High | HIGH | Implemented | 5 |
+| CS-04 | TM | Medium | CRITICAL | Implemented | 5 |
+| CS-05 | CS | High | CRITICAL | Implemented | 5 |
+| CS-06 | TM | High | HIGH | Implemented | 5 |
+| CS-07 | RU | Medium | MEDIUM | Implemented | 5 |
+| CS-08 | CS | Low-Medium | CRITICAL | Implemented | 5 |
+| CS-09 | TM + RU | High | CRITICAL | Implemented | 5 |
+| CS-10 | TM | Medium | CRITICAL | Implemented | 5 |
+| CS-11 | CS + RU | Medium | HIGH | Pending Phase 7 | 0 |
+| CS-12 | TM | Low | MEDIUM | Pending Phase 7 | 0 |
+| CS-13 | CS | Medium | HIGH | Pending Phase 7 | 0 |
+| CS-14 | TM | Medium | CRITICAL | Pending Phase 7 | 0 |
+| CS-15 | TM | Medium | HIGH | Pending Phase 7 | 0 |
+| CS-16 | CS + TM | High | CRITICAL | Pending Phase 7 | 0 |
+| CS-17 | TM + CS | High | CRITICAL | Pending Phase 7 | 0 |
+| CS-18 | TM | Medium | NO ALERT | Pending Phase 7 | 0 |
+| CS-19 | RU | High | HIGH | Pending Phase 7 | 0 |
+| CS-20 | ALL FOUR | Very High | CRITICAL | Pending Phase 7 | 0 |
+
+## Phase 6 Coverage Notes
+
+CS-01 demonstrates TM and CS coordination for pre-announcement accumulation and Tier 3 escalation. CS-02 demonstrates single-agent spoofing detection. CS-03 demonstrates a Type B severity disagreement. CS-04 demonstrates CRITICAL AML structuring. CS-05 demonstrates communication-only Chinese Wall detection. CS-06 demonstrates cross-account wash trading. CS-07 demonstrates RU-only regulatory-change UPDATE handling. CS-08 demonstrates mass misleading-marketing detection. CS-09 demonstrates TM and RU sanctions coordination and Tier 4 escalation. CS-10 demonstrates temporal front-running detection.
+
+All scenario records are synthetic. No real ML/NLP models, regulatory-feed parsers, customer data, external filing integrations, or persistent storage are introduced in Phase 6.

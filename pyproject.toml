@@ -58,7 +58,7 @@ ignore = ["E501", "N818", "SIM102"]
 
 [tool.pytest.ini_options]
 minversion = "7.0"
-addopts = "-v --tb=short"
+addopts = "-v --tb=short --import-mode=importlib"
 testpaths = ["tests"]
 python_files = ["test_*.py"]
 
