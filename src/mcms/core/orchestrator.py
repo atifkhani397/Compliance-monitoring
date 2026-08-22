@@ -12,6 +12,7 @@ from src.mcms.core.audit import AuditChain
 from src.mcms.core.config import Config
 from src.mcms.core.consensus import ConsensusEngine
 from src.mcms.core.exceptions import AgentNotFoundError, OrchestratorError
+from src.mcms.core.observability import ObservabilityService
 from src.mcms.core.registry import AgentRegistry
 
 
@@ -38,10 +39,12 @@ class Orchestrator:
         self._conflict_buffer: dict[str, list[Message]] = {}
         self._resolved_messages: list[Message] = []
         self._shutdown = False
+        self._observability = ObservabilityService(config.get_observability_config())
         from src.mcms.core.conflict_resolver import ConflictResolver
         from src.mcms.core.escalation import EscalationService
 
         self._conflict_resolver: ConflictResolver = ConflictResolver(ConsensusEngine(config), self)
+        self._conflict_resolver.consensus_engine.observability = self._observability
         escalation_config = config.get_escalation_config()
         escalation_config["human_assignment"] = config.get("human_assignment", {})
         escalation_config["feedback"] = config.get("feedback", {})
@@ -97,7 +100,27 @@ class Orchestrator:
             if agent is None:
                 raise AgentNotFoundError(recipient_id)
             await agent.process_message(message)
+            self._observability.log_communication(
+                message.sender_agent_id,
+                recipient_id,
+                message.message_type,
+                "delivered",
+            )
 
+        self._observability.log(
+            "COMMUNICATION_EVENTS",
+            "INFO",
+            "Message dispatched",
+            {
+                "agent_id": "orchestrator",
+                "message_id": message.message_id,
+                "message_type": message.message_type,
+                "sender": message.sender_agent_id,
+                "recipients": recipients,
+                "priority": message.priority,
+            },
+            trace_id=message.trace_id,
+        )
         self._audit_chain.append(
             {
                 "action": "DISPATCH",
@@ -134,6 +157,10 @@ class Orchestrator:
         """Registers agent for message delivery."""
         self._ensure_sla_monitor()
         self._registry.register(agent)
+        agent.observability = self._observability
+        self._observability.log_agent_lifecycle(
+            agent.agent_id, "Agent registered", {"status": "HEALTHY"}
+        )
         self._audit_chain.append(
             {
                 "action": "REGISTER_AGENT",
@@ -167,6 +194,7 @@ class Orchestrator:
             "agent_id": sender_id,
         }
         self._registry.update_health(sender_id, health_data)
+        self._observability.log_agent_lifecycle(sender_id, "Heartbeat received", health_data)
 
     async def handle_escalation(self, message: Message, reason: str) -> UUID:
         """Route an ESCALATION message through EscalationService."""
@@ -197,6 +225,13 @@ class Orchestrator:
             "recommended_tier": recommended_tier,
         }
         self._escalation_queue.append(escalation_entry)
+        self._observability.log(
+            "ESCALATION_EVENTS",
+            "ALERT",
+            "Escalation requested",
+            {"agent_id": "orchestrator", **escalation_entry},
+            trace_id=message.trace_id,
+        )
         self._audit_chain.append(
             {"action": "ESCALATION", **escalation_entry},
             agent_id="orchestrator",
@@ -234,6 +269,9 @@ class Orchestrator:
         if self._sla_monitor_task is not None:
             self._sla_monitor_task.cancel()
             self._sla_monitor_task = None
+        self._observability.log_agent_lifecycle(
+            "orchestrator", "Orchestrator shutdown", {"status": "STOPPED"}
+        )
         self._audit_chain.append(
             {
                 "action": "SHUTDOWN",

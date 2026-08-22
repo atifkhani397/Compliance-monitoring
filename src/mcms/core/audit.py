@@ -23,6 +23,15 @@ class AuditEntry(BaseModel):
     current_hash: str = Field(description="SHA-256 hex string of this audit entry.")
     data: dict[str, Any] = Field(description="Structured data payload recorded in audit log.")
     agent_id: str = Field(description="ID of agent recording the audit entry.")
+    trace_id: str | None = Field(
+        default=None, description="Distributed trace correlation identifier."
+    )
+    action_type: str | None = Field(default=None, description="Significant action category.")
+    action_data: dict[str, Any] | None = Field(
+        default=None, description="Structured action context."
+    )
+    signature: str | None = Field(default=None, description="HMAC-SHA256 signature.")
+    nonce: str | None = Field(default=None, description="Unique entry nonce.")
 
 
 class AuditChain:
@@ -38,28 +47,73 @@ class AuditChain:
         return list(self._entries)
 
     def _compute_hash(
-        self, previous_hash: str, timestamp: str, data: dict[str, Any], agent_id: str
+        self,
+        previous_hash: str,
+        timestamp: str,
+        data: dict[str, Any],
+        agent_id: str,
+        trace_id: str | None = None,
+        action_type: str | None = None,
+        action_data: dict[str, Any] | None = None,
+        signature: str | None = None,
+        nonce: str | None = None,
     ) -> str:
         """Computes deterministic SHA-256 hash of entry elements."""
         canonical_data = json.dumps(data, sort_keys=True, separators=(",", ":"))
+        metadata = json.dumps(
+            {
+                "trace_id": trace_id,
+                "action_type": action_type,
+                "action_data": action_data,
+                "signature": signature,
+                "nonce": nonce,
+            },
+            sort_keys=True,
+            separators=(",", ":"),
+        )
         hasher = hashlib.sha256()
         hasher.update(previous_hash.encode("utf-8"))
         hasher.update(timestamp.encode("utf-8"))
         hasher.update(agent_id.encode("utf-8"))
         hasher.update(canonical_data.encode("utf-8"))
+        if any(
+            value is not None for value in (trace_id, action_type, action_data, signature, nonce)
+        ):
+            hasher.update(metadata.encode("utf-8"))
         return hasher.hexdigest()
 
-    def append(self, entry_data: dict[str, Any], agent_id: str) -> AuditEntry:
-        """Appends a new audit record to the chain with deterministic cryptographic hashing."""
+    def append(
+        self,
+        entry_data: dict[str, Any],
+        agent_id: str,
+        *,
+        timestamp: str | None = None,
+        trace_id: str | None = None,
+        action_type: str | None = None,
+        action_data: dict[str, Any] | None = None,
+        signature: str | None = None,
+        nonce: str | None = None,
+    ) -> AuditEntry:
+        """Append an audit record with optional Phase 5 observability metadata."""
         index = len(self._entries)
-        now_utc = datetime.now(UTC).isoformat()
+        now_utc = timestamp or datetime.now(UTC).isoformat()
 
         if index == 0:
             previous_hash = hashlib.sha256(self._initial_seed.encode("utf-8")).hexdigest()
         else:
             previous_hash = self._entries[-1].current_hash
 
-        current_hash = self._compute_hash(previous_hash, now_utc, entry_data, agent_id)
+        current_hash = self._compute_hash(
+            previous_hash,
+            now_utc,
+            entry_data,
+            agent_id,
+            trace_id,
+            action_type,
+            action_data,
+            signature,
+            nonce,
+        )
 
         entry = AuditEntry(
             index=index,
@@ -68,6 +122,11 @@ class AuditChain:
             current_hash=current_hash,
             data=entry_data,
             agent_id=agent_id,
+            trace_id=trace_id,
+            action_type=action_type,
+            action_data=action_data,
+            signature=signature,
+            nonce=nonce,
         )
         self._entries.append(entry)
         return entry
@@ -97,7 +156,15 @@ class AuditChain:
                 )
 
             recalculated_hash = self._compute_hash(
-                entry.previous_hash, entry.timestamp, entry.data, entry.agent_id
+                entry.previous_hash,
+                entry.timestamp,
+                entry.data,
+                entry.agent_id,
+                entry.trace_id,
+                entry.action_type,
+                entry.action_data,
+                entry.signature,
+                entry.nonce,
             )
 
             if entry.current_hash != recalculated_hash:

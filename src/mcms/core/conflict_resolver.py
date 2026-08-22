@@ -230,18 +230,25 @@ class ConflictResolver:
 
     async def _audit(self, action: str, messages: list[Message], result: ConsensusResult) -> None:
         audit_chain = getattr(self.orchestrator, "_audit_chain", None)
+        event_data = {
+            "action": action,
+            "message_ids": sorted(message.message_id for message in messages),
+            "conflict_type": result.conflict_type,
+            "resolution_method": result.resolution_method,
+            "consensus_confidence": str(result.consensus_confidence),
+            "escalation_required": result.escalation_required,
+            "audit_trail_ref": str(result.audit_trail_ref),
+        }
         if audit_chain is not None:
-            audit_chain.append(
-                {
-                    "action": action,
-                    "message_ids": sorted(message.message_id for message in messages),
-                    "conflict_type": result.conflict_type,
-                    "resolution_method": result.resolution_method,
-                    "consensus_confidence": str(result.consensus_confidence),
-                    "escalation_required": result.escalation_required,
-                    "audit_trail_ref": str(result.audit_trail_ref),
-                },
-                agent_id="conflict-resolver",
+            audit_chain.append(event_data, agent_id="conflict-resolver")
+        observability = getattr(self.orchestrator, "_observability", None)
+        if observability is not None:
+            observability.log(
+                "ESCALATION_EVENTS" if result.escalation_required else "DETECTION_EVENTS",
+                "ALERT" if result.escalation_required else "INFO",
+                action,
+                {"agent_id": "conflict-resolver", **event_data},
+                trace_id=str(result.audit_trail_ref),
             )
 
     async def resolve_conflict(self, alert_messages: list[Message]) -> Message:

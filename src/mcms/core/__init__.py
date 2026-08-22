@@ -16,11 +16,13 @@ from src.mcms.core.exceptions import (
     AuditIntegrityError,
     CapabilityNotFoundError,
     ConfigError,
+    DashboardError,
     EscalationError,
     FeedbackError,
-    KafkaConnectionError,
     MCMSException,
     MessageValidationError,
+    MetricsError,
+    ObservabilityError,
     OrchestratorError,
     OverrideDeniedError,
     RoutingError,
@@ -31,6 +33,8 @@ from src.mcms.core.feedback import FeedbackLoop, FeedbackRecord
 from src.mcms.core.human_assignment import HumanAssignmentEngine, HumanProfile
 from src.mcms.core.kafka_client import KafkaConsumer, KafkaProducer, build_topic_name
 from src.mcms.core.message import BaseMessage, Message
+from src.mcms.core.metrics import MetricSample, MetricsCollector
+from src.mcms.core.observability import ObservabilityService
 from src.mcms.core.orchestrator import Orchestrator
 from src.mcms.core.registry import AgentRegistry
 from src.mcms.core.routing import PriorityRoutingEngine
@@ -44,10 +48,11 @@ __all__ = [
     "AuditEntry",
     "AuditIntegrityError",
     "BaseMessage",
-    "DecisionSupportPackage",
     "CapabilityNotFoundError",
     "Config",
     "ConfigError",
+    "DashboardError",
+    "DecisionSupportPackage",
     "EscalationError",
     "EscalationRecord",
     "EscalationService",
@@ -63,13 +68,18 @@ __all__ = [
     "MCMSException",
     "Message",
     "MessageValidationError",
+    "MetricSample",
+    "MetricsCollector",
+    "MetricsError",
+    "ObservabilityError",
+    "ObservabilityService",
     "Orchestrator",
     "OrchestratorError",
     "OverrideDeniedError",
     "OverrideRequest",
     "PriorityRoutingEngine",
     "RoutingError",
-    "SlaViolationError",
     "SecurityError",
+    "SlaViolationError",
     "build_topic_name",
 ]

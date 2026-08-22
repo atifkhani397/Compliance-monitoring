@@ -105,3 +105,10 @@ class Config:
         if not isinstance(feedback, dict):
             return {}
         return dict(feedback)
+
+    def get_observability_config(self) -> dict[str, Any]:
+        """Retrieve Phase 5 observability configuration."""
+        observability = self._data.get("observability", {})
+        if not isinstance(observability, dict):
+            return {}
+        return dict(observability)

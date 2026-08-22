@@ -285,6 +285,9 @@ class EscalationService:
         }
         if audit_chain is not None:
             record.audit_trail.append(audit_chain.append(data, agent_id="escalation-service"))
+        observability = getattr(self.orchestrator, "_observability", None)
+        if observability is not None:
+            observability.log_escalation(record.escalation_id, action, context)
 
     async def check_sla(self) -> list[EscalationRecord]:
         """Return open records at or beyond the 50-percent SLA warning point."""
@@ -338,6 +341,14 @@ class EscalationService:
         )
         if self.feedback_loop is not None:
             await self.feedback_loop.capture_feedback(escalation_id, human_decision)
+        observability = getattr(self.orchestrator, "_observability", None)
+        if observability is not None:
+            observability.log_human_decision(
+                escalation_id,
+                human_decision.decided_by,
+                human_decision.decision,
+                human_decision.justification,
+            )
         if record.assigned_to != "unassigned":
             self.assignment_engine.release(record.assigned_to)
 

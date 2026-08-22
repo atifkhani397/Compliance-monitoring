@@ -120,3 +120,15 @@ class OverrideDeniedError(EscalationError):
 
 class FeedbackError(EscalationError):
     """Raised when feedback data is malformed or cannot be recorded."""
+
+
+class ObservabilityError(MCMSException):
+    """Base exception for structured observability failures."""
+
+
+class MetricsError(ObservabilityError):
+    """Raised when a metric cannot be recorded or queried."""
+
+
+class DashboardError(ObservabilityError):
+    """Raised when dashboard data cannot be retrieved."""

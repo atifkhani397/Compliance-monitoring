@@ -158,6 +158,7 @@ class ConsensusEngine:
             "convergence_threshold",
         )
         self.prior = _bounded(_decimal(consensus_config.get("prior", HALF)), "prior")
+        self.observability: Any | None = None
 
     @staticmethod
     def _load_weights(raw_weights: Any) -> dict[str, Decimal]:
@@ -418,6 +419,24 @@ class ConsensusEngine:
         )
         return dict(self.agent_weights)
 
+    def _log_result(self, result: ConsensusResult) -> None:
+        if self.observability is not None:
+            self.observability.log(
+                "DETECTION_EVENTS",
+                "INFO",
+                "Consensus decision resolved",
+                {
+                    "agent_id": "consensus-engine",
+                    "consensus_confidence": float(result.consensus_confidence),
+                    "consensus_severity": result.consensus_severity,
+                    "conflict_type": result.conflict_type,
+                    "resolution_method": result.resolution_method,
+                    "escalation_required": result.escalation_required,
+                    "audit_trail_ref": str(result.audit_trail_ref),
+                },
+                trace_id=str(result.audit_trail_ref),
+            )
+
     def resolve(self, assessments: list[AgentAssessment]) -> ConsensusResult:
         """Resolve a set of assessments into one reproducible decision."""
         if not assessments:
@@ -445,6 +464,7 @@ class ConsensusEngine:
                     {"type": "D", "agents": contributing, "confidence": str(confidence)}
                 ),
             )
+            self._log_result(result)
             return result
 
         likelihoods = [assessment.confidence for assessment in assessments]
@@ -506,7 +526,7 @@ class ConsensusEngine:
             "method": method,
             "escalation": escalation_required,
         }
-        return ConsensusResult(
+        result = ConsensusResult(
             consensus_confidence=confidence,
             consensus_severity=severity,
             conflict_type=conflict_type,
@@ -517,3 +537,5 @@ class ConsensusEngine:
             escalation_reason=escalation_reason,
             audit_trail_ref=self._audit_ref(result_data),
         )
+        self._log_result(result)
+        return result

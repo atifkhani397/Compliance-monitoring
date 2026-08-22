@@ -89,3 +89,18 @@ feedback:
     agent-cs-001: 0.30
     agent-ru-001: 0.20
     agent-rg-001: 0.15
+
+# Phase 5 observability configuration
+observability:
+  log_path: "data/observability/audit.jsonl"
+  initial_seed: "MERIDIAN_GENESIS_BLOCK"
+  default_key: "macms-phase5-development-key"
+  metrics:
+    retention_seconds: 31536000
+    ema_alpha: 0.3
+    trend_stability_tolerance: 0.000001
+  agent_keys:
+    agent-tm-001: "tm-secret-key-2026"
+    agent-cs-001: "cs-secret-key-2026"
+    agent-ru-001: "ru-secret-key-2026"
+    agent-rg-001: "rg-secret-key-2026"
