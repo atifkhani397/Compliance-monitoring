@@ -1,159 +1,170 @@
-<div align="center">
-  <h1>🛡️ MACMS: Multi-Agent Compliance Monitoring System</h1>
-  <p><strong>Enterprise-grade asynchronous compliance monitoring for global financial institutions.</strong></p>
+# MACMS
 
-  [![Python Version](https://img.shields.io/badge/python-3.11%2B-blue.svg?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/downloads/)
-  [![Code Style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json&style=for-the-badge)](https://github.com/astral-sh/ruff)
-  [![Checked with mypy](https://img.shields.io/badge/mypy-strict-blue?style=for-the-badge&logo=python&logoColor=white)](https://mypy-lang.org/)
-  [![License](https://img.shields.io/badge/license-Proprietary-red.svg?style=for-the-badge)]()
-  [![Build Status](https://img.shields.io/badge/build-Phase%202%20Passing-brightgreen.svg?style=for-the-badge)]()
-</div>
+## Multi-Agent Compliance Monitoring System
 
-<br />
+MACMS is a Python reference implementation for coordinating compliance checks across trading activity, employee communications, regulatory updates, and reporting workflows.
 
-MACMS is a state-of-the-art compliance platform built specifically for **Meridian Global Bank**. It orchestrates a fleet of specialized AI agents working asynchronously over a distributed Apache Kafka event backbone. Designed to operate across global trading desks and communication streams, MACMS ensures real-time adherence to international regulatory frameworks including RBI, SEBI, FINRA, SEC, GDPR, and MiFID II.
+The project addresses a practical problem: a compliance case often depends on evidence from more than one source. A suspicious trade may need to be compared with a chat message, a regulatory rule, and a prior decision. If each review is handled separately, important context can be missed and the final decision can be difficult to reconstruct. MACMS provides a common message contract, routes work to specialist agents, combines their assessments, escalates uncertain cases to a human reviewer, and records the decision history in a tamper-evident audit chain.
 
----
+This repository is a **synthetic, in-process reference implementation**. It demonstrates the coordination and control logic; it is not connected to a bank, customer data, live market feeds, production Kafka infrastructure, or external regulatory feeds.
 
-## ✨ Key Features
+## What the repository implements
 
-- **🤖 Multi-Agent Orchestration**: Specialized agents for Transaction Monitoring, Communication Scanning, Regulatory Tracking, and Report Generation.
-- **⚡ Asynchronous Event Backbone**: Built on Apache Kafka for high-throughput, partitioned, exact-once message delivery.
-- **🔒 Cryptographic Non-Repudiation**: Every inter-agent message is secured using HMAC-SHA256 signatures to ensure origin authenticity.
-- **⛓️ Immutable Audit Trails**: Tamper-evident SHA-256 hash chaining logs all regulatory decisions and system events.
-- **🚦 SLA-Driven Routing**: Five-tier priority queue system (P1-CRITICAL to P5-INFORMATIONAL) guaranteeing sub-5-minute SLAs for critical market abuse alerts.
-- **🛡️ Strict Type Safety**: 100% strict `mypy` typing and high-speed `Pydantic v2` data validation.
+| Area | Implemented capability |
+| --- | --- |
+| Agent roles | Transaction Monitor (`TM`), Communication Scanner (`CS`), Regulatory Update Tracker (`RU`), and Report Generator (`RG`) |
+| Message contracts | Pydantic models for alerts, queries, responses, updates, heartbeats, and escalations, with schema validation |
+| Routing | Priority-based routing with retry limits, queue depth controls, TTL handling, and dead-letter routing |
+| Evidence review | Deterministic synthetic assessments from multiple agents and evidence items |
+| Decision handling | Bayesian and Dempster–Shafer consensus, conflict classification, and special handling for unresolved conflicts |
+| Human review | Tiered escalation, assignment, decision recording, override handling, and feedback capture |
+| Auditability | Append-only SHA-256 hash-chain records with trace IDs and action metadata |
+| Observability | Structured audit events, metrics, dashboard data, and a FastAPI observability API |
+| Scenario coverage | 20 synthetic compliance scenarios, CS-01 through CS-20, with five tests per scenario |
 
----
+## Typical workflow
 
-## 🏗️ System Architecture
-
-MACMS utilizes a hierarchical, event-driven C4 model architecture:
+A scenario moves through the system as follows:
 
 ```mermaid
-graph TD
-    %% Styling
-    classDef orchestrator fill:#2d3436,stroke:#0984e3,stroke-width:2px,color:#fff;
-    classDef agent fill:#0984e3,stroke:#74b9ff,stroke-width:2px,color:#fff;
-    classDef infrastructure fill:#00b894,stroke:#55efc4,stroke-width:2px,color:#fff;
-
-    %% Nodes
-    O[Central Orchestration Node]:::orchestrator
-    
-    TM[Transaction Monitor<br/>TM-001]:::agent
-    CS[Communication Scanner<br/>CS-001]:::agent
-    RU[Regulatory Tracker<br/>RU-001]:::agent
-    RG[Report Generator<br/>RG-001]:::agent
-
-    K[(Apache Kafka Message Backbone)]:::infrastructure
-
-    %% Connections
-    O <-->|Dispatches & Routes| TM
-    O <-->|Dispatches & Routes| CS
-    O <-->|Dispatches & Routes| RU
-    O <-->|Dispatches & Routes| RG
-    
-    TM -.->|Events/Logs| K
-    CS -.->|Events/Logs| K
-    RU -.->|Events/Logs| K
-    RG -.->|Events/Logs| K
-    O -.->|Audit Trails| K
+flowchart LR
+    A[Input event] --> B[Specialist agent assessment]
+    B --> C[Evidence collection]
+    C --> D[Consensus or conflict handling]
+    D --> E{Human review needed?}
+    E -- No --> F[Report or update]
+    E -- Yes --> G[Tiered escalation]
+    G --> H[Human decision]
+    H --> F
+    F --> I[Audit chain and metrics]
 ```
 
----
+The flow is designed to make a case traceable. A reviewer should be able to identify the originating event, participating agents, evidence references, decision path, escalation level, and final report or suppression outcome.
 
-## 📂 Repository Structure
+## Scenarios
 
-Our documentation and source code are modularized for clarity:
+The scenario suite uses fixed synthetic data and rule-based expected outcomes. It is intended to verify message flow and decision handling, not to measure the accuracy of a machine-learning model.
+
+| Scenario group | Examples |
+| --- | --- |
+| Trading and market conduct | Spoofing, wash trading, insider trading, late trading, concentration risk, and routing bias |
+| Communications | Off-channel communications, privileged communications, and research-independence conflicts |
+| Regulatory and jurisdictional issues | Cross-border transfers and conflicting EU/Singapore requirements |
+| Customer and financial crime risk | Elder exploitation and trade-finance money laundering |
+| Decision quality | Legitimate block-trade false-positive suppression with no alert or escalation |
+
+The full status table is available in [`tests/scenarios/scenario-summary.md`](tests/scenarios/scenario-summary.md). Each scenario directory contains the specification, trace-through, message artifact, audit artifact, and tests.
+
+## Repository structure
 
 ```text
-Compliance-monitoring/
-├── config/                # System configuration files (YAML/JSON)
-├── docs/                  # Comprehensive system documentation
-│   ├── architecture/      # C4 models, topology, data flow, security
-│   ├── protocols/         # Kafka schemas and routing logic
-│   ├── conflict-resolution/# Consensus algorithms for agent disputes
-│   ├── decision-trees/    # Agent execution capability matrices
-│   ├── escalation/        # Human-in-the-loop escalation frameworks
-│   └── observability/     # Audit, metrics, and structured logging
-├── src/
-│   └── mcms/              # Core source code package
-│       ├── agents/        # Concrete agent implementations
-│       └── core/          # Orchestrator, registry, and crypto utilities
-└── tests/                 # Complete Pytest suite (unit & async tests)
+.
+├── config/
+│   └── config.yaml                 # Local development configuration
+├── docs/
+│   ├── architecture/               # System topology, data flow, security, and failure modes
+│   ├── agents/                     # Agent responsibilities and decision trees
+│   ├── conflict-resolution/        # Consensus and conflict handling
+│   ├── escalation/                 # Human-review workflow
+│   ├── observability/              # Logging, metrics, and dashboard documentation
+│   └── protocols/                  # Message schema and routing rules
+├── src/mcms/
+│   ├── agents/                     # Agent implementations
+│   ├── api/                        # FastAPI observability dashboard
+│   ├── core/                       # Messages, routing, orchestration, audit, consensus, and escalation
+│   ├── scenario_specs.py           # Synthetic scenario catalogue
+│   └── scenario_support.py         # Shared scenario runner and assertions
+├── tests/
+│   ├── scenarios/                  # CS-01 through CS-20 scenario tests and artifacts
+│   └── test_*.py                   # Unit and component tests
+├── pyproject.toml
+└── requirements.txt
 ```
 
----
+## Quick start
 
-## 🚀 Quick Start
+### Requirements
 
-### 1. Prerequisites
-- **Python 3.11+**
-- **Apache Kafka** (Local instance or Docker container)
-- **Git**
+- Python 3.11 or newer
+- Git
 
-### 2. Installation
+The test suite does not require a running Kafka broker. Kafka client configuration and integration-facing components are included, but the current scenario and unit tests run in process with synthetic inputs.
 
-Clone the repository and set up your virtual environment:
+### Install
 
 ```bash
 git clone https://github.com/atifkhani397/Compliance-monitoring.git
 cd Compliance-monitoring
 
-# Create and activate virtual environment
 python -m venv .venv
+source .venv/bin/activate       # macOS/Linux
+# .venv\Scripts\Activate.ps1   # Windows PowerShell
 
-# Windows
-.\.venv\Scripts\Activate.ps1
-# macOS/Linux
-source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
 ```
 
-Install the required dependencies:
+### Run the tests
 
 ```bash
-pip install -r requirements.txt
+pytest -q
 ```
 
-### 3. Configuration
+The current repository contains 287 passing tests, including 100 scenario tests across CS-01 through CS-20.
 
-Create a `.env` file in the root directory (refer to `.env.example` if needed):
-
-```env
-MACMS_ENV=development
-MACMS_LOG_LEVEL=INFO
-KAFKA_BOOTSTRAP_SERVERS=localhost:9092
-AUDIT_CHAIN_SECRET_KEY=meridian-global-audit-secret-key-2026
-```
-
-### 4. Running the Test Suite
-
-MACMS maintains a 100% strict coverage standard. Verify your installation by running the test suite and type checker:
+### Run quality checks
 
 ```bash
-# Run unit and async tests
-python -m pytest -v --tb=short
-
-# Verify strict type safety
+ruff check src/ tests/
+ruff format --check src/ tests/
 mypy --strict src/
+git diff --check
 ```
 
----
+### Run the observability API locally
 
-## 🛠️ Technology Stack
+The dashboard is an optional FastAPI application. Start it with:
 
-| Component | Technology | Justification |
-| :--- | :--- | :--- |
-| **Language** | Python 3.11+ | High performance async event loops, rich data science ecosystem, strict typing. |
-| **Validation** | Pydantic v2 | Rust-accelerated validation, strict schema enforcement, and JSON parsing. |
-| **Message Broker** | Apache Kafka | Distributed log architecture, high throughput, exact-once semantics. |
-| **Logging** | `structlog` | Context-aware structured JSON log rendering with zero-overhead. |
-| **Cryptography** | `cryptography` | OpenSSL-backed primitives for HMAC-SHA256 signing and hash chaining. |
-| **Testing** | `pytest` + `pytest-asyncio` | Production-standard async testing and strict coverage reporting. |
+```bash
+uvicorn src.mcms.api.dashboard:app --reload
+```
 
----
+All dashboard routes require the `X-API-Key` header. For local development, the default key is `macms-phase5-api-key`; set `MCMS_DASHBOARD_API_KEY` before starting the application to use a different value.
 
-## 📋 Compliance & Auditing
+## Important limitations
 
-Phase 2 establishes the core agent specifications and infrastructure adhering strictly to Meridian Global Bank's internal controls.
-For the full Phase 1 and 2 readiness evaluation, please consult the [`SELF-ASSESSMENT.md`](SELF-ASSESSMENT.md).
+This repository should not be described as a production compliance platform. It currently does not provide:
+
+- Live trading, communications, customer, or regulatory data ingestion.
+- A trained machine-learning or natural-language-processing detection model.
+- Persistent production storage for audit, metrics, or case records.
+- Production mTLS certificate validation, HSM integration, Vault integration, or full enterprise RBAC.
+- Completed India-specific regulatory implementation from the Phase 8 prompt.
+- The optional CS-21 through CS-25 bonus scenarios from the Phase 8 prompt.
+- A production deployment, availability guarantee, or regulatory filing service.
+
+The synthetic scenarios are deliberately deterministic so that the message contracts, routing, consensus, escalation, reporting, and audit behavior can be tested repeatably.
+
+## Documentation guide
+
+| Topic | Document |
+| --- | --- |
+| System structure and data flow | [`docs/architecture/`](docs/architecture/) |
+| Agent responsibilities | [`docs/agents/`](docs/agents/) |
+| Message format | [`docs/protocols/message-schema.json`](docs/protocols/message-schema.json) |
+| Routing and priority rules | [`docs/protocols/routing-logic.md`](docs/protocols/routing-logic.md) |
+| Consensus and conflict handling | [`docs/conflict-resolution/`](docs/conflict-resolution/) |
+| Human escalation | [`docs/escalation/`](docs/escalation/) |
+| Audit and observability | [`docs/observability/`](docs/observability/) |
+| Scenario implementation status | [`tests/scenarios/scenario-summary.md`](tests/scenarios/scenario-summary.md) |
+| Phase 1–6 assessment | [`SELF-ASSESSMENT.md`](SELF-ASSESSMENT.md) |
+
+## Project status
+
+**Phase 7 is implemented and published.** The repository includes all 20 mandatory synthetic scenarios and the supporting unit and integration-style tests described above.
+
+**Phase 8 has been reviewed but not implemented.** Its remaining scope includes production security controls, India-specific compliance documentation and tests, optional additional scenarios, performance validation, and final documentation review.
+
+## License
+
+No open-source license has been declared for this repository. Treat the contents as project-specific reference code unless the repository owner provides separate licensing terms.
