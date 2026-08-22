@@ -1,16 +1,25 @@
-"""Central orchestrator for MACMS inter-agent message coordination."""
+"""Central orchestration and Phase 3 correlated-alert routing."""
+
+from __future__ import annotations
 
 import logging
 from datetime import UTC, datetime
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, cast
 
 from src.mcms.core.audit import AuditChain
 from src.mcms.core.config import Config
+from src.mcms.core.consensus import ConsensusEngine
 from src.mcms.core.exceptions import AgentNotFoundError, OrchestratorError
 from src.mcms.core.registry import AgentRegistry
 
+
+def _payload(message: Message) -> dict[str, Any]:
+    return cast(dict[str, Any], message.payload)
+
+
 if TYPE_CHECKING:
     from src.mcms.agents.base import BaseAgent
+    from src.mcms.core.conflict_resolver import ConflictResolver
     from src.mcms.core.message import Message
 
 logger = logging.getLogger(__name__)
@@ -24,12 +33,26 @@ class Orchestrator:
         self._registry = AgentRegistry()
         self._audit_chain = AuditChain()
         self._escalation_queue: list[dict[str, Any]] = []
+        self._conflict_buffer: dict[str, list[Message]] = {}
+        self._resolved_messages: list[Message] = []
         self._shutdown = False
+        from src.mcms.core.conflict_resolver import ConflictResolver
 
-    async def dispatch(self, message: "Message") -> None:  # noqa: F821
-        """Routes message to recipient agent(s) based on routing rules."""
+        self._conflict_resolver: ConflictResolver = ConflictResolver(ConsensusEngine(config), self)
+
+    async def dispatch(self, message: Message) -> None:
+        """Route messages, buffering correlated ALERTs for conflict resolution."""
         if self._shutdown:
             raise OrchestratorError("Orchestrator is shut down; cannot dispatch messages")
+
+        if message.message_type == "ALERT":
+            key = message.correlation_id or message.trace_id
+            buffer = self._conflict_buffer.setdefault(key, [])
+            buffer.append(message)
+            if len(buffer) > 1 and self._conflict_resolver.detect_conflict(buffer):
+                await self.route_to_resolver(buffer.copy())
+                self._conflict_buffer.pop(key, None)
+                return
 
         recipients: list[str] = (
             [message.recipient_agent_id]
@@ -62,9 +85,18 @@ class Orchestrator:
             recipients,
         )
 
-    async def register_agent(self, agent: "BaseAgent") -> None:
-        """Registers agent for message delivery."""
+    async def route_to_resolver(self, messages: list[Message]) -> None:
+        """Resolve correlated alerts and deliver the result to RG when registered."""
+        if not messages:
+            raise OrchestratorError("Cannot route an empty message group to the resolver")
+        resolved = await self._conflict_resolver.resolve_conflict(messages)
+        self._resolved_messages.append(resolved)
+        report_agent = self._registry.get_agent("agent-rg-001")
+        if report_agent is not None:
+            await report_agent.process_message(resolved)
 
+    async def register_agent(self, agent: BaseAgent) -> None:
+        """Registers agent for message delivery."""
         self._registry.register(agent)
         self._audit_chain.append(
             {
@@ -89,18 +121,18 @@ class Orchestrator:
         )
         logger.info("Unregistered agent %s", agent_id)
 
-    async def handle_heartbeat(self, message: "Message") -> None:  # noqa: F821
+    async def handle_heartbeat(self, message: Message) -> None:
         """Processes heartbeat message and updates agent health status."""
         sender_id = message.sender_agent_id
         health_data: dict[str, Any] = {
-            "status": message.payload.get("agent_status", "UNKNOWN"),
-            "queue_depth": message.payload.get("queue_depth", 0),
+            "status": _payload(message).get("agent_status", "UNKNOWN"),
+            "queue_depth": _payload(message).get("queue_depth", 0),
             "last_heartbeat": datetime.now(UTC).isoformat(),
             "agent_id": sender_id,
         }
         self._registry.update_health(sender_id, health_data)
 
-    async def escalate(self, message: "Message", reason: str) -> None:  # noqa: F821
+    async def escalate(self, message: Message, reason: str) -> None:
         """Creates escalation entry and routes to human escalation queue."""
         escalation_entry: dict[str, Any] = {
             "original_message_id": message.message_id,
@@ -121,7 +153,7 @@ class Orchestrator:
         return self._registry.get_health(agent_id)
 
     def get_system_health(self) -> dict[str, Any]:
-        """Returns health of all registered agents."""
+        """Returns health of all registered agents and conflict buffers."""
         agents_list = self._registry.list_agents()
         agent_healths: list[dict[str, Any]] = []
         for agent_info in agents_list:
@@ -134,6 +166,8 @@ class Orchestrator:
             "agents": agent_healths,
             "escalation_queue_depth": len(self._escalation_queue),
             "audit_chain_length": len(self._audit_chain.entries),
+            "conflict_buffer_depth": sum(len(items) for items in self._conflict_buffer.values()),
+            "resolved_message_depth": len(self._resolved_messages),
         }
 
     async def shutdown(self) -> None:

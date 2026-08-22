@@ -60,3 +60,13 @@ escalation:
     TIER_1: 3600
     TIER_2: 14400
     TIER_3: 86400
+
+consensus:
+  prior: 0.5
+  escalation_threshold: 0.7
+  convergence_threshold: 0.2
+  agent_weights:
+    agent-tm-001: 0.35
+    agent-cs-001: 0.30
+    agent-ru-001: 0.20
+    agent-rg-001: 0.15

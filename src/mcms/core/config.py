@@ -84,3 +84,10 @@ class Config:
         if not isinstance(audit, dict):
             return {}
         return dict(audit)
+
+    def get_consensus_config(self) -> dict[str, Any]:
+        """Retrieve Phase 3 consensus configuration."""
+        consensus = self._data.get("consensus", {})
+        if not isinstance(consensus, dict):
+            return {}
+        return dict(consensus)

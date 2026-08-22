@@ -84,3 +84,19 @@ class CapabilityNotFoundError(MCMSException):
     def __init__(self, capability: str, details: dict[str, Any] | None = None) -> None:
         super().__init__(f"No agent found with capability: {capability}", details)
         self.capability = capability
+
+
+class ConsensusError(MCMSException):
+    """Base exception for deterministic consensus failures."""
+
+
+class ConflictDetectionError(ConsensusError):
+    """Raised when a group of alerts cannot be classified as a supported conflict."""
+
+
+class ConvergenceError(ConsensusError):
+    """Raised when Bayesian and Dempster-Shafer results diverge beyond the limit."""
+
+
+class InvalidAssessmentError(ConsensusError):
+    """Raised when an agent assessment violates the consensus input contract."""
