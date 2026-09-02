@@ -5,7 +5,7 @@ version: 2.0.0
 status: Complete - All 25 Scenarios Active
 ---
 
-# MACMS Test Scenario Summary Index
+# MACMS Compliance Scenario Summary Index
 
 This document tracks all 25 compliance test scenarios (`CS-01` through `CS-25`) fully implemented in MACMS.
 

@@ -1,0 +1,95 @@
+[
+  {
+    "message_id": "21b67da9-7a8c-4432-93c1-46b6dbd19d0c",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:38:52.607205+00:00",
+    "sender_agent_id": "agent-tm-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "ALERT",
+    "priority": 2,
+    "correlation_id": "b9586e89-092d-4e10-a2d0-d885237988af",
+    "trace_id": "b9586e89-092d-4e10-a2d0-d885237988af",
+    "payload_schema": "alert-v1",
+    "payload": {
+      "violation_type": "concentration_risk",
+      "severity": "MEDIUM",
+      "detected_at": "2026-08-22T18:38:52.607189+00:00",
+      "evidence_refs": [
+        "sector_concentration_028",
+        "limit_025_001"
+      ],
+      "affected_entities": [
+        "Fund_12",
+        "Sector_12"
+      ],
+      "exculpatory": false,
+      "jurisdiction": null,
+      "regulatory_requirement": null,
+      "attributed_entity": null,
+      "cross_jurisdictional": false,
+      "mria": false,
+      "board_level": false,
+      "senior_management": false,
+      "repeated_violation_count": 0,
+      "system_generated_anomaly": false,
+      "sanctions_related": false,
+      "agent_status": null,
+      "conflict_type": null,
+      "required_skills": [],
+      "scenario_context": {
+        "concentration_pct": 28,
+        "limit_pct": 25,
+        "persistent_trading_days": 5
+      },
+      "affected_jurisdictions": [],
+      "conflicting_regulations": [],
+      "consensus_result": null
+    },
+    "confidence_score": 0.75,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "d6dbb58dbab1663d"
+  },
+  {
+    "message_id": "8583b44d-f891-4ca3-a21a-6d4a80dc51f2",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:38:52.608650+00:00",
+    "sender_agent_id": "agent-rg-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "UPDATE",
+    "priority": 2,
+    "correlation_id": "b9586e89-092d-4e10-a2d0-d885237988af",
+    "trace_id": "b9586e89-092d-4e10-a2d0-d885237988af",
+    "payload_schema": "update-v1",
+    "payload": {
+      "update_type": "report_generation",
+      "entity_id": "CS-12",
+      "changed_fields": {
+        "report_types": [
+          "Prospectus deviation report",
+          "Portfolio rebalancing recommendation"
+        ],
+        "status": "DRAFT_REQUIRES_HUMAN_AUTHORIZATION",
+        "regulations": [
+          "Investment Company Act Section 13",
+          "SEC Form N-PORT",
+          "UCITS concentration limits"
+        ]
+      },
+      "previous_values": {},
+      "consensus_result": null,
+      "human_decision": null,
+      "feedback": null,
+      "reason": null,
+      "evidence_refs": []
+    },
+    "confidence_score": null,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "001bda68af381889"
+  }
+]

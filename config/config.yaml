@@ -53,10 +53,54 @@ orchestrator:
   heartbeat_interval_seconds: 30
   shutdown_timeout_seconds: 30
 
+consensus:
+  prior: 0.5
+  escalation_threshold: 0.7
+  convergence_threshold: 0.2
+  agent_weights:
+    agent-tm-001: 0.35
+    agent-cs-001: 0.30
+    agent-ru-001: 0.20
+    agent-rg-001: 0.15
+
+# Phase 4 human-in-the-loop escalation configuration
 escalation:
   human_queue_topic: "mcms.escalation.human"
   default_tier: "TIER_1"
   sla_seconds:
-    TIER_1: 3600
-    TIER_2: 14400
-    TIER_3: 86400
+    TIER_1: 14400
+    TIER_2: 7200
+    TIER_3: 3600
+    TIER_4: 1800
+  after_hours: false
+  review_warning_fraction: 0.5
+
+human_assignment:
+  business_hours_start: 6
+  business_hours_end: 18
+  on_call: []
+  cco_id: "cco-001"
+
+feedback:
+  review_period_seconds: 86400
+  thresholds: {}
+  agent_weights:
+    agent-tm-001: 0.35
+    agent-cs-001: 0.30
+    agent-ru-001: 0.20
+    agent-rg-001: 0.15
+
+# Phase 5 observability configuration
+observability:
+  log_path: "data/observability/audit.jsonl"
+  initial_seed: "MERIDIAN_GENESIS_BLOCK"
+  default_key: "macms-phase5-development-key"
+  metrics:
+    retention_seconds: 31536000
+    ema_alpha: 0.3
+    trend_stability_tolerance: 0.000001
+  agent_keys:
+    agent-tm-001: "tm-secret-key-2026"
+    agent-cs-001: "cs-secret-key-2026"
+    agent-ru-001: "ru-secret-key-2026"
+    agent-rg-001: "rg-secret-key-2026"

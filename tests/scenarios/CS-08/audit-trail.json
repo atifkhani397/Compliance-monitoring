@@ -1,0 +1,229 @@
+[
+  {
+    "index": 0,
+    "timestamp": "2026-08-22T18:27:01.424028+00:00",
+    "previous_hash": "e3eba8b0b470c0e19ed44237f1302e2fe392b8138b5ef82a6031636dc371ad46",
+    "current_hash": "30b9f008d6d4e50e4a3f3b03b3010261d102bb0945e8891160b395a089dd6dfc",
+    "data": {
+      "action": "DETECTION",
+      "scenario_id": "CS-08",
+      "trace_id": "09fae7c0-d0b3-4137-863c-d6aa85c0cf07",
+      "agent_id": "agent-cs-001",
+      "confidence": 0.96,
+      "severity": "CRITICAL"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "09fae7c0-d0b3-4137-863c-d6aa85c0cf07",
+    "action_type": "DETECTION",
+    "action_data": {
+      "scenario_id": "CS-08",
+      "trace_id": "09fae7c0-d0b3-4137-863c-d6aa85c0cf07",
+      "agent_id": "agent-cs-001",
+      "confidence": 0.96,
+      "severity": "CRITICAL"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 1,
+    "timestamp": "2026-08-22T18:27:01.424081+00:00",
+    "previous_hash": "30b9f008d6d4e50e4a3f3b03b3010261d102bb0945e8891160b395a089dd6dfc",
+    "current_hash": "5ec08cbb2b128ef779013fac83d7bcfbb0d4c0f86a591cd59f86ea6cc1a2fba4",
+    "data": {
+      "action": "MESSAGE_SENT",
+      "scenario_id": "CS-08",
+      "trace_id": "09fae7c0-d0b3-4137-863c-d6aa85c0cf07",
+      "agent_id": "agent-cs-001",
+      "message_id": "ad51fe3f-9df9-4858-a1c9-3f6caeadf35a"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "09fae7c0-d0b3-4137-863c-d6aa85c0cf07",
+    "action_type": "MESSAGE_SENT",
+    "action_data": {
+      "scenario_id": "CS-08",
+      "trace_id": "09fae7c0-d0b3-4137-863c-d6aa85c0cf07",
+      "agent_id": "agent-cs-001",
+      "message_id": "ad51fe3f-9df9-4858-a1c9-3f6caeadf35a"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 2,
+    "timestamp": "2026-08-22T18:27:01.424113+00:00",
+    "previous_hash": "5ec08cbb2b128ef779013fac83d7bcfbb0d4c0f86a591cd59f86ea6cc1a2fba4",
+    "current_hash": "77c2a8d193a8d336a9c595f647a3ebfd4286ce1170e19738186cbafdd9bd32ed",
+    "data": {
+      "action": "MESSAGE_RECEIVED",
+      "scenario_id": "CS-08",
+      "trace_id": "09fae7c0-d0b3-4137-863c-d6aa85c0cf07",
+      "agent_id": "orchestrator",
+      "message_id": "ad51fe3f-9df9-4858-a1c9-3f6caeadf35a"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "09fae7c0-d0b3-4137-863c-d6aa85c0cf07",
+    "action_type": "MESSAGE_RECEIVED",
+    "action_data": {
+      "scenario_id": "CS-08",
+      "trace_id": "09fae7c0-d0b3-4137-863c-d6aa85c0cf07",
+      "agent_id": "orchestrator",
+      "message_id": "ad51fe3f-9df9-4858-a1c9-3f6caeadf35a"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 3,
+    "timestamp": "2026-08-22T18:27:01.424579+00:00",
+    "previous_hash": "77c2a8d193a8d336a9c595f647a3ebfd4286ce1170e19738186cbafdd9bd32ed",
+    "current_hash": "8eac681ba433903a057b4d2559b021d415f1f2335f0f0f8b9f18d20144c6fd63",
+    "data": {
+      "action": "CONSENSUS_RESOLUTION",
+      "scenario_id": "CS-08",
+      "trace_id": "09fae7c0-d0b3-4137-863c-d6aa85c0cf07",
+      "confidence": "0.8600714285714285714285714285",
+      "severity": "CRITICAL",
+      "conflict_type": null,
+      "method": "hybrid"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "09fae7c0-d0b3-4137-863c-d6aa85c0cf07",
+    "action_type": "CONSENSUS_RESOLUTION",
+    "action_data": {
+      "scenario_id": "CS-08",
+      "trace_id": "09fae7c0-d0b3-4137-863c-d6aa85c0cf07",
+      "confidence": "0.8600714285714285714285714285",
+      "severity": "CRITICAL",
+      "conflict_type": null,
+      "method": "hybrid"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 4,
+    "timestamp": "2026-08-22T18:27:01.424822+00:00",
+    "previous_hash": "8eac681ba433903a057b4d2559b021d415f1f2335f0f0f8b9f18d20144c6fd63",
+    "current_hash": "dc9569e8714a948d38dd7c8dcb96205d87ff55cf12173d13be878bd216ddbd27",
+    "data": {
+      "action": "ESCALATION_CREATED",
+      "escalation_id": "177bffe7-63bf-4ed7-9097-3f34f232309f",
+      "alert_id": "ad51fe3f-9df9-4858-a1c9-3f6caeadf35a",
+      "tier": 3,
+      "assigned_to": "unassigned",
+      "status": "open",
+      "reason": "Phase 6 CS-08: Misleading Marketing \u2014 Performance Claims requires human review"
+    },
+    "agent_id": "escalation-service",
+    "trace_id": null,
+    "action_type": null,
+    "action_data": null,
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 5,
+    "timestamp": "2026-08-22T18:27:01.425227+00:00",
+    "previous_hash": "dc9569e8714a948d38dd7c8dcb96205d87ff55cf12173d13be878bd216ddbd27",
+    "current_hash": "d4423924ffe43f97f068d2caa9acb0cfe9d3ba633ed040b211085bf25e5c38fa",
+    "data": {
+      "action": "ESCALATION",
+      "scenario_id": "CS-08",
+      "trace_id": "09fae7c0-d0b3-4137-863c-d6aa85c0cf07",
+      "escalation_id": "177bffe7-63bf-4ed7-9097-3f34f232309f",
+      "tier": 3,
+      "sla_deadline": "2026-08-22T19:27:01.424764+00:00"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "09fae7c0-d0b3-4137-863c-d6aa85c0cf07",
+    "action_type": "ESCALATION",
+    "action_data": {
+      "scenario_id": "CS-08",
+      "trace_id": "09fae7c0-d0b3-4137-863c-d6aa85c0cf07",
+      "escalation_id": "177bffe7-63bf-4ed7-9097-3f34f232309f",
+      "tier": 3,
+      "sla_deadline": "2026-08-22T19:27:01.424764+00:00"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 6,
+    "timestamp": "2026-08-22T18:27:01.425280+00:00",
+    "previous_hash": "d4423924ffe43f97f068d2caa9acb0cfe9d3ba633ed040b211085bf25e5c38fa",
+    "current_hash": "28a6a9f42046058b4f072086301034f542ffe5a72168671b0cc0a9dfb24958da",
+    "data": {
+      "action": "DECISION_SUPPORT_PACKAGE",
+      "scenario_id": "CS-08",
+      "trace_id": "09fae7c0-d0b3-4137-863c-d6aa85c0cf07",
+      "escalation_id": "177bffe7-63bf-4ed7-9097-3f34f232309f",
+      "evidence_count": 2
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "09fae7c0-d0b3-4137-863c-d6aa85c0cf07",
+    "action_type": "DECISION_SUPPORT_PACKAGE",
+    "action_data": {
+      "scenario_id": "CS-08",
+      "trace_id": "09fae7c0-d0b3-4137-863c-d6aa85c0cf07",
+      "escalation_id": "177bffe7-63bf-4ed7-9097-3f34f232309f",
+      "evidence_count": 2
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 7,
+    "timestamp": "2026-08-22T18:27:01.425480+00:00",
+    "previous_hash": "28a6a9f42046058b4f072086301034f542ffe5a72168671b0cc0a9dfb24958da",
+    "current_hash": "14a2c70517705e535100778fc0d9e6316941f308d5ff97e1c5a1631a702be996",
+    "data": {
+      "action": "REPORT_GENERATION",
+      "scenario_id": "CS-08",
+      "trace_id": "09fae7c0-d0b3-4137-863c-d6aa85c0cf07",
+      "report_types": [
+        "Marketing withdrawal order",
+        "Client correction notice",
+        "Regulatory notification"
+      ],
+      "status": "DRAFT_REQUIRES_HUMAN_AUTHORIZATION"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "09fae7c0-d0b3-4137-863c-d6aa85c0cf07",
+    "action_type": "REPORT_GENERATION",
+    "action_data": {
+      "scenario_id": "CS-08",
+      "trace_id": "09fae7c0-d0b3-4137-863c-d6aa85c0cf07",
+      "report_types": [
+        "Marketing withdrawal order",
+        "Client correction notice",
+        "Regulatory notification"
+      ],
+      "status": "DRAFT_REQUIRES_HUMAN_AUTHORIZATION"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 8,
+    "timestamp": "2026-08-22T18:27:01.425529+00:00",
+    "previous_hash": "14a2c70517705e535100778fc0d9e6316941f308d5ff97e1c5a1631a702be996",
+    "current_hash": "8be6dbe11d08363950a7cd9fc47200878e6f93f73b152f2cfa64d83678222504",
+    "data": {
+      "action": "REPORT_AUTHORIZATION_REQUIRED",
+      "scenario_id": "CS-08",
+      "trace_id": "09fae7c0-d0b3-4137-863c-d6aa85c0cf07",
+      "report_id": "b823f7b7-4f92-4a0c-a712-1ee49e360e9d"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "09fae7c0-d0b3-4137-863c-d6aa85c0cf07",
+    "action_type": "REPORT_AUTHORIZATION_REQUIRED",
+    "action_data": {
+      "scenario_id": "CS-08",
+      "trace_id": "09fae7c0-d0b3-4137-863c-d6aa85c0cf07",
+      "report_id": "b823f7b7-4f92-4a0c-a712-1ee49e360e9d"
+    },
+    "signature": null,
+    "nonce": null
+  }
+]

@@ -84,3 +84,31 @@ class Config:
         if not isinstance(audit, dict):
             return {}
         return dict(audit)
+
+    def get_consensus_config(self) -> dict[str, Any]:
+        """Retrieve Phase 3 consensus configuration."""
+        consensus = self._data.get("consensus", {})
+        if not isinstance(consensus, dict):
+            return {}
+        return dict(consensus)
+
+    def get_escalation_config(self) -> dict[str, Any]:
+        """Retrieve Phase 4 escalation configuration."""
+        escalation = self._data.get("escalation", {})
+        if not isinstance(escalation, dict):
+            return {}
+        return dict(escalation)
+
+    def get_feedback_config(self) -> dict[str, Any]:
+        """Retrieve Phase 4 feedback configuration."""
+        feedback = self._data.get("feedback", {})
+        if not isinstance(feedback, dict):
+            return {}
+        return dict(feedback)
+
+    def get_observability_config(self) -> dict[str, Any]:
+        """Retrieve Phase 5 observability configuration."""
+        observability = self._data.get("observability", {})
+        if not isinstance(observability, dict):
+            return {}
+        return dict(observability)

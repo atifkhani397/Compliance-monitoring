@@ -1,0 +1,202 @@
+[
+  {
+    "message_id": "40e27a36-8fdb-4be2-86ab-7f84be6c3820",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:27:01.330703+00:00",
+    "sender_agent_id": "agent-cs-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "ALERT",
+    "priority": 2,
+    "correlation_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+    "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+    "payload_schema": "alert-v1",
+    "payload": {
+      "violation_type": "unsuitable_recommendation",
+      "severity": "HIGH",
+      "detected_at": "2026-08-22T18:27:01.330686+00:00",
+      "evidence_refs": [
+        "advisor_message_001",
+        "ips_violation_012"
+      ],
+      "affected_entities": [
+        "Advisor_12"
+      ],
+      "exculpatory": false,
+      "jurisdiction": null,
+      "regulatory_requirement": null,
+      "attributed_entity": null,
+      "cross_jurisdictional": false,
+      "mria": false,
+      "board_level": false,
+      "senior_management": false,
+      "repeated_violation_count": 0,
+      "system_generated_anomaly": false,
+      "sanctions_related": false,
+      "agent_status": null,
+      "conflict_type": null,
+      "required_skills": [],
+      "scenario_context": {
+        "retirement_clients": 12,
+        "client_age_range": "68-82",
+        "leveraged_etf": true
+      },
+      "consensus_result": null
+    },
+    "confidence_score": 0.89,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "4ad5344e70052b04"
+  },
+  {
+    "message_id": "4490b687-d1df-486e-b934-b45feb76e06f",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:27:01.331287+00:00",
+    "sender_agent_id": "agent-tm-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "ALERT",
+    "priority": 2,
+    "correlation_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+    "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+    "payload_schema": "alert-v1",
+    "payload": {
+      "violation_type": "unsuitable_recommendation",
+      "severity": "MEDIUM",
+      "detected_at": "2026-08-22T18:27:01.331271+00:00",
+      "evidence_refs": [
+        "trade_confirmations_012",
+        "aum_risk_002"
+      ],
+      "affected_entities": [
+        "Advisor_12"
+      ],
+      "exculpatory": false,
+      "jurisdiction": null,
+      "regulatory_requirement": null,
+      "attributed_entity": null,
+      "cross_jurisdictional": false,
+      "mria": false,
+      "board_level": false,
+      "senior_management": false,
+      "repeated_violation_count": 0,
+      "system_generated_anomaly": false,
+      "sanctions_related": false,
+      "agent_status": null,
+      "conflict_type": null,
+      "required_skills": [],
+      "scenario_context": {
+        "aum_at_risk_usd": 2300000,
+        "clients_executed": 12
+      },
+      "consensus_result": null
+    },
+    "confidence_score": 0.75,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "3d55fa093d8ddb7e"
+  },
+  {
+    "message_id": "0bd47d0e-90a6-4f70-9d7a-12125bdac67a",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:27:01.333171+00:00",
+    "sender_agent_id": "agent-rg-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "ALERT",
+    "priority": 2,
+    "correlation_id": null,
+    "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+    "payload_schema": "alert-v1",
+    "payload": {
+      "violation_type": "consensus-resolved",
+      "severity": "HIGH",
+      "detected_at": "2026-08-22T18:27:01.333171+00:00",
+      "evidence_refs": [
+        "71a524ec-7580-4829-a6a4-ee0ced817deb"
+      ],
+      "affected_entities": [
+        "agent-cs-001",
+        "agent-tm-001"
+      ],
+      "exculpatory": false,
+      "jurisdiction": null,
+      "regulatory_requirement": null,
+      "attributed_entity": null,
+      "cross_jurisdictional": false,
+      "mria": false,
+      "board_level": false,
+      "senior_management": false,
+      "repeated_violation_count": 0,
+      "system_generated_anomaly": false,
+      "sanctions_related": false,
+      "agent_status": null,
+      "conflict_type": null,
+      "required_skills": [],
+      "scenario_context": {},
+      "consensus_result": {
+        "consensus_confidence": 0.9282524682136596,
+        "consensus_severity": "HIGH",
+        "conflict_type": "B",
+        "contributing_agents": [
+          "agent-cs-001",
+          "agent-tm-001"
+        ],
+        "dissenting_agents": [
+          "agent-tm-001"
+        ],
+        "resolution_method": "hybrid",
+        "escalation_required": false,
+        "escalation_reason": null,
+        "audit_trail_ref": "71a524ec-7580-4829-a6a4-ee0ced817deb"
+      }
+    },
+    "confidence_score": 0.9282524682136596,
+    "ttl_seconds": 300,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "Y29uZmxpY3QtcmVzb2x2ZXItcGxhY2Vob2xkZXI=",
+    "nonce": "7be54fe0d21f73a7"
+  },
+  {
+    "message_id": "12a2cdea-4136-4d47-a796-b135ac2d8cfe",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:27:01.334584+00:00",
+    "sender_agent_id": "agent-rg-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "UPDATE",
+    "priority": 2,
+    "correlation_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+    "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+    "payload_schema": "update-v1",
+    "payload": {
+      "update_type": "report_generation",
+      "entity_id": "CS-03",
+      "changed_fields": {
+        "report_types": [
+          "FINRA referral",
+          "Client remediation plan",
+          "Advisor disciplinary report"
+        ],
+        "status": "DRAFT_REQUIRES_HUMAN_AUTHORIZATION",
+        "regulations": [
+          "FINRA Rule 2111",
+          "SEC Regulation Best Interest"
+        ]
+      },
+      "previous_values": {},
+      "consensus_result": null,
+      "human_decision": null,
+      "feedback": null,
+      "reason": null,
+      "evidence_refs": []
+    },
+    "confidence_score": null,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "4459d697e2c33b3c"
+  }
+]

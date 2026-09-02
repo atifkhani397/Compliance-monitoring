@@ -1,0 +1,273 @@
+[
+  {
+    "message_id": "6b76bd5c-4045-4205-bc41-7b04e6c4639b",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:38:52.771099+00:00",
+    "sender_agent_id": "agent-tm-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "ALERT",
+    "priority": 1,
+    "correlation_id": "2a671d49-9c3f-4d43-a65d-e9326b6ac0e5",
+    "trace_id": "2a671d49-9c3f-4d43-a65d-e9326b6ac0e5",
+    "payload_schema": "alert-v1",
+    "payload": {
+      "violation_type": "trade_based_money_laundering",
+      "severity": "CRITICAL",
+      "detected_at": "2026-08-22T18:38:52.771083+00:00",
+      "evidence_refs": [
+        "cs20_tm_evidence_01",
+        "cs20_tm_evidence_02",
+        "cs20_tm_evidence_03",
+        "cs20_tm_evidence_04",
+        "cs20_tm_evidence_05",
+        "cs20_tm_evidence_06"
+      ],
+      "affected_entities": [
+        "Trade_Client_20",
+        "Beneficiary_20"
+      ],
+      "exculpatory": false,
+      "jurisdiction": null,
+      "regulatory_requirement": null,
+      "attributed_entity": null,
+      "cross_jurisdictional": false,
+      "mria": false,
+      "board_level": false,
+      "senior_management": false,
+      "repeated_violation_count": 0,
+      "system_generated_anomaly": false,
+      "sanctions_related": false,
+      "agent_status": null,
+      "conflict_type": null,
+      "required_skills": [],
+      "scenario_context": {
+        "trade_mispricing_pct": 300,
+        "intermediary_bank_count": 5,
+        "layering": true
+      },
+      "affected_jurisdictions": [],
+      "conflicting_regulations": [],
+      "consensus_result": null
+    },
+    "confidence_score": 0.9,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "f739065a644e373c"
+  },
+  {
+    "message_id": "0ddf4f6f-ec7a-4ace-8823-d8a3d4b630f2",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:38:52.771601+00:00",
+    "sender_agent_id": "agent-cs-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "ALERT",
+    "priority": 1,
+    "correlation_id": "2a671d49-9c3f-4d43-a65d-e9326b6ac0e5",
+    "trace_id": "2a671d49-9c3f-4d43-a65d-e9326b6ac0e5",
+    "payload_schema": "alert-v1",
+    "payload": {
+      "violation_type": "trade_based_money_laundering",
+      "severity": "CRITICAL",
+      "detected_at": "2026-08-22T18:38:52.771588+00:00",
+      "evidence_refs": [
+        "cs20_cs_evidence_01",
+        "cs20_cs_evidence_02",
+        "cs20_cs_evidence_03",
+        "cs20_cs_evidence_04",
+        "cs20_cs_evidence_05",
+        "cs20_cs_evidence_06"
+      ],
+      "affected_entities": [
+        "RM_20"
+      ],
+      "exculpatory": false,
+      "jurisdiction": null,
+      "regulatory_requirement": null,
+      "attributed_entity": null,
+      "cross_jurisdictional": false,
+      "mria": false,
+      "board_level": false,
+      "senior_management": false,
+      "repeated_violation_count": 0,
+      "system_generated_anomaly": false,
+      "sanctions_related": false,
+      "agent_status": null,
+      "conflict_type": null,
+      "required_skills": [],
+      "scenario_context": {
+        "override_count": 2,
+        "pressure_phrases": [
+          "expedite this for VIP client",
+          "override the hold"
+        ],
+        "rm_misconduct": true
+      },
+      "affected_jurisdictions": [],
+      "conflicting_regulations": [],
+      "consensus_result": null
+    },
+    "confidence_score": 0.91,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "ab3801e63b45ac22"
+  },
+  {
+    "message_id": "c5126a28-bbf9-47b8-9477-a8a35bbb5acc",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:38:52.771961+00:00",
+    "sender_agent_id": "agent-ru-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "ALERT",
+    "priority": 1,
+    "correlation_id": "2a671d49-9c3f-4d43-a65d-e9326b6ac0e5",
+    "trace_id": "2a671d49-9c3f-4d43-a65d-e9326b6ac0e5",
+    "payload_schema": "alert-v1",
+    "payload": {
+      "violation_type": "trade_based_money_laundering",
+      "severity": "CRITICAL",
+      "detected_at": "2026-08-22T18:38:52.771950+00:00",
+      "evidence_refs": [
+        "cs20_ru_evidence_01",
+        "cs20_ru_evidence_02",
+        "cs20_ru_evidence_03",
+        "cs20_ru_evidence_04",
+        "cs20_ru_evidence_05",
+        "cs20_ru_evidence_06"
+      ],
+      "affected_entities": [
+        "Beneficiary_20"
+      ],
+      "exculpatory": false,
+      "jurisdiction": null,
+      "regulatory_requirement": null,
+      "attributed_entity": null,
+      "cross_jurisdictional": false,
+      "mria": false,
+      "board_level": false,
+      "senior_management": false,
+      "repeated_violation_count": 0,
+      "system_generated_anomaly": false,
+      "sanctions_related": false,
+      "agent_status": null,
+      "conflict_type": null,
+      "required_skills": [],
+      "scenario_context": {
+        "fatf_update_days_ago": 14,
+        "enhanced_due_diligence": true,
+        "regulatory_update_confirmed": true
+      },
+      "affected_jurisdictions": [],
+      "conflicting_regulations": [],
+      "consensus_result": null
+    },
+    "confidence_score": 0.93,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "921327e6c0540fb2"
+  },
+  {
+    "message_id": "6650d819-3173-4dc4-97d3-a90c751170b3",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:38:52.772265+00:00",
+    "sender_agent_id": "agent-rg-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "ALERT",
+    "priority": 1,
+    "correlation_id": "2a671d49-9c3f-4d43-a65d-e9326b6ac0e5",
+    "trace_id": "2a671d49-9c3f-4d43-a65d-e9326b6ac0e5",
+    "payload_schema": "alert-v1",
+    "payload": {
+      "violation_type": "trade_based_money_laundering",
+      "severity": "CRITICAL",
+      "detected_at": "2026-08-22T18:38:52.772255+00:00",
+      "evidence_refs": [
+        "cs20_rg_evidence_01",
+        "cs20_rg_evidence_02",
+        "cs20_rg_evidence_03",
+        "cs20_rg_evidence_04",
+        "cs20_rg_evidence_05",
+        "cs20_rg_evidence_06"
+      ],
+      "affected_entities": [
+        "Board_20"
+      ],
+      "exculpatory": false,
+      "jurisdiction": null,
+      "regulatory_requirement": null,
+      "attributed_entity": null,
+      "cross_jurisdictional": false,
+      "mria": false,
+      "board_level": false,
+      "senior_management": false,
+      "repeated_violation_count": 0,
+      "system_generated_anomaly": false,
+      "sanctions_related": false,
+      "agent_status": null,
+      "conflict_type": null,
+      "required_skills": [],
+      "scenario_context": {
+        "board_level_reporting": true,
+        "evidence_compilation": "20+ items"
+      },
+      "affected_jurisdictions": [],
+      "conflicting_regulations": [],
+      "consensus_result": null
+    },
+    "confidence_score": 0.95,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "ce9fbb1a7e6c1d79"
+  },
+  {
+    "message_id": "f2a149f9-2e13-43b8-b95c-8b510f9551aa",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:38:52.773951+00:00",
+    "sender_agent_id": "agent-rg-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "UPDATE",
+    "priority": 1,
+    "correlation_id": "2a671d49-9c3f-4d43-a65d-e9326b6ac0e5",
+    "trace_id": "2a671d49-9c3f-4d43-a65d-e9326b6ac0e5",
+    "payload_schema": "update-v1",
+    "payload": {
+      "update_type": "report_generation",
+      "entity_id": "CS-20",
+      "changed_fields": {
+        "report_types": [
+          "SAR filing (FinCEN)",
+          "Trade finance review report",
+          "RM conduct investigation report",
+          "Sanctions screening report",
+          "Board-level executive summary"
+        ],
+        "status": "DRAFT_REQUIRES_HUMAN_AUTHORIZATION",
+        "regulations": [
+          "BSA/AML",
+          "OFAC",
+          "Trade-Based Money Laundering Red Flags",
+          "FATF Recommendations"
+        ]
+      },
+      "previous_values": {},
+      "consensus_result": null,
+      "human_decision": null,
+      "feedback": null,
+      "reason": null,
+      "evidence_refs": []
+    },
+    "confidence_score": null,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "75e13944abe9ea80"
+  }
+]

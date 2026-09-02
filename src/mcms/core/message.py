@@ -31,6 +31,24 @@ class AlertPayload(BaseModel):
     detected_at: str
     evidence_refs: list[str]
     affected_entities: list[str]
+    exculpatory: bool = False
+    jurisdiction: str | None = None
+    regulatory_requirement: str | None = None
+    attributed_entity: str | None = None
+    cross_jurisdictional: bool = False
+    mria: bool = False
+    board_level: bool = False
+    senior_management: bool = False
+    repeated_violation_count: int = Field(default=0, ge=0)
+    system_generated_anomaly: bool = False
+    sanctions_related: bool = False
+    agent_status: Literal["HEALTHY", "DEGRADED", "STOPPED"] | None = None
+    conflict_type: str | None = None
+    required_skills: list[str] = Field(default_factory=list)
+    scenario_context: dict[str, Any] = Field(default_factory=dict)
+    affected_jurisdictions: list[str] = Field(default_factory=list)
+    conflicting_regulations: list[str] = Field(default_factory=list)
+    consensus_result: dict[str, Any] | None = None
 
     @field_validator("detected_at")
     @classmethod
@@ -52,6 +70,22 @@ class QueryPayload(BaseModel):
     response_schema_required: str
 
 
+class ConsensusPayload(BaseModel):
+    """Consensus result embedded in an UPDATE message."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    consensus_confidence: float = Field(ge=0.0, le=1.0)
+    consensus_severity: Literal["CRITICAL", "HIGH", "MEDIUM", "LOW", "NO_ALERT"]
+    conflict_type: str | None = None
+    contributing_agents: list[str]
+    dissenting_agents: list[str]
+    resolution_method: Literal["bayesian", "dempster_shafer", "hybrid", "escalation"]
+    escalation_required: bool
+    escalation_reason: str | None = None
+    audit_trail_ref: str
+
+
 class ResponsePayload(BaseModel):
     """Payload for RESPONSE messages."""
 
@@ -61,6 +95,7 @@ class ResponsePayload(BaseModel):
     status: Literal["SUCCESS", "PARTIAL", "FAILED"]
     result_data: dict[str, Any]
     errors: list[str]
+    resolution_method: Literal["bayesian", "dempster_shafer", "hybrid", "escalation"] | None = None
 
     @field_validator("query_id")
     @classmethod
@@ -74,6 +109,34 @@ class ResponsePayload(BaseModel):
         return v
 
 
+class HumanDecisionPayload(BaseModel):
+    """Human disposition carried by an UPDATE message."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    decision: Literal["approve", "reject", "override", "request_more_info"]
+    justification: str
+    decided_by: str
+    decided_at: str
+    confidence_after: float = Field(ge=0.0, le=1.0)
+
+
+class FeedbackPayload(BaseModel):
+    """Labeled feedback carried by an UPDATE message."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    decision_id: str
+    alert_id: str
+    agent_id: str
+    violation_type: str
+    human_decision: Literal["approve", "reject", "override", "request_more_info"]
+    confidence_before: float = Field(ge=0.0, le=1.0)
+    confidence_after: float | None = Field(default=None, ge=0.0, le=1.0)
+    justification: str
+    timestamp: str
+
+
 class UpdatePayload(BaseModel):
     """Payload for UPDATE messages."""
 
@@ -83,6 +146,11 @@ class UpdatePayload(BaseModel):
     entity_id: str
     changed_fields: dict[str, Any]
     previous_values: dict[str, Any]
+    consensus_result: ConsensusPayload | None = None
+    human_decision: HumanDecisionPayload | None = None
+    feedback: FeedbackPayload | None = None
+    reason: str | None = None
+    evidence_refs: list[str] = Field(default_factory=list)
 
 
 class HeartbeatPayload(BaseModel):
@@ -110,9 +178,14 @@ class EscalationPayload(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     escalation_reason: str
-    recommended_tier: Literal["TIER_1", "TIER_2", "TIER_3"]
+    recommended_tier: Literal["TIER_1", "TIER_2", "TIER_3", "TIER_4"]
     decision_support_package_ref: str
     human_assignee_role: str
+    conflict_type: str | None = None
+    assigned_to: str | None = None
+    tier: int | None = Field(default=None, ge=1, le=4)
+    sla_deadline: str | None = None
+    status: Literal["open", "in_review", "resolved", "auto_escalated", "overridden"] | None = None
 
 
 PayloadType = (
@@ -122,6 +195,9 @@ PayloadType = (
     | UpdatePayload
     | HeartbeatPayload
     | EscalationPayload
+    | ConsensusPayload
+    | HumanDecisionPayload
+    | FeedbackPayload
     | dict[str, Any]
 )
 
@@ -141,7 +217,7 @@ class BaseMessage(BaseModel):
     correlation_id: str | None = Field(default=None, description="UUID v4 correlation ID.")
     trace_id: str = Field(description="UUID v4 distributed trace ID.")
     payload_schema: str = Field(description="Pattern matching payload schema.")
-    payload: dict[str, Any] = Field(description="Structured message payload dictionary.")
+    payload: PayloadType = Field(description="Structured message payload dictionary.")
     confidence_score: float | None = Field(default=None, ge=0.0, le=1.0)
     ttl_seconds: int = Field(ge=1, le=86400)
     retry_count: int = Field(default=0, ge=0)
@@ -247,20 +323,23 @@ class BaseMessage(BaseModel):
                     f"correlation_id is required for message_type '{self.message_type}'"
                 )
 
-        # Validate typed payload matching message_type
+        # Validate the typed payload matching message_type, then normalize it
+        # back to a dictionary to preserve the Phase 1–2 runtime contract.
         try:
+            typed_payload: BaseModel
             if self.message_type == "ALERT":
-                AlertPayload.model_validate(self.payload)
+                typed_payload = AlertPayload.model_validate(self.payload)
             elif self.message_type == "QUERY":
-                QueryPayload.model_validate(self.payload)
+                typed_payload = QueryPayload.model_validate(self.payload)
             elif self.message_type == "RESPONSE":
-                ResponsePayload.model_validate(self.payload)
+                typed_payload = ResponsePayload.model_validate(self.payload)
             elif self.message_type == "UPDATE":
-                UpdatePayload.model_validate(self.payload)
+                typed_payload = UpdatePayload.model_validate(self.payload)
             elif self.message_type == "HEARTBEAT":
-                HeartbeatPayload.model_validate(self.payload)
-            elif self.message_type == "ESCALATION":
-                EscalationPayload.model_validate(self.payload)
+                typed_payload = HeartbeatPayload.model_validate(self.payload)
+            else:
+                typed_payload = EscalationPayload.model_validate(self.payload)
+            self.payload = typed_payload.model_dump(mode="json")
         except Exception as err:
             raise MessageValidationError(
                 f"Payload validation failed for type '{self.message_type}': {err}",

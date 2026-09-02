@@ -1,0 +1,92 @@
+[
+  {
+    "message_id": "f795cc1c-ee50-40b2-879a-44007d68ef5d",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:27:01.273899+00:00",
+    "sender_agent_id": "agent-tm-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "ALERT",
+    "priority": 2,
+    "correlation_id": "a4551896-8b5e-4837-a290-8af87b01e3ef",
+    "trace_id": "a4551896-8b5e-4837-a290-8af87b01e3ef",
+    "payload_schema": "alert-v1",
+    "payload": {
+      "violation_type": "spoofing",
+      "severity": "HIGH",
+      "detected_at": "2026-08-22T18:27:01.273884+00:00",
+      "evidence_refs": [
+        "spoofing_signature_001",
+        "cancel_burst_047"
+      ],
+      "affected_entities": [
+        "crude_oil_desk"
+      ],
+      "exculpatory": false,
+      "jurisdiction": null,
+      "regulatory_requirement": null,
+      "attributed_entity": null,
+      "cross_jurisdictional": false,
+      "mria": false,
+      "board_level": false,
+      "senior_management": false,
+      "repeated_violation_count": 0,
+      "system_generated_anomaly": false,
+      "sanctions_related": false,
+      "agent_status": null,
+      "conflict_type": null,
+      "required_skills": [],
+      "scenario_context": {
+        "repetitions": 47,
+        "cancel_latency_ms": "200-500",
+        "opposite_side_execution": true
+      },
+      "consensus_result": null
+    },
+    "confidence_score": 0.88,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "f56c6f803e6cf59d"
+  },
+  {
+    "message_id": "6f6a7de7-86f9-4209-98a0-505319df3bac",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:27:01.275287+00:00",
+    "sender_agent_id": "agent-rg-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "UPDATE",
+    "priority": 2,
+    "correlation_id": "a4551896-8b5e-4837-a290-8af87b01e3ef",
+    "trace_id": "a4551896-8b5e-4837-a290-8af87b01e3ef",
+    "payload_schema": "update-v1",
+    "payload": {
+      "update_type": "report_generation",
+      "entity_id": "CS-02",
+      "changed_fields": {
+        "report_types": [
+          "CFTC referral draft",
+          "Internal surveillance report"
+        ],
+        "status": "DRAFT_REQUIRES_HUMAN_AUTHORIZATION",
+        "regulations": [
+          "Dodd-Frank Act Section 747",
+          "CEA Section 4c(a)(5)",
+          "CME Rule 575"
+        ]
+      },
+      "previous_values": {},
+      "consensus_result": null,
+      "human_decision": null,
+      "feedback": null,
+      "reason": null,
+      "evidence_refs": []
+    },
+    "confidence_score": null,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "b76b07679e106901"
+  }
+]

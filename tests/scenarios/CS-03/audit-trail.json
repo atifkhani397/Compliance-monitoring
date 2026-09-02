@@ -1,0 +1,327 @@
+[
+  {
+    "index": 0,
+    "timestamp": "2026-08-22T18:27:01.331154+00:00",
+    "previous_hash": "e3eba8b0b470c0e19ed44237f1302e2fe392b8138b5ef82a6031636dc371ad46",
+    "current_hash": "6be2833b3833b7a42dddc200950e66bc77b40c6690f1302400b032e1274d6fec",
+    "data": {
+      "action": "DETECTION",
+      "scenario_id": "CS-03",
+      "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+      "agent_id": "agent-cs-001",
+      "confidence": 0.89,
+      "severity": "HIGH"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+    "action_type": "DETECTION",
+    "action_data": {
+      "scenario_id": "CS-03",
+      "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+      "agent_id": "agent-cs-001",
+      "confidence": 0.89,
+      "severity": "HIGH"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 1,
+    "timestamp": "2026-08-22T18:27:01.331208+00:00",
+    "previous_hash": "6be2833b3833b7a42dddc200950e66bc77b40c6690f1302400b032e1274d6fec",
+    "current_hash": "d75d41ec94b4cac795b9caed285c71ed903645c46b628800862d8830cda479da",
+    "data": {
+      "action": "MESSAGE_SENT",
+      "scenario_id": "CS-03",
+      "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+      "agent_id": "agent-cs-001",
+      "message_id": "40e27a36-8fdb-4be2-86ab-7f84be6c3820"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+    "action_type": "MESSAGE_SENT",
+    "action_data": {
+      "scenario_id": "CS-03",
+      "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+      "agent_id": "agent-cs-001",
+      "message_id": "40e27a36-8fdb-4be2-86ab-7f84be6c3820"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 2,
+    "timestamp": "2026-08-22T18:27:01.331243+00:00",
+    "previous_hash": "d75d41ec94b4cac795b9caed285c71ed903645c46b628800862d8830cda479da",
+    "current_hash": "9de81f986a8b5427483e0a2da88d6ec2f8b831707145bad449232623c0ca1d7c",
+    "data": {
+      "action": "MESSAGE_RECEIVED",
+      "scenario_id": "CS-03",
+      "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+      "agent_id": "orchestrator",
+      "message_id": "40e27a36-8fdb-4be2-86ab-7f84be6c3820"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+    "action_type": "MESSAGE_RECEIVED",
+    "action_data": {
+      "scenario_id": "CS-03",
+      "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+      "agent_id": "orchestrator",
+      "message_id": "40e27a36-8fdb-4be2-86ab-7f84be6c3820"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 3,
+    "timestamp": "2026-08-22T18:27:01.331707+00:00",
+    "previous_hash": "9de81f986a8b5427483e0a2da88d6ec2f8b831707145bad449232623c0ca1d7c",
+    "current_hash": "eb770f9a7669810f3857fb56ef28d8ca81e2119fa9703e118b5d589d3e5a5e36",
+    "data": {
+      "action": "DETECTION",
+      "scenario_id": "CS-03",
+      "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+      "agent_id": "agent-tm-001",
+      "confidence": 0.75,
+      "severity": "MEDIUM"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+    "action_type": "DETECTION",
+    "action_data": {
+      "scenario_id": "CS-03",
+      "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+      "agent_id": "agent-tm-001",
+      "confidence": 0.75,
+      "severity": "MEDIUM"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 4,
+    "timestamp": "2026-08-22T18:27:01.331756+00:00",
+    "previous_hash": "eb770f9a7669810f3857fb56ef28d8ca81e2119fa9703e118b5d589d3e5a5e36",
+    "current_hash": "cdf3f581c65e5651199467bc02b745d4af45189f88c2dc0f0d5ffa77969208b1",
+    "data": {
+      "action": "MESSAGE_SENT",
+      "scenario_id": "CS-03",
+      "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+      "agent_id": "agent-tm-001",
+      "message_id": "4490b687-d1df-486e-b934-b45feb76e06f"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+    "action_type": "MESSAGE_SENT",
+    "action_data": {
+      "scenario_id": "CS-03",
+      "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+      "agent_id": "agent-tm-001",
+      "message_id": "4490b687-d1df-486e-b934-b45feb76e06f"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 5,
+    "timestamp": "2026-08-22T18:27:01.331787+00:00",
+    "previous_hash": "cdf3f581c65e5651199467bc02b745d4af45189f88c2dc0f0d5ffa77969208b1",
+    "current_hash": "4a04910f2c4bfa6d5fd2653684bb100f83944629eef41d0cbd719403007cc60f",
+    "data": {
+      "action": "MESSAGE_RECEIVED",
+      "scenario_id": "CS-03",
+      "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+      "agent_id": "orchestrator",
+      "message_id": "4490b687-d1df-486e-b934-b45feb76e06f"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+    "action_type": "MESSAGE_RECEIVED",
+    "action_data": {
+      "scenario_id": "CS-03",
+      "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+      "agent_id": "orchestrator",
+      "message_id": "4490b687-d1df-486e-b934-b45feb76e06f"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 6,
+    "timestamp": "2026-08-22T18:27:01.332960+00:00",
+    "previous_hash": "4a04910f2c4bfa6d5fd2653684bb100f83944629eef41d0cbd719403007cc60f",
+    "current_hash": "5985a0960ace70b7b65f85b22bbf2f9ec6ecfecc6bf7bb13fdeabc0f6db37c9d",
+    "data": {
+      "action": "CONFLICT_RESOLUTION",
+      "message_ids": [
+        "40e27a36-8fdb-4be2-86ab-7f84be6c3820",
+        "4490b687-d1df-486e-b934-b45feb76e06f"
+      ],
+      "conflict_type": "B",
+      "resolution_method": "hybrid",
+      "consensus_confidence": "0.928252468213659536116036841",
+      "escalation_required": false,
+      "audit_trail_ref": "71a524ec-7580-4829-a6a4-ee0ced817deb"
+    },
+    "agent_id": "conflict-resolver",
+    "trace_id": null,
+    "action_type": null,
+    "action_data": null,
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 7,
+    "timestamp": "2026-08-22T18:27:01.333976+00:00",
+    "previous_hash": "5985a0960ace70b7b65f85b22bbf2f9ec6ecfecc6bf7bb13fdeabc0f6db37c9d",
+    "current_hash": "dfacb58dd4b30cffb9d0b03bb159b1c79e55970e0449703df94ef4cf4c413072",
+    "data": {
+      "action": "CONSENSUS_RESOLUTION",
+      "scenario_id": "CS-03",
+      "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+      "confidence": "0.928252468213659536116036841",
+      "severity": "HIGH",
+      "conflict_type": "B",
+      "method": "hybrid"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+    "action_type": "CONSENSUS_RESOLUTION",
+    "action_data": {
+      "scenario_id": "CS-03",
+      "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+      "confidence": "0.928252468213659536116036841",
+      "severity": "HIGH",
+      "conflict_type": "B",
+      "method": "hybrid"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 8,
+    "timestamp": "2026-08-22T18:27:01.334164+00:00",
+    "previous_hash": "dfacb58dd4b30cffb9d0b03bb159b1c79e55970e0449703df94ef4cf4c413072",
+    "current_hash": "73dec4ebfb1be695e878dca7aae3dd90917e0760eb139253c85a4750ff9c29ac",
+    "data": {
+      "action": "ESCALATION_CREATED",
+      "escalation_id": "c0526474-fb6a-42cb-af9d-5935ee5dad73",
+      "alert_id": "40e27a36-8fdb-4be2-86ab-7f84be6c3820",
+      "tier": 2,
+      "assigned_to": "unassigned",
+      "status": "open",
+      "reason": "Phase 6 CS-03: Unsuitable Investment Recommendation requires human review"
+    },
+    "agent_id": "escalation-service",
+    "trace_id": null,
+    "action_type": null,
+    "action_data": null,
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 9,
+    "timestamp": "2026-08-22T18:27:01.334512+00:00",
+    "previous_hash": "73dec4ebfb1be695e878dca7aae3dd90917e0760eb139253c85a4750ff9c29ac",
+    "current_hash": "af8e417be688fbd422f6d664d88ecbe07587fe5796b27966d0658fe2f4e397fd",
+    "data": {
+      "action": "ESCALATION",
+      "scenario_id": "CS-03",
+      "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+      "escalation_id": "c0526474-fb6a-42cb-af9d-5935ee5dad73",
+      "tier": 2,
+      "sla_deadline": "2026-08-22T20:27:01.334116+00:00"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+    "action_type": "ESCALATION",
+    "action_data": {
+      "scenario_id": "CS-03",
+      "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+      "escalation_id": "c0526474-fb6a-42cb-af9d-5935ee5dad73",
+      "tier": 2,
+      "sla_deadline": "2026-08-22T20:27:01.334116+00:00"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 10,
+    "timestamp": "2026-08-22T18:27:01.334553+00:00",
+    "previous_hash": "af8e417be688fbd422f6d664d88ecbe07587fe5796b27966d0658fe2f4e397fd",
+    "current_hash": "2e1629d393003adbc31a7bf850fe7a00afce516650f4ff87e8b2c6376102e47e",
+    "data": {
+      "action": "DECISION_SUPPORT_PACKAGE",
+      "scenario_id": "CS-03",
+      "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+      "escalation_id": "c0526474-fb6a-42cb-af9d-5935ee5dad73",
+      "evidence_count": 2
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+    "action_type": "DECISION_SUPPORT_PACKAGE",
+    "action_data": {
+      "scenario_id": "CS-03",
+      "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+      "escalation_id": "c0526474-fb6a-42cb-af9d-5935ee5dad73",
+      "evidence_count": 2
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 11,
+    "timestamp": "2026-08-22T18:27:01.334674+00:00",
+    "previous_hash": "2e1629d393003adbc31a7bf850fe7a00afce516650f4ff87e8b2c6376102e47e",
+    "current_hash": "2880bc205e3ff40c5fcb69a5e8f5f3b85e97f7d9e279c721a24e8c1fc4f81831",
+    "data": {
+      "action": "REPORT_GENERATION",
+      "scenario_id": "CS-03",
+      "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+      "report_types": [
+        "FINRA referral",
+        "Client remediation plan",
+        "Advisor disciplinary report"
+      ],
+      "status": "DRAFT_REQUIRES_HUMAN_AUTHORIZATION"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+    "action_type": "REPORT_GENERATION",
+    "action_data": {
+      "scenario_id": "CS-03",
+      "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+      "report_types": [
+        "FINRA referral",
+        "Client remediation plan",
+        "Advisor disciplinary report"
+      ],
+      "status": "DRAFT_REQUIRES_HUMAN_AUTHORIZATION"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 12,
+    "timestamp": "2026-08-22T18:27:01.334703+00:00",
+    "previous_hash": "2880bc205e3ff40c5fcb69a5e8f5f3b85e97f7d9e279c721a24e8c1fc4f81831",
+    "current_hash": "9d059189d4c296cb8727859e0f31f9562825203c5edf8d97ec04463695d38211",
+    "data": {
+      "action": "REPORT_AUTHORIZATION_REQUIRED",
+      "scenario_id": "CS-03",
+      "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+      "report_id": "12a2cdea-4136-4d47-a796-b135ac2d8cfe"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+    "action_type": "REPORT_AUTHORIZATION_REQUIRED",
+    "action_data": {
+      "scenario_id": "CS-03",
+      "trace_id": "6860610b-6b88-4832-b8b1-04fa69bcd855",
+      "report_id": "12a2cdea-4136-4d47-a796-b135ac2d8cfe"
+    },
+    "signature": null,
+    "nonce": null
+  }
+]

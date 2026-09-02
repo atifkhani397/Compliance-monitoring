@@ -1,0 +1,76 @@
+[
+  {
+    "message_id": "f3f212e1-b420-471f-9496-f6038c5169c6",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:38:52.727489+00:00",
+    "sender_agent_id": "agent-tm-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "UPDATE",
+    "priority": 2,
+    "correlation_id": "f1ed883c-9626-4705-8c9e-87f8c7deeeab",
+    "trace_id": "f1ed883c-9626-4705-8c9e-87f8c7deeeab",
+    "payload_schema": "update-v1",
+    "payload": {
+      "update_type": "false_positive_suppressed",
+      "entity_id": "CS-18",
+      "changed_fields": {
+        "confidence": 0.15,
+        "reason": "block_trade_verified"
+      },
+      "previous_values": {
+        "confidence": 0.65
+      },
+      "consensus_result": null,
+      "human_decision": null,
+      "feedback": null,
+      "reason": "block_trade_verified",
+      "evidence_refs": [
+        "block_desk_confirm_001",
+        "rebalancing_program_002"
+      ]
+    },
+    "confidence_score": null,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "9470d60b51212183"
+  },
+  {
+    "message_id": "668b9fef-c47c-43d8-b8b3-466aa370ebe7",
+    "protocol_version": "1.0.0",
+    "timestamp": "2026-08-22T18:38:52.727625+00:00",
+    "sender_agent_id": "agent-rg-001",
+    "recipient_agent_id": "agent-rg-001",
+    "message_type": "UPDATE",
+    "priority": 2,
+    "correlation_id": "f1ed883c-9626-4705-8c9e-87f8c7deeeab",
+    "trace_id": "f1ed883c-9626-4705-8c9e-87f8c7deeeab",
+    "payload_schema": "update-v1",
+    "payload": {
+      "update_type": "report_generation",
+      "entity_id": "CS-18",
+      "changed_fields": {
+        "report_types": [
+          "No report generated \u2014 false-positive suppression record"
+        ],
+        "status": "DRAFT_REQUIRES_HUMAN_AUTHORIZATION",
+        "regulations": [
+          "N/A \u2014 negative test"
+        ]
+      },
+      "previous_values": {},
+      "consensus_result": null,
+      "human_decision": null,
+      "feedback": null,
+      "reason": null,
+      "evidence_refs": []
+    },
+    "confidence_score": null,
+    "ttl_seconds": 3600,
+    "retry_count": 0,
+    "audit_classification": "REGULATORY",
+    "sender_signature": "cGhhc2U2LXN5bnRoZXRpYy1wbGFjZWhvbGRlcg==",
+    "nonce": "cb542bb0b8f7af53"
+  }
+]

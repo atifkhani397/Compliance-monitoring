@@ -1,0 +1,199 @@
+[
+  {
+    "index": 0,
+    "timestamp": "2026-08-22T18:27:01.406972+00:00",
+    "previous_hash": "e3eba8b0b470c0e19ed44237f1302e2fe392b8138b5ef82a6031636dc371ad46",
+    "current_hash": "524770f5423e82f35270ce7f1154b1a4657d35f3b3129ef2402ae101cfbbf01e",
+    "data": {
+      "action": "DETECTION",
+      "scenario_id": "CS-07",
+      "trace_id": "416a2b7b-5ed6-42b1-b9ab-5c655eca28e7",
+      "agent_id": "agent-ru-001",
+      "confidence": null,
+      "severity": null
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "416a2b7b-5ed6-42b1-b9ab-5c655eca28e7",
+    "action_type": "DETECTION",
+    "action_data": {
+      "scenario_id": "CS-07",
+      "trace_id": "416a2b7b-5ed6-42b1-b9ab-5c655eca28e7",
+      "agent_id": "agent-ru-001",
+      "confidence": null,
+      "severity": null
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 1,
+    "timestamp": "2026-08-22T18:27:01.407116+00:00",
+    "previous_hash": "524770f5423e82f35270ce7f1154b1a4657d35f3b3129ef2402ae101cfbbf01e",
+    "current_hash": "00f2be9914b7fa44a2041d4550c773e6a262bcc97db712d1b7b53c2e267d4ead",
+    "data": {
+      "action": "REGULATORY_UPDATE",
+      "scenario_id": "CS-07",
+      "trace_id": "416a2b7b-5ed6-42b1-b9ab-5c655eca28e7",
+      "message_id": "f7a908a1-57a1-4b90-a935-cfe61251d6c0",
+      "confidence": null
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "416a2b7b-5ed6-42b1-b9ab-5c655eca28e7",
+    "action_type": "REGULATORY_UPDATE",
+    "action_data": {
+      "scenario_id": "CS-07",
+      "trace_id": "416a2b7b-5ed6-42b1-b9ab-5c655eca28e7",
+      "message_id": "f7a908a1-57a1-4b90-a935-cfe61251d6c0",
+      "confidence": null
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 2,
+    "timestamp": "2026-08-22T18:27:01.407297+00:00",
+    "previous_hash": "00f2be9914b7fa44a2041d4550c773e6a262bcc97db712d1b7b53c2e267d4ead",
+    "current_hash": "012f993035eba875bad1b1a0ed1c360e8ca476cddcdb8afcb95c3a3ea47b8e10",
+    "data": {
+      "action": "ESCALATION_CREATED",
+      "escalation_id": "d331d73a-fcf7-4f2f-9878-38d90b5da8c1",
+      "alert_id": "f7a908a1-57a1-4b90-a935-cfe61251d6c0",
+      "tier": 1,
+      "assigned_to": "unassigned",
+      "status": "open",
+      "reason": "Phase 6 CS-07: Regulatory Change Impact \u2014 New Margin Requirements requires human review"
+    },
+    "agent_id": "escalation-service",
+    "trace_id": null,
+    "action_type": null,
+    "action_data": null,
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 3,
+    "timestamp": "2026-08-22T18:27:01.407662+00:00",
+    "previous_hash": "012f993035eba875bad1b1a0ed1c360e8ca476cddcdb8afcb95c3a3ea47b8e10",
+    "current_hash": "b9480595ab32096551279b405ed47ed97c8fae2e75c52a9246b8bd8b7df15d96",
+    "data": {
+      "action": "ESCALATION",
+      "scenario_id": "CS-07",
+      "trace_id": "416a2b7b-5ed6-42b1-b9ab-5c655eca28e7",
+      "escalation_id": "d331d73a-fcf7-4f2f-9878-38d90b5da8c1",
+      "tier": 1,
+      "sla_deadline": "2026-08-22T22:27:01.407252+00:00"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "416a2b7b-5ed6-42b1-b9ab-5c655eca28e7",
+    "action_type": "ESCALATION",
+    "action_data": {
+      "scenario_id": "CS-07",
+      "trace_id": "416a2b7b-5ed6-42b1-b9ab-5c655eca28e7",
+      "escalation_id": "d331d73a-fcf7-4f2f-9878-38d90b5da8c1",
+      "tier": 1,
+      "sla_deadline": "2026-08-22T22:27:01.407252+00:00"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 4,
+    "timestamp": "2026-08-22T18:27:01.407696+00:00",
+    "previous_hash": "b9480595ab32096551279b405ed47ed97c8fae2e75c52a9246b8bd8b7df15d96",
+    "current_hash": "32251d1e91934d9c0f60923368dbaeed053199b902b3577bf03a57bb2007701f",
+    "data": {
+      "action": "DECISION_SUPPORT_PACKAGE",
+      "scenario_id": "CS-07",
+      "trace_id": "416a2b7b-5ed6-42b1-b9ab-5c655eca28e7",
+      "escalation_id": "d331d73a-fcf7-4f2f-9878-38d90b5da8c1",
+      "evidence_count": 2
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "416a2b7b-5ed6-42b1-b9ab-5c655eca28e7",
+    "action_type": "DECISION_SUPPORT_PACKAGE",
+    "action_data": {
+      "scenario_id": "CS-07",
+      "trace_id": "416a2b7b-5ed6-42b1-b9ab-5c655eca28e7",
+      "escalation_id": "d331d73a-fcf7-4f2f-9878-38d90b5da8c1",
+      "evidence_count": 2
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 5,
+    "timestamp": "2026-08-22T18:27:01.407799+00:00",
+    "previous_hash": "32251d1e91934d9c0f60923368dbaeed053199b902b3577bf03a57bb2007701f",
+    "current_hash": "b90228f664d68c63b5854ec02ba9396735654ba8b9da019e2428d36b4eadcf26",
+    "data": {
+      "action": "REPORT_GENERATION",
+      "scenario_id": "CS-07",
+      "trace_id": "416a2b7b-5ed6-42b1-b9ab-5c655eca28e7",
+      "report_types": [
+        "Impact assessment report",
+        "Implementation timeline",
+        "Stakeholder notification"
+      ],
+      "status": "DRAFT_REQUIRES_HUMAN_AUTHORIZATION"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "416a2b7b-5ed6-42b1-b9ab-5c655eca28e7",
+    "action_type": "REPORT_GENERATION",
+    "action_data": {
+      "scenario_id": "CS-07",
+      "trace_id": "416a2b7b-5ed6-42b1-b9ab-5c655eca28e7",
+      "report_types": [
+        "Impact assessment report",
+        "Implementation timeline",
+        "Stakeholder notification"
+      ],
+      "status": "DRAFT_REQUIRES_HUMAN_AUTHORIZATION"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 6,
+    "timestamp": "2026-08-22T18:27:01.407839+00:00",
+    "previous_hash": "b90228f664d68c63b5854ec02ba9396735654ba8b9da019e2428d36b4eadcf26",
+    "current_hash": "c6468e5057ef615e42521c749ff7a70b5fb9d143dbc71c2ae45cd6e0b64d5d41",
+    "data": {
+      "action": "REPORT_AUTHORIZATION_REQUIRED",
+      "scenario_id": "CS-07",
+      "trace_id": "416a2b7b-5ed6-42b1-b9ab-5c655eca28e7",
+      "report_id": "d9426dc8-a87e-4ce7-83f5-b87fb3041e10"
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "416a2b7b-5ed6-42b1-b9ab-5c655eca28e7",
+    "action_type": "REPORT_AUTHORIZATION_REQUIRED",
+    "action_data": {
+      "scenario_id": "CS-07",
+      "trace_id": "416a2b7b-5ed6-42b1-b9ab-5c655eca28e7",
+      "report_id": "d9426dc8-a87e-4ce7-83f5-b87fb3041e10"
+    },
+    "signature": null,
+    "nonce": null
+  },
+  {
+    "index": 7,
+    "timestamp": "2026-08-22T18:27:01.407858+00:00",
+    "previous_hash": "c6468e5057ef615e42521c749ff7a70b5fb9d143dbc71c2ae45cd6e0b64d5d41",
+    "current_hash": "f4e9e145e64a05c515f7b9e77ba8fb23809e7ec38d3ee148e4bfeabbe29fc0eb",
+    "data": {
+      "action": "TRACE_CHECKPOINT",
+      "scenario_id": "CS-07",
+      "trace_id": "416a2b7b-5ed6-42b1-b9ab-5c655eca28e7",
+      "sequence": 7
+    },
+    "agent_id": "phase6-scenario-runner",
+    "trace_id": "416a2b7b-5ed6-42b1-b9ab-5c655eca28e7",
+    "action_type": "TRACE_CHECKPOINT",
+    "action_data": {
+      "scenario_id": "CS-07",
+      "trace_id": "416a2b7b-5ed6-42b1-b9ab-5c655eca28e7",
+      "sequence": 7
+    },
+    "signature": null,
+    "nonce": null
+  }
+]

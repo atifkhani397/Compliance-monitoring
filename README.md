@@ -90,7 +90,7 @@ graph TD
 ### 2. Running the Full Test Suite & Type Checker
 
 ```bash
-# Run unit, security, India compliance, and scenario tests (150+ test cases)
+# Run unit, security, India compliance, and scenario tests (230+ test cases)
 python -m pytest -v --tb=short
 
 # Verify strict type safety across all source files

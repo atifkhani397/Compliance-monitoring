@@ -1,8 +1,869 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "MACMSInterAgentMessage",
-  "description": "JSON Schema draft-07 specification for MACMS inter-agent communication protocol messages.",
-  "type": "object",
+  "$defs": {
+    "AlertPayload": {
+      "additionalProperties": false,
+      "description": "Payload for ALERT messages.",
+      "properties": {
+        "violation_type": {
+          "title": "Violation Type",
+          "type": "string"
+        },
+        "severity": {
+          "enum": [
+            "LOW",
+            "MEDIUM",
+            "HIGH",
+            "CRITICAL"
+          ],
+          "title": "Severity",
+          "type": "string"
+        },
+        "detected_at": {
+          "title": "Detected At",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "affected_entities": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Affected Entities",
+          "type": "array"
+        },
+        "exculpatory": {
+          "default": false,
+          "title": "Exculpatory",
+          "type": "boolean"
+        },
+        "jurisdiction": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Jurisdiction"
+        },
+        "regulatory_requirement": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Regulatory Requirement"
+        },
+        "attributed_entity": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Attributed Entity"
+        },
+        "cross_jurisdictional": {
+          "default": false,
+          "title": "Cross Jurisdictional",
+          "type": "boolean"
+        },
+        "mria": {
+          "default": false,
+          "title": "Mria",
+          "type": "boolean"
+        },
+        "board_level": {
+          "default": false,
+          "title": "Board Level",
+          "type": "boolean"
+        },
+        "senior_management": {
+          "default": false,
+          "title": "Senior Management",
+          "type": "boolean"
+        },
+        "repeated_violation_count": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Repeated Violation Count",
+          "type": "integer"
+        },
+        "system_generated_anomaly": {
+          "default": false,
+          "title": "System Generated Anomaly",
+          "type": "boolean"
+        },
+        "sanctions_related": {
+          "default": false,
+          "title": "Sanctions Related",
+          "type": "boolean"
+        },
+        "agent_status": {
+          "anyOf": [
+            {
+              "enum": [
+                "HEALTHY",
+                "DEGRADED",
+                "STOPPED"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Agent Status"
+        },
+        "conflict_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Conflict Type"
+        },
+        "required_skills": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Skills",
+          "type": "array"
+        },
+        "scenario_context": {
+          "additionalProperties": true,
+          "title": "Scenario Context",
+          "type": "object"
+        },
+        "affected_jurisdictions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Affected Jurisdictions",
+          "type": "array"
+        },
+        "conflicting_regulations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Conflicting Regulations",
+          "type": "array"
+        },
+        "consensus_result": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Consensus Result"
+        }
+      },
+      "required": [
+        "violation_type",
+        "severity",
+        "detected_at",
+        "evidence_refs",
+        "affected_entities"
+      ],
+      "title": "AlertPayload",
+      "type": "object"
+    },
+    "ConsensusPayload": {
+      "additionalProperties": false,
+      "description": "Consensus result embedded in an UPDATE message.",
+      "properties": {
+        "consensus_confidence": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Consensus Confidence",
+          "type": "number"
+        },
+        "consensus_severity": {
+          "enum": [
+            "CRITICAL",
+            "HIGH",
+            "MEDIUM",
+            "LOW",
+            "NO_ALERT"
+          ],
+          "title": "Consensus Severity",
+          "type": "string"
+        },
+        "conflict_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Conflict Type"
+        },
+        "contributing_agents": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Contributing Agents",
+          "type": "array"
+        },
+        "dissenting_agents": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Dissenting Agents",
+          "type": "array"
+        },
+        "resolution_method": {
+          "enum": [
+            "bayesian",
+            "dempster_shafer",
+            "hybrid",
+            "escalation"
+          ],
+          "title": "Resolution Method",
+          "type": "string"
+        },
+        "escalation_required": {
+          "title": "Escalation Required",
+          "type": "boolean"
+        },
+        "escalation_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Escalation Reason"
+        },
+        "audit_trail_ref": {
+          "title": "Audit Trail Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "consensus_confidence",
+        "consensus_severity",
+        "contributing_agents",
+        "dissenting_agents",
+        "resolution_method",
+        "escalation_required",
+        "audit_trail_ref"
+      ],
+      "title": "ConsensusPayload",
+      "type": "object"
+    },
+    "EscalationPayload": {
+      "additionalProperties": false,
+      "description": "Payload for ESCALATION messages.",
+      "properties": {
+        "escalation_reason": {
+          "title": "Escalation Reason",
+          "type": "string"
+        },
+        "recommended_tier": {
+          "enum": [
+            "TIER_1",
+            "TIER_2",
+            "TIER_3",
+            "TIER_4"
+          ],
+          "title": "Recommended Tier",
+          "type": "string"
+        },
+        "decision_support_package_ref": {
+          "title": "Decision Support Package Ref",
+          "type": "string"
+        },
+        "human_assignee_role": {
+          "title": "Human Assignee Role",
+          "type": "string"
+        },
+        "conflict_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Conflict Type"
+        },
+        "assigned_to": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Assigned To"
+        },
+        "tier": {
+          "anyOf": [
+            {
+              "maximum": 4,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tier"
+        },
+        "sla_deadline": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sla Deadline"
+        },
+        "status": {
+          "anyOf": [
+            {
+              "enum": [
+                "open",
+                "in_review",
+                "resolved",
+                "auto_escalated",
+                "overridden"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Status"
+        }
+      },
+      "required": [
+        "escalation_reason",
+        "recommended_tier",
+        "decision_support_package_ref",
+        "human_assignee_role"
+      ],
+      "title": "EscalationPayload",
+      "type": "object"
+    },
+    "FeedbackPayload": {
+      "additionalProperties": false,
+      "description": "Labeled feedback carried by an UPDATE message.",
+      "properties": {
+        "decision_id": {
+          "title": "Decision Id",
+          "type": "string"
+        },
+        "alert_id": {
+          "title": "Alert Id",
+          "type": "string"
+        },
+        "agent_id": {
+          "title": "Agent Id",
+          "type": "string"
+        },
+        "violation_type": {
+          "title": "Violation Type",
+          "type": "string"
+        },
+        "human_decision": {
+          "enum": [
+            "approve",
+            "reject",
+            "override",
+            "request_more_info"
+          ],
+          "title": "Human Decision",
+          "type": "string"
+        },
+        "confidence_before": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence Before",
+          "type": "number"
+        },
+        "confidence_after": {
+          "anyOf": [
+            {
+              "maximum": 1.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Confidence After"
+        },
+        "justification": {
+          "title": "Justification",
+          "type": "string"
+        },
+        "timestamp": {
+          "title": "Timestamp",
+          "type": "string"
+        }
+      },
+      "required": [
+        "decision_id",
+        "alert_id",
+        "agent_id",
+        "violation_type",
+        "human_decision",
+        "confidence_before",
+        "justification",
+        "timestamp"
+      ],
+      "title": "FeedbackPayload",
+      "type": "object"
+    },
+    "HeartbeatPayload": {
+      "additionalProperties": false,
+      "description": "Payload for HEARTBEAT messages.",
+      "properties": {
+        "agent_status": {
+          "enum": [
+            "HEALTHY",
+            "DEGRADED",
+            "UNHEALTHY"
+          ],
+          "title": "Agent Status",
+          "type": "string"
+        },
+        "queue_depth": {
+          "minimum": 0,
+          "title": "Queue Depth",
+          "type": "integer"
+        },
+        "last_processed_timestamp": {
+          "title": "Last Processed Timestamp",
+          "type": "string"
+        }
+      },
+      "required": [
+        "agent_status",
+        "queue_depth",
+        "last_processed_timestamp"
+      ],
+      "title": "HeartbeatPayload",
+      "type": "object"
+    },
+    "HumanDecisionPayload": {
+      "additionalProperties": false,
+      "description": "Human disposition carried by an UPDATE message.",
+      "properties": {
+        "decision": {
+          "enum": [
+            "approve",
+            "reject",
+            "override",
+            "request_more_info"
+          ],
+          "title": "Decision",
+          "type": "string"
+        },
+        "justification": {
+          "title": "Justification",
+          "type": "string"
+        },
+        "decided_by": {
+          "title": "Decided By",
+          "type": "string"
+        },
+        "decided_at": {
+          "title": "Decided At",
+          "type": "string"
+        },
+        "confidence_after": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence After",
+          "type": "number"
+        }
+      },
+      "required": [
+        "decision",
+        "justification",
+        "decided_by",
+        "decided_at",
+        "confidence_after"
+      ],
+      "title": "HumanDecisionPayload",
+      "type": "object"
+    },
+    "QueryPayload": {
+      "additionalProperties": false,
+      "description": "Payload for QUERY messages.",
+      "properties": {
+        "query_type": {
+          "title": "Query Type",
+          "type": "string"
+        },
+        "parameters": {
+          "additionalProperties": true,
+          "title": "Parameters",
+          "type": "object"
+        },
+        "response_schema_required": {
+          "title": "Response Schema Required",
+          "type": "string"
+        }
+      },
+      "required": [
+        "query_type",
+        "parameters",
+        "response_schema_required"
+      ],
+      "title": "QueryPayload",
+      "type": "object"
+    },
+    "ResponsePayload": {
+      "additionalProperties": false,
+      "description": "Payload for RESPONSE messages.",
+      "properties": {
+        "query_id": {
+          "title": "Query Id",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "SUCCESS",
+            "PARTIAL",
+            "FAILED"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "result_data": {
+          "additionalProperties": true,
+          "title": "Result Data",
+          "type": "object"
+        },
+        "errors": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Errors",
+          "type": "array"
+        },
+        "resolution_method": {
+          "anyOf": [
+            {
+              "enum": [
+                "bayesian",
+                "dempster_shafer",
+                "hybrid",
+                "escalation"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Resolution Method"
+        }
+      },
+      "required": [
+        "query_id",
+        "status",
+        "result_data",
+        "errors"
+      ],
+      "title": "ResponsePayload",
+      "type": "object"
+    },
+    "UpdatePayload": {
+      "additionalProperties": false,
+      "description": "Payload for UPDATE messages.",
+      "properties": {
+        "update_type": {
+          "title": "Update Type",
+          "type": "string"
+        },
+        "entity_id": {
+          "title": "Entity Id",
+          "type": "string"
+        },
+        "changed_fields": {
+          "additionalProperties": true,
+          "title": "Changed Fields",
+          "type": "object"
+        },
+        "previous_values": {
+          "additionalProperties": true,
+          "title": "Previous Values",
+          "type": "object"
+        },
+        "consensus_result": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ConsensusPayload"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "human_decision": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/HumanDecisionPayload"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "feedback": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FeedbackPayload"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "update_type",
+        "entity_id",
+        "changed_fields",
+        "previous_values"
+      ],
+      "title": "UpdatePayload",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Base inter-agent message container model.",
+  "properties": {
+    "message_id": {
+      "description": "UUID v4 message identifier.",
+      "title": "Message Id",
+      "type": "string"
+    },
+    "protocol_version": {
+      "description": "Semver version string.",
+      "title": "Protocol Version",
+      "type": "string"
+    },
+    "timestamp": {
+      "description": "ISO 8601 UTC timestamp.",
+      "title": "Timestamp",
+      "type": "string"
+    },
+    "sender_agent_id": {
+      "description": "Sender agent ID.",
+      "title": "Sender Agent Id",
+      "type": "string"
+    },
+    "recipient_agent_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ],
+      "description": "Single agent ID or list of IDs.",
+      "title": "Recipient Agent Id"
+    },
+    "message_type": {
+      "enum": [
+        "ALERT",
+        "QUERY",
+        "RESPONSE",
+        "UPDATE",
+        "HEARTBEAT",
+        "ESCALATION"
+      ],
+      "title": "Message Type",
+      "type": "string"
+    },
+    "priority": {
+      "description": "Priority level 1 to 5.",
+      "maximum": 5,
+      "minimum": 1,
+      "title": "Priority",
+      "type": "integer"
+    },
+    "correlation_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "UUID v4 correlation ID.",
+      "title": "Correlation Id"
+    },
+    "trace_id": {
+      "description": "UUID v4 distributed trace ID.",
+      "title": "Trace Id",
+      "type": "string"
+    },
+    "payload_schema": {
+      "description": "Pattern matching payload schema.",
+      "title": "Payload Schema",
+      "type": "string"
+    },
+    "payload": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/AlertPayload"
+        },
+        {
+          "$ref": "#/$defs/QueryPayload"
+        },
+        {
+          "$ref": "#/$defs/ResponsePayload"
+        },
+        {
+          "$ref": "#/$defs/UpdatePayload"
+        },
+        {
+          "$ref": "#/$defs/HeartbeatPayload"
+        },
+        {
+          "$ref": "#/$defs/EscalationPayload"
+        },
+        {
+          "$ref": "#/$defs/ConsensusPayload"
+        },
+        {
+          "$ref": "#/$defs/HumanDecisionPayload"
+        },
+        {
+          "$ref": "#/$defs/FeedbackPayload"
+        },
+        {
+          "additionalProperties": true,
+          "type": "object"
+        }
+      ],
+      "description": "Structured message payload dictionary.",
+      "title": "Payload"
+    },
+    "confidence_score": {
+      "anyOf": [
+        {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Confidence Score"
+    },
+    "ttl_seconds": {
+      "maximum": 86400,
+      "minimum": 1,
+      "title": "Ttl Seconds",
+      "type": "integer"
+    },
+    "retry_count": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Retry Count",
+      "type": "integer"
+    },
+    "audit_classification": {
+      "enum": [
+        "REGULATORY",
+        "OPERATIONAL",
+        "DIAGNOSTIC"
+      ],
+      "title": "Audit Classification",
+      "type": "string"
+    },
+    "sender_signature": {
+      "minLength": 1,
+      "title": "Sender Signature",
+      "type": "string"
+    },
+    "nonce": {
+      "minLength": 16,
+      "title": "Nonce",
+      "type": "string"
+    }
+  },
   "required": [
     "message_id",
     "protocol_version",
@@ -15,227 +876,10 @@
     "payload_schema",
     "payload",
     "ttl_seconds",
-    "retry_count",
     "audit_classification",
     "sender_signature",
     "nonce"
   ],
-  "properties": {
-    "message_id": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Unique UUID v4 message identifier."
-    },
-    "protocol_version": {
-      "type": "string",
-      "pattern": "^\\d+\\.\\d+\\.\\d+$",
-      "description": "Protocol semantic version string (e.g. 1.0.0)."
-    },
-    "timestamp": {
-      "type": "string",
-      "format": "date-time",
-      "description": "ISO 8601 UTC timestamp."
-    },
-    "sender_agent_id": {
-      "type": "string",
-      "enum": [
-        "agent-tm-001",
-        "agent-cs-001",
-        "agent-ru-001",
-        "agent-rg-001"
-      ],
-      "description": "Identifier of the sending agent."
-    },
-    "recipient_agent_id": {
-      "oneOf": [
-        {
-          "type": "string",
-          "enum": [
-            "agent-tm-001",
-            "agent-cs-001",
-            "agent-ru-001",
-            "agent-rg-001"
-          ]
-        },
-        {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "agent-tm-001",
-              "agent-cs-001",
-              "agent-ru-001",
-              "agent-rg-001"
-            ]
-          },
-          "minItems": 1,
-          "uniqueItems": true
-        }
-      ],
-      "description": "Single recipient agent ID or list of recipient IDs for multicast."
-    },
-    "message_type": {
-      "type": "string",
-      "enum": [
-        "ALERT",
-        "QUERY",
-        "RESPONSE",
-        "UPDATE",
-        "HEARTBEAT",
-        "ESCALATION"
-      ],
-      "description": "Functional category of the message."
-    },
-    "priority": {
-      "type": "integer",
-      "minimum": 1,
-      "maximum": 5,
-      "description": "Priority level from 1 (P1-CRITICAL) to 5 (P5-INFORMATIONAL)."
-    },
-    "correlation_id": {
-      "type": "string",
-      "format": "uuid",
-      "description": "UUID referencing original query or alert message."
-    },
-    "trace_id": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Distributed tracing UUID v4."
-    },
-    "payload_schema": {
-      "type": "string",
-      "pattern": "^[a-z0-9.-]+$",
-      "description": "Identifier pattern of payload schema definition."
-    },
-    "payload": {
-      "type": "object",
-      "description": "Message payload contents matching payload_schema."
-    },
-    "confidence_score": {
-      "type": "number",
-      "minimum": 0.0,
-      "maximum": 1.0,
-      "description": "Analytical confidence score required for ALERT and ESCALATION messages."
-    },
-    "ttl_seconds": {
-      "type": "integer",
-      "minimum": 1,
-      "maximum": 86400,
-      "description": "Time-to-live in seconds."
-    },
-    "retry_count": {
-      "type": "integer",
-      "minimum": 0,
-      "description": "Number of routing retry attempts."
-    },
-    "audit_classification": {
-      "type": "string",
-      "enum": [
-        "REGULATORY",
-        "OPERATIONAL",
-        "DIAGNOSTIC"
-      ],
-      "description": "Audit logging classification."
-    },
-    "sender_signature": {
-      "type": "string",
-      "minLength": 1,
-      "description": "Base64 encoded cryptographic HMAC-SHA256 signature."
-    },
-    "nonce": {
-      "type": "string",
-      "minLength": 16,
-      "description": "Cryptographic nonce string for replay prevention."
-    }
-  },
-  "definitions": {
-    "AlertPayload": {
-      "type": "object",
-      "required": [
-        "violation_type",
-        "severity",
-        "detected_at",
-        "evidence_refs",
-        "affected_entities"
-      ],
-      "properties": {
-        "violation_type": { "type": "string" },
-        "severity": { "type": "string", "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"] },
-        "detected_at": { "type": "string", "format": "date-time" },
-        "evidence_refs": { "type": "array", "items": { "type": "string" } },
-        "affected_entities": { "type": "array", "items": { "type": "string" } }
-      }
-    },
-    "QueryPayload": {
-      "type": "object",
-      "required": [
-        "query_type",
-        "parameters",
-        "response_schema_required"
-      ],
-      "properties": {
-        "query_type": { "type": "string" },
-        "parameters": { "type": "object" },
-        "response_schema_required": { "type": "string" }
-      }
-    },
-    "ResponsePayload": {
-      "type": "object",
-      "required": [
-        "query_id",
-        "status",
-        "result_data",
-        "errors"
-      ],
-      "properties": {
-        "query_id": { "type": "string", "format": "uuid" },
-        "status": { "type": "string", "enum": ["SUCCESS", "PARTIAL", "FAILED"] },
-        "result_data": { "type": "object" },
-        "errors": { "type": "array", "items": { "type": "string" } }
-      }
-    },
-    "UpdatePayload": {
-      "type": "object",
-      "required": [
-        "update_type",
-        "entity_id",
-        "changed_fields",
-        "previous_values"
-      ],
-      "properties": {
-        "update_type": { "type": "string" },
-        "entity_id": { "type": "string" },
-        "changed_fields": { "type": "object" },
-        "previous_values": { "type": "object" }
-      }
-    },
-    "HeartbeatPayload": {
-      "type": "object",
-      "required": [
-        "agent_status",
-        "queue_depth",
-        "last_processed_timestamp"
-      ],
-      "properties": {
-        "agent_status": { "type": "string", "enum": ["HEALTHY", "DEGRADED", "UNHEALTHY"] },
-        "queue_depth": { "type": "integer", "minimum": 0 },
-        "last_processed_timestamp": { "type": "string", "format": "date-time" }
-      }
-    },
-    "EscalationPayload": {
-      "type": "object",
-      "required": [
-        "escalation_reason",
-        "recommended_tier",
-        "decision_support_package_ref",
-        "human_assignee_role"
-      ],
-      "properties": {
-        "escalation_reason": { "type": "string" },
-        "recommended_tier": { "type": "string", "enum": ["TIER_1", "TIER_2", "TIER_3"] },
-        "decision_support_package_ref": { "type": "string" },
-        "human_assignee_role": { "type": "string" }
-      }
-    }
-  }
+  "title": "BaseMessage",
+  "type": "object"
 }

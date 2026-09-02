@@ -28,6 +28,7 @@ class BaseAgent(abc.ABC):
         self.processed_count: int = 0
         self.outbound_queue: list[Message] = []
         self.status: str = "HEALTHY"
+        self.observability = self.config.get("observability_service")
 
     @abc.abstractmethod
     async def process_message(self, message: Message) -> Message:
@@ -41,6 +42,13 @@ class BaseAgent(abc.ABC):
                 f"Cannot send message {message.message_id}: signature verification failed for agent {self.agent_id}"
             )
         self.outbound_queue.append(message)
+        if self.observability is not None:
+            self.observability.log_communication(
+                self.agent_id,
+                str(message.recipient_agent_id),
+                message.message_type,
+                "queued",
+            )
 
     def _canonical_message_string(self, message: Message) -> str:
         """Computes deterministic canonical string representation of message fields for HMAC signing."""
@@ -111,6 +119,12 @@ class BaseAgent(abc.ABC):
         temp_msg = Message.model_validate(msg_dict)
         signature = self.sign_message(temp_msg)
         msg_dict["sender_signature"] = signature
+        if self.observability is not None:
+            self.observability.log_agent_lifecycle(
+                self.agent_id,
+                "Heartbeat generated",
+                {"status": self.status, "queue_depth": len(self.outbound_queue)},
+            )
 
         return Message.model_validate(msg_dict)
 
