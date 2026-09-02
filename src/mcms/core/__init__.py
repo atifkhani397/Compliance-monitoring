@@ -19,6 +19,7 @@ from src.mcms.core.exceptions import (
     DashboardError,
     EscalationError,
     FeedbackError,
+    KafkaConnectionError,
     MCMSException,
     MessageValidationError,
     MetricsError,
