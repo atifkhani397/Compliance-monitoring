@@ -20,6 +20,7 @@ from src.mcms.core.message import BaseMessage, Message
 from src.mcms.core.orchestrator import Orchestrator
 from src.mcms.core.registry import AgentRegistry
 from src.mcms.core.routing import PriorityRoutingEngine
+from src.mcms.core.security import SecurityManager
 
 __all__ = [
     "AgentNotFoundError",
@@ -43,5 +44,6 @@ __all__ = [
     "PriorityRoutingEngine",
     "RoutingError",
     "SecurityError",
+    "SecurityManager",
     "build_topic_name",
 ]

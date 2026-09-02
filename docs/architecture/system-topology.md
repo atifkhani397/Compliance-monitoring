@@ -132,3 +132,29 @@ This document specifies the architectural topology of the Multi-Agent Compliance
 - **Consumer Group Failover**: Each agent runs as a Kafka consumer group with dynamic partition rebalancing.
 - **State Store Persistence**: Agent internal state backed up using RocksDB/Kafka changelog topics.
 
+---
+
+## 7. Performance & Scalability Specifications
+
+### 7.1 Throughput & Workload Volume Calculations
+- **Transaction Processing Throughput**:
+  - **Daily Volume**: 2.4 million transactions per day across global trading desks.
+  - **Average Rate**: 27.8 transactions / second (TPS).
+  - **Peak Burst Capacity**: 100+ TPS during market open/close windows.
+- **Communication Ingestion Volume**:
+  - **Daily Volume**: 850,000 communications (emails, chats, voice transcripts) per day.
+  - **Average Rate**: 9.8 messages / second.
+  - **Peak Processing Capacity**: 50+ messages / second.
+
+### 7.2 Horizontal Scaling Architecture
+- **Stateless Agent Instances**: All execution agents run as stateless Docker/Kubernetes pods horizontally scaled across worker pools.
+- **Kafka Consumer Partitioning**: Topics are partitioned across 16+ partitions per agent type, enabling independent parallel processing without message locks.
+
+### 7.3 Auto-Scaling Triggers & SLA Thresholds
+- **Scale-Out Triggers**:
+  - CPU Utilization > 70% sustained for 3 minutes.
+  - Kafka Consumer Queue Depth > 1,000 pending messages.
+  - P99 Message Processing Latency exceeds SLA target (e.g. > 500ms for TM).
+- **Scale-In Criteria**: CPU < 30% and Queue Depth < 50 for 15 minutes.
+
+

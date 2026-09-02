@@ -13,7 +13,7 @@ class AgentRegistry:
     """In-memory agent registry with capability search and health tracking."""
 
     def __init__(self) -> None:
-        self._agents: dict[str, "BaseAgent"] = {}
+        self._agents: dict[str, BaseAgent] = {}
         self._health: dict[str, dict[str, Any]] = {}
         self._lock: asyncio.Lock = asyncio.Lock()
 
@@ -51,13 +51,12 @@ class AgentRegistry:
 
     def get_agents_by_capability(self, capability: str) -> "list[BaseAgent]":
         """Finds agents supporting a capability."""
-        results: list["BaseAgent"] = []
+        results: list[BaseAgent] = []
         for agent in self._agents.values():
             caps: list[str] = getattr(agent, "capabilities", [])
             if capability in caps:
                 results.append(agent)
         return results
-
 
     def update_health(self, agent_id: str, health: dict[str, Any]) -> None:
         """Updates health status for an agent."""

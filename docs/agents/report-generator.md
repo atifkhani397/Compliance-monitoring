@@ -22,7 +22,7 @@ The Report Generator Agent produces all compliance reports for Meridian Global B
 | **Event-Triggered Reporting** | Immediate report generation for critical compliance events including SAR/STR filings | Sub-15-minute generation for critical events | Alert data, evidence compilation | Emergency reports, draft filings | < 15 minutes |
 | **Multi-Audience Adaptation** | Automatic adjustment of detail, terminology, and format based on target audience | Board, Management, Operations, Regulator profiles | Audience profile, raw report data | Audience-specific report variants | < 5 minutes |
 | **Evidence Compilation** | Automated compilation of supporting evidence including data extracts, communication excerpts | Cross-agent evidence synthesis with source attribution | Evidence references from all agents | Evidence packages with chain of custody | < 10 minutes |
-| **Regulatory Filing Preparation** | Generation of regulatory filing drafts in required formats (XBRL, XML, PDF) | SAR, STR, CTR, Form 13F, TRACE, CAT formats | Structured compliance data, filing templates | Draft filings in required formats | Per filing deadline |
+| **Regulatory Filing Preparation** | Generation of regulatory filing drafts in required formats (XBRL, XML, PDF) | SAR, STR, CTR, Form 13F, TRACE, CAT, SEBI LODR, RBI Fraud Classification, FIU-IND STR formats | Structured compliance data, filing templates | Draft filings in required formats | Per filing deadline |
 
 ---
 

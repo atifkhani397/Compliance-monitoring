@@ -79,6 +79,7 @@ The Communication Scanner Agent monitors and analyzes all forms of regulated com
 | CCPA | Consumer privacy rights | Communication content not retained beyond analysis window |
 | Data Minimization | Process minimum necessary data | Only compliance-relevant content extracted and stored |
 | Right to Erasure | Support data deletion requests | Communication analysis indices support targeted deletion |
+| Aadhaar Act 2016 | Mandatory PII masking & eKYC audit | Mask 12-digit UIDs (only last 4 digits visible: `XXXX-XXXX-1234`), verify UIDAI consent audit tokens |
 
 ---
 

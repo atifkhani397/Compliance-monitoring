@@ -74,8 +74,8 @@ The Regulatory Update Tracker Agent continuously monitors regulatory body public
 
 | Regulator | Monitoring Scope | Implementation |
 | :--- | :--- | :--- |
-| SEBI | Circular monitoring, board meeting disclosures, insider trading regulations | SEBI RSS feed integration, circular parser |
-| RBI | Master Direction tracking, circular letters, monetary policy updates | RBI API integration, Master Direction change detection |
+| SEBI | Circular monitoring, board meeting disclosures, PIT & AI/ML 2024 Circular | SEBI RSS feed integration, XAI explainability metrics, quarterly AI/ML reports |
+| RBI | Master Direction tracking, Digital Lending 2022, Data Localisation 2018 | RBI API integration, LSP disclosure monitoring, India server routing checks |
 | PMLA | Prevention of Money Laundering Act amendment alerts | Legislative amendment tracker, gazette monitoring |
 | IRDAI | Insurance regulatory updates (where applicable) | IRDAI notification monitoring |
 

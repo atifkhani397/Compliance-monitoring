@@ -31,6 +31,7 @@ dev = [
 
 [tool.mypy]
 python_version = "3.11"
+mypy_path = "."
 strict = true
 warn_return_any = true
 warn_unused_configs = true
@@ -48,6 +49,13 @@ warn_unreachable = true
 module = "kafka.*"
 ignore_missing_imports = true
 
+[tool.pyright]
+include = ["src", "tests"]
+executionEnvironments = [
+  { root = "." }
+]
+extraPaths = ["."]
+
 [tool.ruff]
 target-version = "py311"
 line-length = 100
@@ -56,11 +64,15 @@ line-length = 100
 select = ["E", "F", "I", "W", "UP", "B", "C4", "SIM", "ARG"]
 ignore = ["E501", "N818", "SIM102"]
 
+[tool.ruff.lint.isort]
+known-first-party = ["src", "mcms"]
+
 [tool.pytest.ini_options]
 minversion = "7.0"
 addopts = "-v --tb=short"
 testpaths = ["tests"]
 python_files = ["test_*.py"]
+pythonpath = ["."]
 
 [tool.pytest-asyncio]
 mode = "auto"

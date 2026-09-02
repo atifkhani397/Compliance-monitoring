@@ -33,6 +33,8 @@ The Transaction Monitor Agent is responsible for real-time surveillance of all t
 - **Computational Resource Boundaries**: Operates within defined computational resource limits (32 vCPU, 128GB RAM); resource-intensive deep learning models require explicit resource allocation approval.
 - **No Autonomous Trading Halts**: Cannot issue trading halts or circuit breakers autonomously; all halt recommendations must be escalated through the Orchestrator with TIER_2 or TIER_3 human review.
 - **Sub-Second Latency**: Real-time alert generation must maintain sub-second latency for P1-CRITICAL and P2-HIGH priority alerts.
+- **UPI Monitoring Scale**: Process up to 10+ billion monthly (350M+ daily) UPI transactions with sub-second anomaly detection across P2P fraud and merchant payment anomalies.
+- **SEBI Connected Person Mapping**: Perform up to 6th-degree relationship analysis (family, business associates, subsidiaries, common directors) using graph databases (Neo4j / Amazon Neptune).
 
 ---
 
